@@ -86,3 +86,8 @@ print("Today is present", int(attendense))
 а третя - як половина вартості першої та другої разом.
 Скільки будуть коштувати усі книги, якщо купити по одному примірнику?
 """
+first_book = 8
+second_book = first_book+2
+third_book = (first_book + second_book)/2
+total_purchase = first_book+second_book+third_book
+print("Total purchase 3 books:", total_purchase)
