@@ -74,6 +74,11 @@ print("Total temp: " f"{total_temp}" "°C")
 1 хлопчик захворів та 2 дівчинки не прийшли сьогодні.
 Скількі сьогодні дітей у театральному гуртку?
 """
+boys = 24
+girls = boys/2
+kids = boys+girls
+attendense = kids-1-2
+print("Today is present", int(attendense))
 
 # task 10
 """
