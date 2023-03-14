@@ -58,7 +58,15 @@ print("Total trees q-ty:", apple_trees+grusha_trees+sliva_trees)
 Після обіду температура опустилася на 10 градусів.
 Надвечір потепліло на 4 градуси. Яка температура надвечір?
 """
-init_temperature =
+# init_temperature = 0
+dinner_time = 12
+before_din_time_temp = 5
+after_dinn_time_temp = 10
+nadvech_temp = 4
+
+total_temp = before_din_time_temp - after_dinn_time_temp + nadvech_temp
+print("Total temp: " f"{total_temp}" "°C")
+
 
 # task 09
 """
