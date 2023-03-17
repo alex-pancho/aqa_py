@@ -57,7 +57,19 @@ a) 8019 : 8     d) 7248 : 6
 b) 9907 : 9     e) 7128 : 5
 c) 2789 : 5     f) 19224 : 9
 """
-a_1, a_2 =
+a = (8019, 8)
+b = (9907, 9)
+c = (2789, 5)
+d = (7248, 6)
+e = (7128, 5)
+f = (19224, 9)
+
+print("Module division for variable a: ", a[0] % a[1])
+print("Module division for variable b: ", b[0] % b[1])
+print("Module division for variable c: ", c[0] % c[1])
+print("Module division for variable d: ", d[0] % d[1])
+print("Module division for variable e: ", e[0] % e[1])
+print("Module division for variable f: ", f[0] % f[1])
 
 # task 08
 """
