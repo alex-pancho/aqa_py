@@ -83,6 +83,13 @@ print("Module division for variable f: ", f[0] % f[1])
 Торт            1           350 грн
 Вода            3           21 грн
 """
+big_pizzas_cost = 4 * 247
+middle_pizzas_cost = 2 * 218
+juice_cost = 4 * 35
+cake_cost = 350
+water_cost = 3 * 21
+total_hb_product_cost = big_pizzas_cost + middle_pizzas_cost + juice_cost + cake_cost + water_cost
+print("Expected costs for Ira's BD is", total_hb_product_cost)
 
 
 # task 09
