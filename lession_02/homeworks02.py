@@ -32,6 +32,9 @@ print("Total area of black and azov sea: ", total_areas, "km2")
 total_goods_qty = 375291
 first_sec_warehouse = 250449
 second_third_warehouse = 222950
+
+print("1-2 = ", total_areas-first_sec_warehouse)
+print("2-3=", total_goods_qty-second_third_warehouse)
 third_warehouse = None
 
 
@@ -42,7 +45,10 @@ third_warehouse = None
 вати необхідно буде півтора року по 1179 грн/місяць. Обчисліть
 вартість комп’ютера.
 """
-
+one_half_year = 18
+monthly_payment = 1179
+tot_pc_cost = one_half_year * monthly_payment
+print("Total PS cost after", f"{one_half_year}", "payments is",f"{tot_pc_cost}")
 
 # task 07
 """
@@ -51,7 +57,7 @@ a) 8019 : 8     d) 7248 : 6
 b) 9907 : 9     e) 7128 : 5
 c) 2789 : 5     f) 19224 : 9
 """
-
+a_1, a_2 =
 
 # task 08
 """
