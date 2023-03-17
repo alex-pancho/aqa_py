@@ -19,7 +19,7 @@ print("Output task 01 and 02: ", alice_in_wonderland)
 ське моря разом?
 """
 black_sea_area, azov_sea_area = 436402, 37800
-total_areas = sum(black_sea_area,azov_sea_area)
+total_areas = black_sea_area + azov_sea_area
 print("Total area of black and azov sea: ", total_areas, "km2")
 
 # task 05
@@ -29,6 +29,10 @@ print("Total area of black and azov sea: ", total_areas, "km2")
 250 449 товарів. На другому та третьому – 222 950 товарів.
 Знайдіть кількість товарів, що розміщені на кожному складі.
 """
+total_goods_qty = 375291
+first_sec_warehouse = 250449
+second_third_warehouse = 222950
+third_warehouse = None
 
 
 # task 06
