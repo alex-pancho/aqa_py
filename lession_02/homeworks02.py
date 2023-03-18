@@ -123,3 +123,6 @@ print("Igor is able to fill in", f"{int(pages)}", "pages")
 h_b_distance = 1600
 fuel_consuming = 9
 volume_fuel_tank = 48
+trip_fuel_consuming = int(1600 / 100) * 9
+print("Trip fuel consumprion (in liters)", trip_fuel_consuming)
+print("Min q-ty gas refuel", int(trip_fuel_consuming / volume_fuel_tank))
