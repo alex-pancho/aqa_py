@@ -50,25 +50,29 @@ counter = 0
 for letter in new_text:
     if letter.isupper():
         counter += 1
-
 print("Task 5->>> \n{}".format(counter))
 
 # task 06
 """ Виведіть позицію, на якій слово Tom зустрічається вдруге
 """
-
+word = "Tom"
+first_occurrence = new_text.find(word)
+second_occurence = new_text.find(word, first_occurrence+1)
+print("Task 6->>>", second_occurence)
 
 # task 07
 """ Розділіть змінну adwentures_of_tom_sawer по кінцю речення.
 Збережіть результат у змінній adwentures_of_tom_sawer_sentences
 """
-adwentures_of_tom_sawer_sentences = None
+adwentures_of_tom_sawer_sentences = adwentures_of_tom_sawer.split('\n')
+# print("Task 7->>> \n{}".format (adwentures_of_tom_sawer_sentences))
+
 
 # task 08
 """ Виведіть четверте речення з adwentures_of_tom_sawer_sentences.
 Перетворіть рядок у нижній регістр.
 """
-
+print("Task 8->>>", adwentures_of_tom_sawer_sentences[3].lower())
 
 # task 09
 """ Перевірте чи починається якесь речення з "By the time".
