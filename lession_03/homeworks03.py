@@ -18,32 +18,40 @@ in for a dead rat and a string to swing it with—and so on, and so on,
 hour after hour. And when the middle of the afternoon came, from being a
 poor poverty, stricken boy in the .... morning, Tom was literally
 rolling in wealth."""
+
 # task 01 ==
 """ Дані у строці adwentures_of_tom_sawer розбиті випадковим чином, через помилку.
 треба замінити кінець абзацу на пробіл .replace("\n", " ")"""
-print(adwentures_of_tom_sawer.replace("\n", " "))
+print("Task 1 - >>>>>>", adwentures_of_tom_sawer.replace("\n", " "))
 
 # task 02 ==
 """ Замініть .... на пробіл
 """
-print(adwentures_of_tom_sawer.replace("....", " "))
+ignore_points_adwentures = adwentures_of_tom_sawer.replace("....", " ")
+print("Task 2 - >>>>>>", ignore_points_adwentures)
 
 # task 03 ==
 """ Зробіть так, щоб у тексті було не більше одного пробілу між словами.
 """
-print(adwentures_of_tom_sawer, sep=" ", end="\n")
-
-
+ignore_points_adwentures.split()
+new_text = ' '.join(ignore_points_adwentures.split())
+print("Task 3->>> \n{}".format(new_text))
 
 # task 04
 """ Виведіть, скількі разів у тексті зустрічається літера "h"
 """
-
+char_count = new_text.count("h")
+print("Task 4->>> \n{}".format(char_count))
 
 # task 05
 """ Виведіть, скільки слів у тексті починається з Великої літери?
 """
+counter = 0
+for letter in new_text:
+    if letter.isupper():
+        counter += 1
 
+print("Task 5->>> \n{}".format(counter))
 
 # task 06
 """ Виведіть позицію, на якій слово Tom зустрічається вдруге
