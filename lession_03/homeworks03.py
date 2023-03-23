@@ -72,7 +72,8 @@ adwentures_of_tom_sawer_sentences = adwentures_of_tom_sawer.split('\n')
 """ Виведіть четверте речення з adwentures_of_tom_sawer_sentences.
 Перетворіть рядок у нижній регістр.
 """
-print("Task 8->>>", adwentures_of_tom_sawer_sentences[3].lower())
+print("Task 8 v1->>>", adwentures_of_tom_sawer_sentences[3].lower())
+print("Task 8 v2->>>", adwentures_of_tom_sawer_sentences[3].casefold())
 
 # task 09
 """ Перевірте чи починається якесь речення з "By the time".
