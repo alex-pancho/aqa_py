@@ -14,19 +14,56 @@ average_value = sum_elemets / smal_list_lenght
 print("Small list avarage value is", average_value)
 
 # task 3. Перевірте, чи є в списку big_list дублікати
+if len(big_list) != set(big_list):
+    print("Some dublicates is available")
+else:
+    print("Unique item(s) avaliable")
 
 
 base_dict = {'contry':'Ukraine', 'continent': 'Europe', 'size': 123}
 add_dict = {"a":1, "b":2, "c":2, "d":3, 'size': 12}
 # task 4. Знайдіть ключ з максимальним значенням у словнику add_dict
+max_value = max(add_dict.values())
+# print(max_value)
+max_key = [key for key, dict_value in add_dict.items()
+           if dict_value == max_value]
+print("The keys with the maximum value is", max_key)
 
 # task 5. Створіть новий словник, в якому ключі та значення будуть
 # замінені місцями у заданому словнику
+my_dict= {"lesson_1":"intro", "lesson_2":"variables", "lesson_3":"slices"}
+dict_items = my_dict.items()
+versa_dict = {}
+for key,value in dict_items:
+    versa_dict[value] = key
+
+print('My dict:', my_dict)
+print('Versa versa dict:', versa_dict)
+
 
 # task 6. Об'єднайте два словника base_dict та add_dict  в новий словник sum_dict
 # Якщо ключі збігаються, то об'єднайте (str) або додайте їх значення (int)
+join_dict = dict(base_dict)
+print(join_dict)
 sum_dict = {}
 
+for key, value in base_dict.items():
+    if key not in add_dict:
+        sum_dict[key] = int(value)
+    elif value == add_dict[key]:
+        sum_dict[key] = int(value)
+
+for key, value in add_dict.items():
+    if key not in base_dict:
+        sum_dict[key] = int(value)
+    elif value == base_dict[key]:
+        sum_dict[key] = int(value)
+
+
+
+
+# sum_dict = base_dict.update(add_dict)
+print(sum_dict)
 # task 7.
 line = "Створіть множину всіх символів, які входять у заданий рядок"
 
