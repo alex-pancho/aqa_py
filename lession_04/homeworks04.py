@@ -48,26 +48,39 @@ print(join_dict)
 sum_dict = {}
 
 for key, value in base_dict.items():
-    if key not in add_dict:
-        sum_dict[key] = int(value)
-    elif value == add_dict[key]:
-        sum_dict[key] = int(value)
+    if key in add_dict:
+        if isinstance(value, str) and isinstance(add_dict[key], str):
+            sum_dict[key] = value + add_dict[key]
+        elif isinstance(value, int) and isinstance(add_dict[key], int):
+            sum_dict[key] = value + add_dict[key]
+        else:
+            sum_dict[key] = value
+    else:
+        sum_dict[key] = value
 
 for key, value in add_dict.items():
-    if key not in base_dict:
-        sum_dict[key] = int(value)
-    elif value == base_dict[key]:
-        sum_dict[key] = int(value)
+    if key not in sum_dict:
+        sum_dict[key] = value
 
+print(f"Base dictionary: {base_dict}\nAdd dictionary: {add_dict}\nSum dictionary: {sum_dict}")
 
-
-
-# sum_dict = base_dict.update(add_dict)
-print(sum_dict)
 # task 7.
 line = "Створіть множину всіх символів, які входять у заданий рядок"
+new_set = set(line)
+# print(type(new_set))
+print(f"New set:{new_set}")
 
 # task 8. Обчисліть суму елементів двох множин, які не є спільними
+first_set = {1, 2, 3, 4, 5}
+second_set = set([1, 2, 3, 4, 5, 6, 7])
+
+differ_1 = first_set.difference(second_set)
+differ_2 = second_set.difference(first_set)
+
+sum_diff = sum(differ_1) + sum(differ_2)
+
+print('Difference of sets is', sum_diff)
+
 
 # task 9. Створіть два списки та обробіть їх так, щоб отримати сет, який
 # містить всі елементи з обох списків,  які зустрічаються тільки один раз.
@@ -76,6 +89,11 @@ line = "Створіть множину всіх символів, які вхо
 
 person_list = [('Alice', 25), ('Boby', 19), ('Charlie', 32),
                ('David', 28), ('Emma', 22), ('Frank', 45)]
+
+final_set = set(person_list).union(set(small_list))
+# print(type(final_set))
+print('Set with unique elements', final_set)
+
 # task 10. Обробіть список кортежів person_list, що містять ім'я та вік людей,
 # так, щоб отримати словник, де ключі - вікові діапазони (10-19, 20-29 тощо),
 # а значення - списки імен людей, які потрапляють в кожен діапазон.
