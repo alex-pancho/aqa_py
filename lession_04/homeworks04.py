@@ -99,3 +99,20 @@ print('Set with unique elements', final_set)
 # а значення - списки імен людей, які потрапляють в кожен діапазон.
 # Приклад виводу:
 # {'10-19': ['A'], '20-29': ['B', 'C', 'D'], '30-39': ['E'], '40-49': ['F']}
+
+result_ranges = {'19-22': [], '25-28': [], '32-45': []}
+
+for x in person_list:
+    name, age = x
+    if 19 <= age <= 22:
+        age_diapazon = '19-22'
+    elif 25 <= age <= 28:
+        age_diapazon = '25-28'
+    elif 32 <= age <= 45:
+        age_diapazon = '32-45'
+    else:
+        print("The value out of range person_list")
+
+    result_ranges[age_diapazon].append(name)
+
+print("Output for Task 10:", result_ranges)
