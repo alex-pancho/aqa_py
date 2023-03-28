@@ -5,12 +5,12 @@
 Якщо так, надрукуйте повідомлення про те, що гравець щойно заробив 5 балів.
 """
 alien_color = ['red','green', 'yellow']
-for x in alien_color:
-    if x == 'green':
-        print("Congrats! You already earned 5 points")
-        break
-    else:
-        print("Try again!")
+ # for x in alien_color:
+ #    if x == 'green':
+ #        print("Congrats! You already earned 5 points")
+ #        break
+ #    else:
+ #        print("Try again!")
 
 # task 2
 """  Скопіюйте пеопередню відповідь, змініть і доповніть її умовою else.
@@ -18,7 +18,14 @@ for x in alien_color:
 Якщо колір прибульця не зелений, надрукуйте, що гравець щойно заробив 10 балів.
 Зробіть так, щоб виводилася умова else.
 """
-
+fife, ten, fifteen = 5, 10, 15
+# for x in alien_color:
+#     if x == 'green':
+#         print(f"Congrats! You already earned {fife} points")
+#         continue
+#     else:
+#         print(f"Congrats! You already earned {ten} points")
+# не розумію умову, зробив таску 2 як зрозумів + задав запитання Олександру
 
 # task 3
 # task 4
@@ -29,12 +36,33 @@ for x in alien_color:
 Якщо прибулець червоний, надрукуйте повідомлення про те, що гравець заробив 15 очок
 + напишіть цикл for що перебере і обробить всі значення списку alien_color
 """
+for x in alien_color:
+    if x == 'green':
+        print(f"Congrats! You already earned {fife} points")
+    elif x == 'red':
+        print(f"Congrats! You already earned {fifteen} points")
+    else:
+        print(f"Congrats! You already earned {ten} points")
+
 
 # task 5
 """  Начинки для піци (pizza_topping): напишіть цикл, який пропонує користувачеві ввести ряд начинок
 для піци, доки він не введе значення 'quit'. Коли вони введуть кожну начинку,
 надрукуйте повідомлення про те, що ви додасте цю начинку до їхньої піци.
 """
+pizza_topping = []
+add_ingredient_prompt = 'Print ingridient for your best pizza ever'
+exit_prompt = 'pring <quit> to finish order: '
+
+while True:
+    ingredient = str(input(f"{add_ingredient_prompt} or {exit_prompt}"))
+    if ingredient != 'quit':
+        print(f"Following ingridient < {ingredient} > will be added to your pizza")
+        pizza_topping.append(ingredient)
+    else:
+        print("Excellent, we'll cook your pizza with requested ingredients", pizza_topping)
+        break
+
 
 # task 6
 """  Напишіть програму, яка знаходить суму всіх цифр натурального числа, яке вводить користувач.
