@@ -36,13 +36,13 @@ fife, ten, fifteen = 5, 10, 15
 Якщо прибулець червоний, надрукуйте повідомлення про те, що гравець заробив 15 очок
 + напишіть цикл for що перебере і обробить всі значення списку alien_color
 """
-for x in alien_color:
-    if x == 'green':
-        print(f"Congrats! You already earned {fife} points")
-    elif x == 'red':
-        print(f"Congrats! You already earned {fifteen} points")
-    else:
-        print(f"Congrats! You already earned {ten} points")
+# for x in alien_color:
+#     if x == 'green':
+#         print(f"Congrats! You already earned {fife} points")
+#     elif x == 'red':
+#         print(f"Congrats! You already earned {fifteen} points")
+#     else:
+#         print(f"Congrats! You already earned {ten} points")
 
 
 # task 5
@@ -50,18 +50,18 @@ for x in alien_color:
 для піци, доки він не введе значення 'quit'. Коли вони введуть кожну начинку,
 надрукуйте повідомлення про те, що ви додасте цю начинку до їхньої піци.
 """
-pizza_topping = []
-add_ingredient_prompt = 'Print ingridient for your best pizza ever'
-exit_prompt = 'pring <quit> to finish order: '
-
-while True:
-    ingredient = str(input(f"{add_ingredient_prompt} or {exit_prompt}"))
-    if ingredient != 'quit':
-        print(f"Following ingridient < {ingredient} > will be added to your pizza")
-        pizza_topping.append(ingredient)
-    else:
-        print("Excellent, we'll cook your pizza with requested ingredients", pizza_topping)
-        break
+# pizza_topping = []
+# add_ingredient_prompt = 'Print ingridient for your best pizza ever'
+# exit_prompt = 'pring <quit> to finish order: '
+#
+# while True:
+#     ingredient = str(input(f"{add_ingredient_prompt} or {exit_prompt}"))
+#     if ingredient != 'quit':
+#         print(f"Following ingridient < {ingredient} > will be added to your pizza")
+#         pizza_topping.append(ingredient)
+#     else:
+#         print("Excellent, we'll cook your pizza with requested ingredients", pizza_topping)
+#         break
 
 
 # task 6
@@ -71,6 +71,16 @@ while True:
 Введіть натуральне число: 12345
 Сума цифр числа 12345: 15
 """
+num = int(input("Input rignt digit: "))
+digit_summ = 0
+
+while num > 0:
+    last_digit = num % 10
+    digit_summ = digit_summ + last_digit
+    num //= 10
+
+print("Digits summ is: ", digit_summ)
+
 
 # task 7
 """  Потрібно написати програму, яка просить користувача ввести числа, доки він не введе 0.
