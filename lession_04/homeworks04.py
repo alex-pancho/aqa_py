@@ -2,9 +2,10 @@ small_list = [3, 1, 4, 5, 2, 5, 3]
 big_list = [3, 5, -2, -1, -3, 0, 1, 4, 5, 2]
 # task 1. Знайдіть всі унікальні елементи в списку small_list
 set_small = set(small_list)
-set_big = set(big_list)
-unique_elements = set_small.symmetric_difference(set_big)
-print("Unique elements between" f"{small_list}","and", f"{big_list}", "is", unique_elements)
+print("Unique elements in small_list:", set_small)
+# set_big = set(big_list)
+# unique_elements = set_small.symmetric_difference(set_big)
+# print("Unique elements between" f"{small_list}","and", f"{big_list}", "is", unique_elements)
 
 
 # task 2. Знайдіть середнє арифметичне всіх елементів у списку small_list
