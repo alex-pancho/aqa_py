@@ -7,12 +7,11 @@ import random
 Якщо так, надрукуйте повідомлення про те, що гравець щойно заробив 5 балів.
 """
 alien_color = ['green', 'yellow','red']
- # for x in alien_color:
- #    if x == 'green':
- #        print("Congrats! You already earned 5 points")
- #        break
- #    else:
- #        print("Try again!")
+for x in alien_color:
+    if x == 'green':
+       print("Congrats! You already earned 5 points")
+    else:
+        print("Try again!")
 
 # task 2
 """  Скопіюйте пеопередню відповідь, змініть і доповніть її умовою else.
@@ -20,11 +19,13 @@ alien_color = ['green', 'yellow','red']
 Якщо колір прибульця не зелений, надрукуйте, що гравець щойно заробив 10 балів.
 Зробіть так, щоб виводилася умова else.
 """
+
+alien_color = ['red', 'yellow','green']
+
 fife, ten, fifteen = 5, 10, 15
 for x in alien_color:
     if x == 'green':
         print(f"Congrats! You already earned {fife} points")
-        continue
     else:
         print(f"Congrats! You already earned {ten} points")
 
@@ -153,6 +154,8 @@ for x in fruits:
 """  Задано список чисел numbers, потрібно знайти список квадратів
 парних чисел зі списку. Спробуйте використати if та цикл for в один рядок.
 """
+
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-result = ["Відповідь вставте сюди"]
-print(result)  #  [4, 16, 36, 64, 100]
+result = []
+result = [x**2 for x in numbers if x % 2 == 0]
+print("Square of each even number in list", result)
