@@ -1,10 +1,12 @@
+import random
+
 # task 1
 """  Уявіть, що інопланетянина з кольором alien_color щойно збили в грі.
 Створіть змінну під назвою alien_color і призначте їй значення 'green', 'yellow', або 'red'.
 Напишіть оператор if, щоб перевірити, чи колір прибульця 'green'.
 Якщо так, надрукуйте повідомлення про те, що гравець щойно заробив 5 балів.
 """
-alien_color = ['red','green', 'yellow']
+alien_color = ['green', 'yellow','red']
  # for x in alien_color:
  #    if x == 'green':
  #        print("Congrats! You already earned 5 points")
@@ -19,13 +21,13 @@ alien_color = ['red','green', 'yellow']
 Зробіть так, щоб виводилася умова else.
 """
 fife, ten, fifteen = 5, 10, 15
-# for x in alien_color:
-#     if x == 'green':
-#         print(f"Congrats! You already earned {fife} points")
-#         continue
-#     else:
-#         print(f"Congrats! You already earned {ten} points")
-# не розумію умову, зробив таску 2 як зрозумів + задав запитання Олександру
+for x in alien_color:
+    if x == 'green':
+        print(f"Congrats! You already earned {fife} points")
+        continue
+    else:
+        print(f"Congrats! You already earned {ten} points")
+
 
 # task 3
 # task 4
@@ -89,7 +91,7 @@ while True:
 """
 zero = 0
 digits_summ = []
-inp_prompt = "input some digit"
+inp_prompt = "input some digit "
 ex_prompt = "or 0 for exit: "
 
 while True:
@@ -109,17 +111,43 @@ print("Digits sum in Tast 7: ",list_sum)
 У кожній спробі гравець вводить своє припущення, після чого програма повідомляє, чи
 було припущення занадто великим або занадто малим, чи гравець вгадав число.
 """
-import random
-secret_number = random.randint(1, 20)
 guesses = 0
 max_guesses = 5
-print("Вгадайте число від 1 до 20 за 5 спроб!")
+inp_prompt = "Вгадайте число від 1 до 20 за 5 спроб: "
+game_name = "<Вгадай число>"
+
+for i in range(guesses, max_guesses):
+    secret_number = random.randint(1, 20)
+    attempt = int(input(f'Вітаю вас у грі {game_name}! {inp_prompt}'))
+    if attempt > secret_number:
+        print(f"Your attempt is greater than {secret_number}")
+    elif attempt < secret_number:
+        print(f"Your attempt is lower than {secret_number}")
+    else:
+        print("Congratulation! You guessed it" )
+        break
 
 # task 9
 """  Задача з використанням циклу for та continue. Задано список фруктів 'fruits'
 потрібно вивести на екран всі елементи списку, окрім "orange".
 """
 fruits = ["apple", "banana", "orange", "grape", "mango"]
+
+for x in fruits:
+    if x == fruits[0]:
+        print(fruits[0])
+    elif x == fruits[1]:
+        print(fruits[1])
+    elif x == fruits[2]:
+        continue
+    elif x == fruits[3]:
+        print(fruits[3])
+    elif x == fruits[4]:
+        print(fruits[4])
+    else:
+        print("Unknown fruit")
+
+
 
 # task 10
 """  Задано список чисел numbers, потрібно знайти список квадратів
