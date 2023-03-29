@@ -91,7 +91,7 @@ print('Difference of sets is', sum_diff)
 person_list = [('Alice', 25), ('Boby', 19), ('Charlie', 32),
                ('David', 28), ('Emma', 22), ('Frank', 45)]
 
-final_set = set(person_list).union(set(small_list))
+final_set = set(person_list).symmetric_difference(set(small_list))
 # print(type(final_set))
 print('Set with unique elements', final_set)
 
