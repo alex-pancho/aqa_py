@@ -50,18 +50,18 @@ fife, ten, fifteen = 5, 10, 15
 для піци, доки він не введе значення 'quit'. Коли вони введуть кожну начинку,
 надрукуйте повідомлення про те, що ви додасте цю начинку до їхньої піци.
 """
-# pizza_topping = []
-# add_ingredient_prompt = 'Print ingridient for your best pizza ever'
-# exit_prompt = 'pring <quit> to finish order: '
-#
-# while True:
-#     ingredient = str(input(f"{add_ingredient_prompt} or {exit_prompt}"))
-#     if ingredient != 'quit':
-#         print(f"Following ingridient < {ingredient} > will be added to your pizza")
-#         pizza_topping.append(ingredient)
-#     else:
-#         print("Excellent, we'll cook your pizza with requested ingredients", pizza_topping)
-#         break
+pizza_topping = []
+add_ingredient_prompt = 'Print ingridient for your best pizza ever'
+exit_prompt = 'pring <quit> to finish order: '
+
+while True:
+    ingredient = str(input(f"{add_ingredient_prompt} or {exit_prompt}"))
+    if ingredient != 'quit':
+        print(f"Following ingridient < {ingredient} > will be added to your pizza")
+        pizza_topping.append(ingredient)
+    else:
+        print("Excellent, we'll cook your pizza with requested ingredients", pizza_topping)
+        break
 
 
 # task 6
@@ -71,15 +71,15 @@ fife, ten, fifteen = 5, 10, 15
 Введіть натуральне число: 12345
 Сума цифр числа 12345: 15
 """
-num = int(input("Input rignt digit: "))
-digit_summ = 0
-
-while num > 0:
-    last_digit = num % 10
-    digit_summ = digit_summ + last_digit
-    num //= 10
-
-print("Digits summ is: ", digit_summ)
+# num = int(input("Input right digit: "))
+# digit_summ = 0
+#
+# while num > 0:
+#     last_digit = num % 10
+#     digit_summ = digit_summ + last_digit
+#     num //= 10
+#
+# print("Digits summ is: ", digit_summ)
 
 
 # task 7
@@ -87,6 +87,19 @@ print("Digits summ is: ", digit_summ)
 Програма повинна підрахувати суму всіх введених чисел, окрім 0, і вивести її на екран.
 Розв'язати з використанням циклу while та break
 """
+zero = 0
+digits_summ = []
+inp_prompt = "input some digit"
+ex_prompt = "or 0 for exit: "
+
+while True:
+    numbers = int(input(f'Hello, {inp_prompt+ex_prompt}'))
+    if numbers > zero:
+       digits_summ.append(numbers)
+    elif numbers == zero:
+        break
+list_sum = sum(digits_summ)
+print("Digits sum in Tast 7: ",list_sum)
 
 
 # task 8
