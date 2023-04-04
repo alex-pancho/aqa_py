@@ -163,6 +163,12 @@ def get_words_final_sentance(separate_sawer_end_sentanse):
     words_in_last_sent = last_sentence.split()
     return  last_sentence,  len(words_in_last_sent)
 
-
+''' Декомпозиція, за допомогою якої значення, повернені з функції get_words_final_sentance, присвоюються змінним last_sentence та word_count.'''
 last_sentence, words_count = get_words_final_sentance(separate_sawer_end_sentanse)
 print(f"Last sentence is <{last_sentence}> and number of words in last sentence: {words_count}")
+
+
+##################################-Task 9-##########################################
+
+
+##################################-Task 10-##########################################
