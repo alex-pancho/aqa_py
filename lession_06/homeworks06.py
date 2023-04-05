@@ -169,6 +169,20 @@ print(f"Last sentence is <{last_sentence}> and number of words in last sentence:
 
 
 ##################################-Task 9-##########################################
+# Ігор займається фотографією. Він вирішив зібрати всі свої 232
+# фотографії та вклеїти в альбом. На одній сторінці може бути
+# розміщено щонайбільше 8 фото. Скільки сторінок знадобиться
+# Ігорю, щоб вклеїти всі фото?
+
+def calculate_photo_album_pages(number_of_photos: int, photos_per_page: int) -> int:
+    pages = number_of_photos // photos_per_page
+    if number_of_photos % photos_per_page != 0:
+        pages += 1
+    return pages
+
+number_of_photos = 232
+photos_per_page = 8
+print(f"Igor needs {calculate_photo_album_pages(number_of_photos, photos_per_page)} pages to fit all his photos")
 
 
 ##################################-Task 10-##########################################
