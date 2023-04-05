@@ -186,3 +186,31 @@ print(f"Igor needs {calculate_photo_album_pages(number_of_photos, photos_per_pag
 
 
 ##################################-Task 10-##########################################
+#homework 2 and task 10
+# '''Родина зібралася в автомобільну подорож із Харкова в Буда-
+# пешт. Відстань між цими містами становить 1600 км. Відомо,
+# що на кожні 100 км необхідно 9 літрів бензину. Місткість баку
+# становить 48 літрів.
+# 1) Скільки літрів бензину знадобиться для такої подорожі?
+# 2) Скільки щонайменше разів родині необхідно заїхати на зап-
+# равку під час цієї подорожі, кожного разу заправляючи пов-
+# ний бак?
+
+
+def calculace_fuel_and_station_stops(distanse: int, vehile_fuel_cousuming, tank_volume: int):
+    trip_fuel_consuming = int(distanse / 100 * vehile_fuel_cousuming)
+    quontity_petrol_refuel = int(trip_fuel_consuming / tank_volume)
+
+    return trip_fuel_consuming, quontity_petrol_refuel
+
+
+kharkov_budapesht_distance = 1600
+fuel_consuming = 9
+volume_fuel_tank = 48
+
+fuel_cons, refuel = calculace_fuel_and_station_stops(kharkov_budapesht_distance, fuel_consuming, volume_fuel_tank)
+
+print(f"Trip fuel consumprion {fuel_cons} and refuel {refuel} liters")
+#або інший варіант виводу
+print("Trip fuel consumprion", fuel_cons, "liters")
+print("Number of refueling stops:", refuel, "liters")
