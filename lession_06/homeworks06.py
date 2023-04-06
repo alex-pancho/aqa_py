@@ -3,7 +3,8 @@
 лише до максимального значення для добутку - 25.
 Код майже готовий, треба знайти помилки та випраавити\доповнити.
 """
-def multiplication_table(number):
+def multiplication_table(number:int) ->int:
+    '''Повертає результат таблички множення на задане число'''
     # Initialize the appropriate variable
     multiplier = 1
     max_value = 25
@@ -19,7 +20,7 @@ def multiplication_table(number):
         multiplier += 1 # Increment the appropriate variable
 
 
-# multiplication_table(3)
+multiplication_table(3)
 # Should print:
 # 3x1=3
 # 3x2=6
@@ -33,12 +34,14 @@ def multiplication_table(number):
 """
 #solution 1
 def sum_two_numbers(num_1:int, num_2:int):
+    '''Обчислення суми 2х чисел. Варіант 1'''
     return num_1 + num_2
 
 # print(sum_two_numbers(1, 10))
 
 #solution 2
 def sum_two_numbers_v():
+    '''Обчислення суми 2х чисел. Варіант 2'''
     numb_1 = int(input("Input first number: "))
     numb_2 = int(input("Input second number: "))
     return numb_1 + numb_2
@@ -51,7 +54,7 @@ def sum_two_numbers_v():
 """
 #solution 1
 def mean_everage():
-    """ Get mean average of list values"""
+    '''Get mean average of list values'''
     digits_list =[i for i in range(0, 10)]
     mean_res = sum(digits_list) / len(digits_list)
     return mean_res
@@ -60,7 +63,8 @@ def mean_everage():
 
 #solution 2
 
-def mean_average(number_list):
+def mean_average(number_list: int):
+    ''' Get mean average of list values. Var2'''
     mean_resultat = sum(number_list) / len(number_list)
     return mean_resultat
 
@@ -72,6 +76,7 @@ result = mean_average(some_numb_list)
 """  Написати функцію, яка приймає рядок та повертає його у зворотному порядку.
 """
 def get_contrary_string():
+    '''Get revers string'''
     your_string = str(input("Give me some string and I'll convert it: "))
 
     rever_str = ''.join(reversed(your_string))
@@ -83,7 +88,8 @@ def get_contrary_string():
 """  Написати функцію, яка приймає список слів та повертає найдовше слово у списку.
 """
 
-def get_maximum_length_word_list(lst_words):
+def get_maximum_length_word_list(lst_words: int):
+    '''Get the longest word'''
     if len(lst_words) == 0:
         print("Empty list. Please, try again...")
     else:
@@ -97,7 +103,7 @@ print(get_maximum_length_word_list(["Написати", "функцію", "як�
 """  Написати функцію, яка приймає два рядки та повертає індекс першого входження другого рядка
 у перший рядок, якщо другий рядок є підрядком першого рядка, та -1, якщо другий рядок
 не є підрядком першого рядка."""
-def find_substring(str1, str2):
+def find_substring(str1: str, str2: str):
     """Get 1st index of second str"""
     index = str1.find(str2)
     return index
@@ -145,7 +151,8 @@ rolling in wealth."""
 """ Розділіть змінну adwentures_of_tom_sawer по кінцю речення.
 Збережіть результат у змінній adwentures_of_tom_sawer_sentences
 """
-def separate_sawer_end_sentanse(snippet_sawer_story):
+def separate_sawer_end_sentanse(snippet_sawer_story: str):
+    '''Separate adwentures_of_tom_sawer via sentanse end'''
     adwentures_of_tom_sawer_sentences = snippet_sawer_story.split('\n')
     return adwentures_of_tom_sawer_sentences
 
@@ -157,6 +164,7 @@ def separate_sawer_end_sentanse(snippet_sawer_story):
 """ Виведіть кількість слів останнього речення з adwentures_of_tom_sawer_sentences.
 """
 def get_words_final_sentance(separate_sawer_end_sentanse):
+    '''Виведе кількість слів останнього речення з adwentures_of_tom_sawer_sentences.'''
     temp = separate_sawer_end_sentanse(adwentures_of_tom_sawer)
     last_sentence = temp[-1]
     # print(type(last_sentence))
@@ -175,6 +183,7 @@ print(f"Last sentence is <{last_sentence}> and number of words in last sentence:
 # Ігорю, щоб вклеїти всі фото?
 
 def calculate_photo_album_pages(number_of_photos: int, photos_per_page: int) -> int:
+    '''calculate_photo_album_pages'''
     pages = number_of_photos // photos_per_page
     if number_of_photos % photos_per_page != 0:
         pages += 1
@@ -198,6 +207,7 @@ print(f"Igor needs {calculate_photo_album_pages(number_of_photos, photos_per_pag
 
 
 def calculace_fuel_and_station_stops(distanse: int, vehile_fuel_cousuming, tank_volume: int):
+    '''calculace_fuel_and_station_stops'''
     trip_fuel_consuming = int(distanse / 100 * vehile_fuel_cousuming)
     quontity_petrol_refuel = int(trip_fuel_consuming / tank_volume)
 
