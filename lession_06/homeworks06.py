@@ -16,7 +16,7 @@ def multiplication_table(number:int) ->int:
         if  result >= max_value:
             # Enter the action to take if the result is greater than 25
             break
-        print(str(number) + "x" + str(multiplier) + "=" + str(result))
+        # print(str(number) + "x" + str(multiplier) + "=" + str(result))
         multiplier += 1 # Increment the appropriate variable
 
 
@@ -96,7 +96,7 @@ def get_maximum_length_word_list(lst_words: int):
         logest_word_in_list = max(lst_words, key=len)
         return logest_word_in_list
 
-print(get_maximum_length_word_list(["Написати", "функцію", "яка", "приймає", "список", "слів"]))
+# print(get_maximum_length_word_list(["Написати", "функцію", "яка", "приймає", "список", "слів"]))
 
 
 # task 6
@@ -110,11 +110,11 @@ def find_substring(str1: str, str2: str):
 
 str1 = "Hello, world!"
 str2 = "world"
-print(find_substring(str1, str2)) # поверне 7
+# print(find_substring(str1, str2)) # поверне 7
 
 str1 = "The quick brown fox jumps over the lazy dog"
 str2 = "cat"
-print(find_substring(str1, str2)) # поверне -1
+# print(find_substring(str1, str2)) # поверне -1
 
 # task 7
 # task 8
@@ -173,7 +173,7 @@ def get_words_final_sentance(separate_sawer_end_sentanse):
 
 ''' Декомпозиція, за допомогою якої значення, повернені з функції get_words_final_sentance, присвоюються змінним last_sentence та word_count.'''
 last_sentence, words_count = get_words_final_sentance(separate_sawer_end_sentanse)
-print(f"Last sentence is <{last_sentence}> and number of words in last sentence: {words_count}")
+# print(f"Last sentence is <{last_sentence}> and number of words in last sentence: {words_count}")
 
 
 ##################################-Task 9-##########################################
@@ -191,7 +191,7 @@ def calculate_photo_album_pages(number_of_photos: int, photos_per_page: int) -> 
 
 number_of_photos = 232
 photos_per_page = 8
-print(f"Igor needs {calculate_photo_album_pages(number_of_photos, photos_per_page)} pages to fit all his photos")
+# print(f"Igor needs {calculate_photo_album_pages(number_of_photos, photos_per_page)} pages to fit all his photos")
 
 
 ##################################-Task 10-##########################################
@@ -220,7 +220,7 @@ volume_fuel_tank = 48
 
 fuel_cons, refuel = calculace_fuel_and_station_stops(kharkov_budapesht_distance, fuel_consuming, volume_fuel_tank)
 
-print(f"Trip fuel consumprion {fuel_cons} and refuel {refuel} liters")
+# print(f"Trip fuel consumprion {fuel_cons} and refuel {refuel} liters")
 #або інший варіант виводу
-print("Trip fuel consumprion", fuel_cons, "liters")
-print("Number of refueling stops:", refuel, "liters")
+# print("Trip fuel consumprion", fuel_cons, "liters")
+# print("Number of refueling stops:", refuel, "liters")
