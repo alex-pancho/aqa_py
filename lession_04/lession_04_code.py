@@ -64,7 +64,6 @@ number_list.sort()
 print(small_list)
 print(number_list)
 bl = big_list.copy()
-
 big_list.reverse()
 print(big_list)
 # зміни
@@ -192,12 +191,12 @@ my_tuple[2].pop()
 print(my_tuple)
 # Для доступу до елементів Tuple можна використовувати індексацію, яка починається з 0. Наприклад:
 my_tuple = ("apple", "banana", "cherry")
-print(my_tuple[1])  # "banana"
+#print(my_tuple[1])  # "banana"
 
 # Інші корисні операції з Tuple:
 # Отримання довжини Tuple:
 my_tuple = (1, 2, 3)
-print(len(my_tuple))  # 3
+#print(len(my_tuple))  # 3
 
 # Злиття двох Tuple:
 tuple1 = (1, 2, 3)
