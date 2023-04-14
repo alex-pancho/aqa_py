@@ -88,13 +88,16 @@ def get_contrary_string():
 """  Написати функцію, яка приймає список слів та повертає найдовше слово у списку.
 """
 
-def get_maximum_length_word_list(lst_words: int):
+def get_maximum_length_word_list(lst_words: list[str]) -> str:
     '''Get the longest word'''
-    if len(lst_words) == 0:
-        print("Empty list. Please, try again...")
+    if not lst_words:
+       err_description = "Empty list. Please, try again..."
+    #    print("Empty list. Please, try again...")
+       return err_description
     else:
-        logest_word_in_list = max(lst_words, key=len)
-        return logest_word_in_list
+       logest_word_in_list = max(lst_words, key=len)
+       return logest_word_in_list
+
 
 # print(get_maximum_length_word_list(["Написати", "функцію", "яка", "приймає", "список", "слів"]))
 
