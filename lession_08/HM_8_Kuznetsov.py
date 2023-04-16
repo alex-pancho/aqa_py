@@ -3,7 +3,7 @@ import sys
 import pathlib
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
-from dth_8p.dth_6 import *
+from lession_06.dth_6 import *
 
 
 class MyTestCase(unittest.TestCase):
