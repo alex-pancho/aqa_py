@@ -1,33 +1,37 @@
 # task 01 == Виправте синтаксичні помилки
 print("Hello", end = " ")
-    print("world!")
+print("world!")
 
 # task 02 == Виправте синтаксичні помилки
 hello = "Hello"
 world = "world"
 if True:
-print(f"{hello} {world}!")
+    print(f"{hello} {world}!")
 
 # task 03  == Вcтавте пропущену змінну у ф-цію print
 for letter in "Hello world!":
-    print()
-x = 0
+    print(letter)
 
 # task 04 == Зробіть так, щоб кількість бананів була
 # завжди в чотири рази більша, ніж яблук
 apples = 2
-banana = x
+banana = 4*apples
+print(banana)
 
 # task 05 == виправте назви змінних
-1_storona = 1
-$torona_2 = 2
-сторона_3 = 3
-__orona_4 = 4
+storona_1 = 1
+storona_2 = 2
+storona_3 = 3
+storona_4 = 4
 
 # task 06 == Порахуйте периметр фігури з task 05
 # та виведіть його для користувача
-perimetery = x + x + x + x
-print()
+x = 1
+y = 2
+z = 3
+r = 4
+perimetery = x+y+z+r
+print(perimetery)
 
 
 """
@@ -41,6 +45,11 @@ print()
 У саду посадили 4 яблуні. Груш на 5 більше яблунь, а слив - на 2 менше.
 Скільки всього дерев посадили в саду?
 """
+apples = 4
+pears = apples+5
+plums = pears-2
+trees = apples+pears+plums
+print(trees)
 
 # task 08
 """
@@ -48,6 +57,10 @@ print()
 Після обіду температура опустилася на 10 градусів.
 Надвечір потепліло на 4 градуси. Яка температура надвечір?
 """
+t_am = 5
+t_pm = t_am-10
+evening = t_pm+4
+print(evening)
 
 # task 09
 """
@@ -55,6 +68,10 @@ print()
 1 хлопчик захворів та 2 дівчинки не прийшли сьогодні.
 Скількі сьогодні дітей у театральному гуртку?
 """
+boys = 24
+girls = boys/2
+childrens = boys-1+girls-2
+print(childrens)
 
 # task 10
 """
@@ -62,3 +79,8 @@ print()
 а третя - як половина вартості першої та другої разом.
 Скільки будуть коштувати усі книги, якщо купити по одному примірнику?
 """
+first_book = 8 
+second_book = first_book+2
+third_book = (first_book+second_book)/2
+prise = first_book+second_book+third_book
+print("Prise is", prise)
