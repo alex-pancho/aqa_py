@@ -3,23 +3,23 @@
 лише до максимального значення для добутку - 25.
 Код майже готовий, треба знайти помилки та випраавити\доповнити.
 """
-def multiplication_table(number):
-    # Initialize the appropriate variable
-    multiplier = 1
+# def multiplication_table(number):
+#     # Initialize the appropriate variable
+#     multiplier = 1
 
-    # Complete the while loop condition.
-    while multiplier <= number:
-        result = number * multiplier
-        # десь тут помила, а може не одна
-        if  result > "25":
-            # Enter the action to take if the result is greater than 25
-            pass
-        print(str(number) + "x" + str(multiplier) + "=" + str(result))
+#     # Complete the while loop condition.
+#     while multiplier <= number:
+#         result = number * multiplier
+#         # десь тут помила, а може не одна
+#         if  result > "25":
+#             # Enter the action to take if the result is greater than 25
+#             pass
+#         print(str(number) + "x" + str(multiplier) + "=" + str(result))
 
-        # Increment the appropriate variable
-        multi += 1
+#         # Increment the appropriate variable
+#         multi += 1
 
-multiplication_table(3)
+# multiplication_table(3)
 # Should print:
 # 3x1=3
 # 3x2=6
@@ -32,6 +32,16 @@ multiplication_table(3)
 """  Написати функцію, яка обчислює суму двох чисел.
 """
 
+def sum_numbers(first, second):
+    """
+    Function summarizes two numbers
+    Args:
+        first (integer or float): number
+        second (integer or float): number
+    Returns:
+        integer : number (sum of first and second numbers)
+    """
+    return first + second
 
 # task 3
 """  Написати функцію, яка розрахує середнє арифметичне списку чисел.
@@ -50,16 +60,27 @@ multiplication_table(3)
 у перший рядок, якщо другий рядок є підрядком першого рядка, та -1, якщо другий рядок
 не є підрядком першого рядка."""
 def find_substring(str1, str2):
+    """
+    Function that takes two strings and returns the index of the first
+    occurrence of the second string in the first string
+    Args:
+        str1 (string): first line
+        str2 (string): second line
+    Returns:
+        integer : index
+    """
+    index = str1.find(str2)
+    return index
 
-    return -1
+#     return -1
 
-str1 = "Hello, world!"
-str2 = "world"
-print(find_substring(str1, str2)) # поверне 7
+# str1 = "Hello, world!"
+# str2 = "world"
+# print(find_substring(str1, str2)) # поверне 7
 
-str1 = "The quick brown fox jumps over the lazy dog"
-str2 = "cat"
-print(find_substring(str1, str2)) # поверне -1
+# str1 = "The quick brown fox jumps over the lazy dog"
+# str2 = "cat"
+# print(find_substring(str1, str2)) # поверне -1
 
 # task 7
 # task 8
