@@ -14,7 +14,7 @@ from lession_06 import homeworks06
 class TestSubstringInMainString(unittest.TestCase):
 
 
-    def test_subtring_included_to_first_place_mainstring(self):
+    def test_en_substring_at_beginning(self):
         '''Substring is included to fist place main string'''
         str1 = "The quick brown fox jumps over the lazy dog"
         str2 = "The"
@@ -23,7 +23,7 @@ class TestSubstringInMainString(unittest.TestCase):
         self.assertTrue(actual_result == expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
        
 
-    def test_subtring_included_end_mainstring(self):
+    def test_en_substring_at_end(self):
         '''Substring is included to end main string'''
         str1 = "The quick brown fox jumps over the lazy dog"
         str2 = "dog"
@@ -32,7 +32,7 @@ class TestSubstringInMainString(unittest.TestCase):
         self.assertEqual(actual_result, expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
 
 
-    def test_subtring_included_middle_mainstring(self):
+    def test_en_subtring_in_middle(self):
         '''Substring is included to end main string without spaces'''
         str1 = "Thequickbrownfoxjumpsoverthelaz&nbspdog"
         str2 = "fox"
@@ -41,17 +41,8 @@ class TestSubstringInMainString(unittest.TestCase):
         self.assertEqual(actual_result, expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
 
 
-    def test_subtring_included_mainstring_no_spases(self):
-        '''Substring is included to end main string without spaces'''
-        str1 = "Thequickbrownfoxjumpsoverthelazdog"
-        str2 = "fox"
-        actual_result = homeworks06.find_substring(str1, str2)
-        expected_result = 13
-        self.assertEqual(actual_result, expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
-
-
-    def test_subtring_included_ua_mainstring(self):
-        '''Substring is included to end main string without spaces'''
+    def test_ua_subtring_found(self):
+        '''Test UA substring'''
         str1 = "Русні прийде скоро ..зда"
         str2 = "скоро"
         actual_result = homeworks06.find_substring(str1, str2)
@@ -59,8 +50,8 @@ class TestSubstringInMainString(unittest.TestCase):
         self.assertEqual(actual_result, expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
 
 
-    def test_subtring_included_ch_mainstring(self):
-        '''Substring is included to end main string without spaces'''
+    def test_ch_subtring_found(self):
+        '''Test CH substring'''
         str1 = "举案齐眉"
         str2 = "齐"
         actual_result = homeworks06.find_substring(str1, str2)
@@ -68,18 +59,18 @@ class TestSubstringInMainString(unittest.TestCase):
         self.assertEqual(actual_result, expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
 
 
-    def test_subtring_is_not_included_to_mainstring(self):
-        '''Substring isn't included to main string'''
+    def test_substring_not_found(self):
+        '''Get unexpected substring'''
         str1 = "The quick brown fox jumps over the lazy dog"
         str2 = "cat"
         actual_result = homeworks06.find_substring(str1, str2)
         expected_result = -1
-        self.assertEqual(actual_result, expected_result, msg=f"Substring <{str2}> don't get {expected_result} index in <{str1}>")
+        self.assertEqual(actual_result, expected_result, msg=f"Unexpected substring <{str2}> in <{str1}>")
 
 
 class TestGetMaxLenWordLst(unittest.TestCase):
 
-    def test_get_maxlenght_word_in_first_place_in_list(self):
+    def test_get_maxlenght_word_at_beginning(self):
         '''Getting first word with max lenght in list'''
         lst_words = ["Написати", "функцію", "яка", "приймає", "список", "слів"]    
         actual_result = homeworks06.get_maximum_length_word_list(lst_words)
@@ -87,7 +78,7 @@ class TestGetMaxLenWordLst(unittest.TestCase):
         self.assertEqual(actual_result, expected_result, msg=f"Word <{actual_result}> does not match the <{expected_result}>")
 
 
-    def test_get_maxlenght_word_in_last_place_in_list(self):
+    def test_get_maxlenght_word_in_end(self):
         '''Getting word with max lenght in last plase in list'''
         lst_words = ["функцію", "яка", "приймає", "список", "слів", "Написатитут"]    
         actual_result = homeworks06.get_maximum_length_word_list(lst_words)
@@ -96,6 +87,7 @@ class TestGetMaxLenWordLst(unittest.TestCase):
 
 
     def test_empty_list(self):
+        '''Get result with empty list'''
         lst_words = []
         expected_result = "Empty list. Please, try again..."
         actual_result = homeworks06.get_maximum_length_word_list(lst_words)
@@ -111,6 +103,7 @@ class TestGetMaxLenWordLst(unittest.TestCase):
 
 
     def test_list_with_one_word(self):
+        '''Get result with one item in lst'''
         lst_words = ['hillel']
         expected_result = 'hillel'
         actual_result = homeworks06.get_maximum_length_word_list(lst_words)
