@@ -4,6 +4,8 @@ print(car == 'bmw')
 print(car == 'audi')
 
 
+False # "", {}, [], (), 0
+
 # оператор if
 age =  44 #int(input("Type your age: "))
 if age < 18:
@@ -31,12 +33,3 @@ while current_number <= 4:
 # break
 # continue
 
-# цикл for
-for i in range(2, 6):
-    print(i)
-my_list = [1, 2, 3, 4, 5]
-for i in my_list:
-    print(i)
-# for в один рядок
-sum_el = [i for i in my_list if i%2 == 0]
-print(sum_el)
