@@ -75,7 +75,7 @@ class HomeworksTesting08(unittest.TestCase):
         """unique elements of string and number list ['a', 'b', 'a', 'c', 'd', 'b', 1]"""
         actual_result = homeworks05_yuliia_turovska.unique_elements(['a', 'b', 'a', 'c', 'd', 'b', 1])
         expected_result = set(['a', 'b', 'c', 'd', 1])
-        self.assertEqual(actual_result, expected_result, msg = "Incorrect actual result for the unique elements of string and number list ['a', 'b', 'a', 'c', 'd', 'b', 1]! Actual result should be 'a', 'b', 'c', 'd', 1")
+        self.assertEqual(actual_result, expected_result, msg = "Incorrect actual result for the unique elements of string and number list['a', 'b', 'a', 'c', 'd', 'b', 1]! Actual result should be 'a', 'b', 'c', 'd', 1")
 
 
     def test_unique_empty_list(self):
