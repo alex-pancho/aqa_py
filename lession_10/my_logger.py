@@ -3,6 +3,10 @@ import logging
 # Створюємо логгер
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+# logging.DEBUG
+# logging.INFO
+# logging.WARNING
+# logging.ERROR
 
 # Створюємо обробник для запису в файл
 file_handler = logging.FileHandler('log_file.log')
