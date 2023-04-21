@@ -37,8 +37,7 @@ class HomeworksTesting1(unittest.TestCase):
         Test incorrect values: count_month > 1, month_payment < 0
         """
         actual_result = desktop_price_define(count_month=0, month_payment=0)
-        expected_result = None
-        self.assertEqual(actual_result, expected_result)
+        self.assertIsNone(actual_result)
 
     def test05(self):  # Equivalence partitioning
         """
@@ -46,8 +45,7 @@ class HomeworksTesting1(unittest.TestCase):
         Test incorrect values: count_month > 1, month_payment < 0
         """
         actual_result = desktop_price_define(count_month=-36, month_payment=-500)
-        expected_result = None
-        self.assertEqual(actual_result, expected_result)
+        self.assertIsNone(actual_result)
 
     def test06(self):  # Equivalence partitioning, Boundary analysis.
         """
@@ -55,8 +53,7 @@ class HomeworksTesting1(unittest.TestCase):
         Test incorrect values: count_month = 0, month_payment > 1
         """
         actual_result = desktop_price_define(count_month=0, month_payment=1000)
-        expected_result = None
-        self.assertEqual(actual_result, expected_result)
+        self.assertIsNone(actual_result)
 
     def test07(self):  # Equivalence partitioning, Boundary analysis.
         """
@@ -64,8 +61,7 @@ class HomeworksTesting1(unittest.TestCase):
         Test incorrect values: count_month > 1, month_payment = 1
         """
         actual_result = desktop_price_define(count_month=12, month_payment=0)
-        expected_result = None
-        self.assertEqual(actual_result, expected_result)
+        self.assertIsNone(actual_result)
 
     def test08(self):  # Equivalence partitioning, Boundary analysis.
         """
@@ -73,8 +69,7 @@ class HomeworksTesting1(unittest.TestCase):
         Test incorrect values: count_month < 0, month_payment > 1
         """
         actual_result = desktop_price_define(count_month=-1, month_payment=1000)
-        expected_result = None
-        self.assertEqual(actual_result, expected_result)
+        self.assertIsNone(actual_result)
 
     def test09(self):  # Equivalence partitioning  Boundary analysis.
         """
@@ -82,8 +77,7 @@ class HomeworksTesting1(unittest.TestCase):
         Test incorrect values: count_month > 1, month_payment < 0
         """
         actual_result = desktop_price_define(count_month=1, month_payment=-1000)
-        expected_result = None
-        self.assertEqual(actual_result, expected_result)
+        self.assertIsNone(actual_result)
 
 
 if __name__ == "__main__":
