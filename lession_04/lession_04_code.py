@@ -155,8 +155,10 @@ print(set(my_list))
 # порівняння
 # підмножина. Еквівалентом методу issubset() є оператор <=
 set_a = {1, 2, 3}
+
 set_b = {1, 2, 3, 4, 5}
 #print(set_a <= set_b)
+
 set_b = {1, 2, 4, 5, 3,}
 print(set_a.issubset(set_b))
 print("B <= A", set_b <= set_a)
@@ -214,4 +216,8 @@ print(4 in my_tuple)  # False
 
 # Повторення Tuple:
 my_tuple = ("apple", "banana", "cherry")
+
 # print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
+
+# print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
+

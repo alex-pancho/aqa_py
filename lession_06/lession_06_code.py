@@ -118,7 +118,19 @@ def describe_pet(animal_type, pet_name):
     """Display information about a pet."""
     return f"My {animal_type}'s name is {pet_name.title()}."
 
-# def make_pizza(*toppings):
+print(describe_pet("shinshila", "pyizhyk"))
+print(describe_pet("pyizhyk", "shinshila"))
+
+
+#
+def comma(*args) -> int:
+    return ",".join([str(a) for a in args])
+print(comma(1))
+print(comma(1, 2))
+print(comma(1, 2, 3))
+
+def make_pizza(*toppings):
+    return f"your pizza contains: {', '.join(toppings)}"
 
 
 print(describe_pet("shinshila", "pyizhyk"))
@@ -137,6 +149,10 @@ def make_pizza(*toppings):
 print(make_pizza("aplle", "banana", "kivi"))
 
 #print(comma(1, 2, 3))
+
+print(make_pizza("aplle", "banana", "kivi"))
+
+
 
 # Опційні задані значення аргументів - Making an Argument Optional
 def spam(a, b=42):

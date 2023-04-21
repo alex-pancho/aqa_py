@@ -4,7 +4,9 @@ print(car == 'bmw')
 print(car == 'audi')
 
 
+
 False # "", {}, [], (), 0
+
 
 # оператор if
 age =  44 #int(input("Type your age: "))
@@ -33,7 +35,9 @@ while current_number <= 4:
 # break
 # continue
 
+
 # for в один рядок (comprehensions)
+
 # цикл for
 for i in range(2, 6):
     print(i)
@@ -42,4 +46,8 @@ for i in my_list:
     print(i)
 # for в один рядок
 sum_el = [i for i in my_list if i%2 == 0]
+
 print(sum_el)
+
+print(sum_el)
+
