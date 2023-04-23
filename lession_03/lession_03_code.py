@@ -50,7 +50,7 @@ x = -0.123
 f'{x:.1f}'
 
 for num in range(0,17):
-    for base in 'dfxob':
+    for base in 'dxob':
         print('{0:{width}{base}}'.format(num, base=base, width=6), end=' ')
     print()
 
@@ -62,6 +62,8 @@ for num in range(0,17):
 "\t"	# Tab
 "\b"	# Backspace
 "\f"	# Form Feed
+"\ooo"	# Octal value
+"\xhh"	# Hex value
 
 long_long_line = """\
 Long long string\

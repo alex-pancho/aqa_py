@@ -83,21 +83,22 @@ def square(number):
 # Функція з аргументами
 def describe_pet(animal_type, pet_name):
     """Display information about a pet."""
-    return f"My {animal_type}'s name is {pet_name.title()}."
+    print(f"I have a {animal_type}.")
+    print(f"My {animal_type}'s name is {pet_name.title()}.")
 
 # def make_pizza(*toppings):
 
 
-def comma(*args) -> int:
+def summ(*args) -> int:
     return ",".join([str(a) for a in args])
 
-#print(comma(1, 2, 3))
+#print(summ(1, 2, 3))
 
 # Опційні задані значення аргументів - Making an Argument Optional
 def spam(a, b=42):
-    return (a + b)
+    print(a+b)
 
 def kward_spam(**kwargs):
-    return (kwargs["a"]+kwargs["b"])
+    return(kwargs["a"]+kwargs["b"])
 
 #print(kward_spam(a=1, b=2))

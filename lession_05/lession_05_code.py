@@ -27,4 +27,4 @@ while current_number <= 5:
 
 # continue
 
-# for в один рядок (comprehensions)
+# for в один рядок

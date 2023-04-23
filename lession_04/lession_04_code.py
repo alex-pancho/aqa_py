@@ -21,7 +21,7 @@ value = 61
 big_list.index(value)
 big_list.count(value)
 # впорядкування даних
-#big_list.sort()  #['abc', 'ABD', 'aBe']
+big_list.sort()  #['abc', 'ABD', 'aBe']
 big_list.reverse()
 # зміни
 big_list.copy()
@@ -72,7 +72,7 @@ set(numbers)
 # підмножина. Еквівалентом методу issubset() є оператор <=
 set_a = {1, 2, 3}
 set_b = {1, 2, 3, 4, 5}
-#print(set_a <= set_b)
+print(set_a <= set_b)
 # обєднання  with the '|' operator or with the set type’s 'union' method
 set_a = {1, 2, 3}
 set_b = {3, 4, 5}
@@ -95,24 +95,24 @@ my_tuple = ("apple", 3.14, [1, 2, 3], (4, 5, 6))
 
 # Для доступу до елементів Tuple можна використовувати індексацію, яка починається з 0. Наприклад:
 my_tuple = ("apple", "banana", "cherry")
-#print(my_tuple[1])  # "banana"
+print(my_tuple[1])  # "banana"
 
 # Інші корисні операції з Tuple:
 # Отримання довжини Tuple:
 my_tuple = (1, 2, 3)
-#print(len(my_tuple))  # 3
+print(len(my_tuple))  # 3
 
 # Злиття двох Tuple:
 tuple1 = (1, 2, 3)
 tuple2 = ("apple", "banana", "cherry")
 tuple3 = tuple1 + tuple2
-#print(tuple3)  # (1, 2, 3, "apple", "banana", "cherry")
+print(tuple3)  # (1, 2, 3, "apple", "banana", "cherry")
 
 # Перевірка наявності елемента в Tuple:
 my_tuple = (1, 2, 3)
-#print(1 in my_tuple)  # True
-#print(4 in my_tuple)  # False
+print(1 in my_tuple)  # True
+print(4 in my_tuple)  # False
 
 # Повторення Tuple:
 my_tuple = ("apple", "banana", "cherry")
-#print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
+print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
