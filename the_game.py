@@ -29,29 +29,29 @@ def end():
     """Кінець гри, коли гравець витратив всю енергію"""
     if heroes[hero]["енергія"] <= 0:
         if points >= 0:
-            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}, ти витратив всю енергію!'
-                  f'Ти зіграв {games} ігор'
-                  f'Випив {beer_count} келихів пива'
+            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}, ти витратив всю енергію!\n'
+                  f'Ти зіграв {games} ігор\n'
+                  f'Випив {beer_count} келихів пива\n'
                   f'Заробив {points} балів!')
             logger.info(f'Гра скінчилася. Ігри: {games}, келихи: {beer_count}, бали: {points}')
         else:
-            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}, ти витратив всю енергію!'
-                  f'Ти зіграв {games} ігор'
-                  f'Випив {beer_count} келихів пива'
-                  f'Пішов у мінус {+points} балів!')
+            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}, ти витратив всю енергію!\n'
+                  f'Ти зіграв {games} ігор\n'
+                  f'Випив {beer_count} келихів пива\n'
+                  f'Пішов у мінус {abs(points)} балів!')
             logger.info(f'Гра скінчилася. Ігри: {games}, келихи: {beer_count}, бали: {points}')
     if heroes[hero]["енергія"] > 0:
         if points >= 0:
-            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}!'
-                  f'Ти зіграв {games} ігор'
-                  f'Випив {beer_count} келихів пива'
+            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}!\n'
+                  f'Ти зіграв {games} ігор\n'
+                  f'Випив {beer_count} келихів пива\n'
                   f'Заробив {points} балів!')
             logger.info(f'Гра скінчилася. Ігри: {games}, келихи: {beer_count}, бали: {points}')
         else:
-            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}!'
-                  f'Ти зіграв {games} ігор'
-                  f'Випив {beer_count} келихів пива'
-                  f'Пішов у мінус {+points} балів!')
+            print(f'Що ж, от і все на сьогодні, друже, {heroes[hero]["name"]}!\n'
+                  f'Ти зіграв {games} ігор\n'
+                  f'Випив {beer_count} келихів пива\n'
+                  f'Пішов у мінус {abs(points)} балів!\n')
             logger.info(f'Гра скінчилася. Ігри: {games}, келихи: {beer_count}, бали: {points}')
 
 
@@ -85,6 +85,7 @@ def start():
     print(f'Приємно з тобою познайомитися, {name}')
     print('Ну що, пограємо?')
     logger.info(f'Персонажа створено. Обраний герой: {hero}, ім`я: {name}')
+
     return choose_game()
 
 
@@ -124,7 +125,8 @@ def choose_game():
         print('Келих пива за рахунок закладу нашому гостю!')
         print('Ваша енергія зменшилась на 1')
         logger.info(f'Келихи: {beer_count}, енергія: {heroes[hero]["енергія"]}')
-        return beer()
+        print(beer())
+        return choose_game()
     if choose == 'пиво' and beer_count == 10:
         print('Ти вже достатньо випив, друже! Побережи себе та свою енергію для ігор!')
         return choose_game()
@@ -141,7 +143,8 @@ def choose_game():
     if choose == 'слово':
         print(f'О, {hero}, як добре, що Ви не пройшли повз мене! Мене звати Лис-перевернис, скажіть мені слово і\n'
               f'я скажу Вам, чи отримаю те саме слово якщо прочитаю його задом наперед! Якщо це так, то Ви отримаєте \n'
-              f'Але майте на увазі, що слово повинно містити лише букви, інакше я не зможу нічого зробити!\n'
+              f'Але майте на увазі, що слово повинно містити лише букви і не менше аніж три букви та не більше аніж '
+              f'10, інакше я не зможу нічого зробити!\n'
               f'До того ж, зауважу ще й те, що регістр букв не має значення!')
         print(word_validator(word=input('Введіть слово ')))
         return choose_game()
@@ -153,7 +156,7 @@ def choose_game():
 def beer():
     global beer_count
     beer_count += 1
-    return choose_game()
+    return '*Ви кажете:* "Львівське різдвяне, це я люблю!"'
 
 
 def word_validator(word: str):
@@ -310,13 +313,23 @@ def palindrom_word(word: str):
 
     word = word.lower()
     inverse = word[::-1]
-    if word == inverse:
+    if word == inverse and 3 <= len(word) <= 10:
         heroes[hero]["енергія"] -= 2
         points += 1
         logger.info(f'Енергія: {heroes[hero]["енергія"]}, ігри: {games}, бали: {points}, паліндром - так')
         return f'Це паліндром!\n' \
                f'Ваша енергія зменшилась на 2\n' \
                f'Ви отримали 2 бали!'
+    if 3 > len(word) or 10 < len(word):
+        heroes[hero]["енергія"] -= 2
+        logger.info(f'Енергія: {heroes[hero]["енергія"]}, ігри: {games}, бали: {points}, паліндром - так')
+        return f'Некоректне слово!\n' \
+               f'Ваша енергія зменшилась на 2'
+    heroes[hero]["енергія"] -= 2
     logger.info(f'Енергія: {heroes[hero]["енергія"]}, ігри: {games}, бали: {points}, паліндром - ні')
     return f'На жаль це не паліндром :(\n' \
            f'Ваша енергія зменшилась на 2'
+
+
+if __name__ == '__main__':
+    start()
