@@ -37,9 +37,18 @@ print(7 in a) # False
 ## методи списків
 # додавання у список
 big_list.append(4)
-print(big_list)
-big_list[1] = 338
-print(big_list)
+big_list.extend([5,6,7])
+big_list.insert(1, "223")
+# пошук, перевірка значень
+value = 61
+big_list.index(value)
+big_list.count(value)
+# впорядкування даних
+#big_list.sort()  #['abc', 'ABD', 'aBe']
+big_list.reverse()
+# зміни
+big_list.copy()
+big_list.clear()
 
 big_list.extend([5,6,7])
 print(big_list)
@@ -192,12 +201,12 @@ my_tuple[2].pop()
 print(my_tuple)
 # Для доступу до елементів Tuple можна використовувати індексацію, яка починається з 0. Наприклад:
 my_tuple = ("apple", "banana", "cherry")
-print(my_tuple[1])  # "banana"
+#print(my_tuple[1])  # "banana"
 
 # Інші корисні операції з Tuple:
 # Отримання довжини Tuple:
 my_tuple = (1, 2, 3)
-print(len(my_tuple))  # 3
+#print(len(my_tuple))  # 3
 
 # Злиття двох Tuple:
 tuple1 = (1, 2, 3)
