@@ -1,6 +1,6 @@
 ContactID,FirstName,LastName,BadgeName,Birthday,EmailAddress,Employer,Occupation,HomeAddress,HomePhone,MailingAddress,MobilePhone,EnrolledBy,EnrolledDate,EnrolledByLP,WorkshopType,WorkshopNumber,WorkshopStatus,
 16957,Michael,Owens,MICHAEL,10/21/1990,mike@revolutionalaboratories.com,Revolution Labs LLC,SR Mgr of Brand empowerment,"5245 Genesee Cove, San Diego, CA, 92122",,"5245 Genesee Cove, San Diego, CA, 92122",(619) 820-7890,Joshua Nussbaum,5/21/2014,116,Advanced,117,Completed Training,"Advanced,117,Completed Training"
-16957,Michael,Owens,MICHAEL,10/21/1990,mike@revolutionalaboratories.com,Revolution Labs LLC,SR Mgr of Brand empowerment,"5245 Nussbaum,5/21/2014,116,GRACE,7,CC DECL,"GRACE,7,CC DECL"
+16957,Michael,Owens,MICHAEL,10/21/1990,mike@revolutionalaboratories.com,Revolution Labs LLC,SR Mgr of Brand empowerment,"5245 Nussbaum,5/21/2014,116,GRACE,7,CC DECL,GRACE",7,"CC DECL"""
 1885,Michael,Palomino,MICHAEL,5/1/1981,abcpalomino@hotmail.com,First Choice,Account Executive,"2153 Evening Side Drive
 West Covina, CA  91792",(626) 391-9891,RHEENA BARTOLOME,11/16/2004,42,Advanced,43,Completed Training,"Advanced,43,Completed Training"
 1885,Michael,Palomino,MICHAEL,5/1/1981,abcpalomino@hotmail.com,First Choice,Account Executive,"2153 Evening Side Drive
@@ -8,8 +8,8 @@ West Covina, CA  91792",(626) 961-2438,"2153 Evening Side Drive
 West Covina, CA  91792",(626) 391-9891,RHEENA BARTOLOME,11/16/2004,42,Basic,43,Completed Training,"Basic,43,Completed Training"
 1885,Michael,Palomino,MICHAEL,5/1/1981,abcpalomino@hotmail.com,First Choice,Account Executive,"2153 Evening Side Drive
 West Covina, CA  91792",(626) 961-2438,"2153 Evening Side Drive
-1885,Michael,Palomino,MICHAEL,5/1/1981,abcpalomino@hotmail.com,First Choice,Account Executive,"2153 Evening Side Drive
-West Covina, CA  91792",(626) 961-2438,"2153 Evening Side Drive
+1885,Michael,Palomino,MICHAEL,5/1/1981,abcpalomino@hotmail.com,First Choice,Account Executive,2153 Evening Side Drive"
+West Covina," CA  91792""",(626) 961-2438,"2153 Evening Side Drive
 West Covina, CA  91792",(626) 391-9891,RHEENA BARTOLOME,11/16/2004,42,GRACE MEN,2,Completed Training,"GRACE MEN,2,Completed Training"
 12764,Michael,Park,MIKE,1/2/1986,mpark21@hotmail.com,,Attorney,"246 N. Lucerne Blvd
 Los Angeles, CA 90004",,"246 N. Lucerne Blvd
