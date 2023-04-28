@@ -37,9 +37,24 @@ print(7 in a) # False
 ## методи списків
 # додавання у список
 big_list.append(4)
+<<<<<<< HEAD
 print(big_list)
 big_list[1] = 338
 print(big_list)
+=======
+big_list.extend([5,6,7])
+big_list.insert(1, "223")
+# пошук, перевірка значень
+value = 61
+big_list.index(value)
+big_list.count(value)
+# впорядкування даних
+#big_list.sort()  #['abc', 'ABD', 'aBe']
+big_list.reverse()
+# зміни
+big_list.copy()
+big_list.clear()
+>>>>>>> e2a93ac51a45648d4d4f592b6de449ff4313bfd3
 
 big_list.extend([5,6,7])
 print(big_list)
@@ -155,10 +170,13 @@ print(set(my_list))
 # порівняння
 # підмножина. Еквівалентом методу issubset() є оператор <=
 set_a = {1, 2, 3}
+<<<<<<< HEAD
 
 set_b = {1, 2, 3, 4, 5}
 #print(set_a <= set_b)
 
+=======
+>>>>>>> e2a93ac51a45648d4d4f592b6de449ff4313bfd3
 set_b = {1, 2, 4, 5, 3,}
 print(set_a.issubset(set_b))
 print("B <= A", set_b <= set_a)
@@ -218,6 +236,9 @@ print(4 in my_tuple)  # False
 my_tuple = ("apple", "banana", "cherry")
 
 # print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
+<<<<<<< HEAD
 
 # print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
 
+=======
+>>>>>>> e2a93ac51a45648d4d4f592b6de449ff4313bfd3

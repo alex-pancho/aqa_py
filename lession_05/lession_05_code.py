@@ -35,9 +35,12 @@ while current_number <= 4:
 # break
 # continue
 
+<<<<<<< HEAD
 
 # for в один рядок (comprehensions)
 
+=======
+>>>>>>> e2a93ac51a45648d4d4f592b6de449ff4313bfd3
 # цикл for
 for i in range(2, 6):
     print(i)
@@ -48,6 +51,9 @@ for i in my_list:
 sum_el = [i for i in my_list if i%2 == 0]
 
 print(sum_el)
+<<<<<<< HEAD
 
 print(sum_el)
 
+=======
+>>>>>>> e2a93ac51a45648d4d4f592b6de449ff4313bfd3
