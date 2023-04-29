@@ -10,12 +10,9 @@ ideas_for_test/work_with_csv
 порівняйте на наявність дублікатів
 результат запишіть у файл result_<your_second_name>.csv
 """
-c = Path('c:\\')
-c = c.parent
 
-path_aqa_py = c / "Users" / "Alex" /"PycharmProjects" /"aqa_py"
-path_ideas_f_test = c / "Users" / "Alex" /"PycharmProjects" /"aqa_py" / "ideas_for_test" / "work_with_csv"
-
+curr_folder_path = (Path.cwd())
+path_ideas_f_test = (curr_folder_path.parent / 'ideas_for_test' / 'work_with_csv')
 
 def read_csv_file(filename):
     """Read CSV-file"""
@@ -52,7 +49,7 @@ def check_duplicates(file_1, file_2):
     write_csv_file('result_kobko.csv', list(duplicates))
 
 
-path_to_r_m_c_file = c / "Users" / "alex" /"PycharmProjects" /"aqa_py" / "ideas_for_test" / "work_with_c sv" / "r-m-c.csv"
-path_to_random_michaels_file = c / "Users" / "alex" /"PycharmProjects" /"aqa_py" / "ideas_for_test" / "work_with_csv" / "random-michaels.csv"
+path_to_r_m_c_file = curr_folder_path.parent / 'ideas_for_test' / 'work_with_csv' / "r-m-c.csv"
+path_to_random_michaels_file = curr_folder_path.parent / 'ideas_for_test' / 'work_with_csv' / "random-michaels.csv"
 
 check_duplicates(path_to_r_m_c_file,path_to_random_michaels_file)

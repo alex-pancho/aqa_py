@@ -3,7 +3,7 @@ import json
 import csv
 import xml.etree.ElementTree as ET
 import logging
-from logger_info_level import logger
+from my_logger import logger
 
 # task 3
 """ Для файла ideas_for_test/work_with_xml/groups.xml
@@ -16,8 +16,7 @@ def get_group_number_incoming(xml_path: str, number: int=0):
     '''
     Search in group/number and child values in timingExbytes/incoming
     '''
-  
-    # path_group_file = (Path.cwd() / "group.xml")
+
     if not my_xml.exists():
        raise FileNotFoundError("Файл не знайдено")
 
@@ -43,6 +42,7 @@ def get_group_number_incoming(xml_path: str, number: int=0):
         except IndexError as s:
             print(f"IndexError: {s}")
     
+curr_folder_path = (Path.cwd())
+my_xml = (curr_folder_path.parent / 'ideas_for_test' / 'work_with_xml' / 'groups.xml')
 
-my_xml = (Path.cwd() / "lession_12" / "group.xml")
 get_group_number_incoming(my_xml, 5)

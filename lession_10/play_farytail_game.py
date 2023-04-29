@@ -21,15 +21,17 @@ characters = {
 }
 }
 
+your_character = []
+player = []
+
 def hello ():
     return ('Привіт любий друже. Гайда пограємось в просту але цікаву гру')
 
 def choose_character():
     while True:
-        your_character = []
         selected_char = input("Вибери одного із персонажів Котигорошко, Кінь, Відьмак! Тож, напиши твій вибір?: ")
         your_character.append(selected_char)
-        print(your_character)
+        # print(your_character)
         try:
             if selected_char in characters:
                 print(f"Перекрасний вибір. Твій персонаж-{selected_char}. Вій має такі характеристики: {characters[selected_char]}")
@@ -48,11 +50,14 @@ def choose_character():
 def random_player():
     print("sdf->>>>>")
     exists_character = choose_character()
-    player = random.choice(list(characters.values()))
-    if exists_character != player:
-        return player
+    players = list(characters.values())
+    chosen_player = random.choice(players)
+    print("gg->", chosen_player['імя'])
+    if exists_character != chosen_player:
+        return chosen_player
 
-# random_player()
+
+random_player()
 
 
 
@@ -65,33 +70,30 @@ def meeting_stage(player:str) ->str:
     print(f"Ви зустрілися з {player['імя']}. Його рівень життя: {player['рівень життя']}, сила: {player['сила']}, розум: {player['розум']}.")
     action = input("Що ви будете робити?\n1. Почати діалог з ним.\n2. Розпочати бій.\n3. Спробувати втекти.\nВиберіть один із трьох варіантів(1,2,3):")
     if action == "1":
-        print("Ви почали діалог.")
+        # print("Ви почали діалог.")
+        speak_with_me(player['імя'])
     elif action == "2":
-        # stage_two(player, characters)
-        print("sss")
-        pass
-    elif action == "3":
-        print("Ви спробували втекти, але не вдалося.")
+        lets_fight(your_character, player)
+    # elif action == "3":
+    #     print("Ви спробували втекти, але не вдалося.")
 
 
-rnd_player = random_player()
-meeting_stage(rnd_player)
+# rnd_player = random_player()
+# meeting_stage(rnd_player)
 
 
 def speak_with_me():
     plesant_greetings = ['Привіт друже,', "Дуже радий зустрічі,", 'О, я такий радий тебе зустріти. Тримай цукерку, ']
     unpleasant_greetings = ["Чому витрищився?", "Зійди з мого шляху", "Іди броди"]
     escape_list = ["Ви втекли від персонажа. Тепер він ваш опонент", "Вас наздогнав персонаж.Йой що буде", "Тікаючи, ви перечепилися і впали."]
-    print(f"Ти обрав варіант розмови із {rnd_player}")
+    print(f"Ти обрав варіант розмови із {player['імя']} Його рівень життя: {player['рівень життя']}, сила: {player['сила']}, розум: {player['розум']}.")
     action_for_speak = input("1.Ввічливо привітатися?\n2.Щось зухвало буркнути.\n3.Проігнорувати і втікти\n3.Виберіть один із трьох варіантів(1,2,3):")
     if action_for_speak == '1':
         x_peasant = random.choice(plesant_greetings)
-        print(f"{x_peasant}{rnd_player}")
-        print(f'Я,{rnd_player}.Радий зустрічі,теж')
-    elif  action_for_speak == '2':
+        print(f"{x_peasant},{player['імя']}. Я,{your_character['імя']}.Радий зустрічі із тобою")
+    elif action_for_speak == '2':
         x_unplesant = random.choice(unpleasant_greetings)
-        print(f"{x_unplesant}{rnd_player}")
-        print(f'Як ти смієш так розмовляти, Поганець. Я, могутній {rnd_player} і таких слів не пробачу")')
+        print(f"{x_unplesant}{player['імя']}. О-о-о, як ти смієш так розмовляти, поганецю. Я, могутній {player['імя']} і таких слів не пробачу")
     elif action_for_speak == '3':
         x_escape = random.choice(escape_list)
         print(f"WOW, {x_escape}")
@@ -99,15 +101,38 @@ def speak_with_me():
 speak_with_me()
 
 
+def lets_fight(your_character, player):
+    print(f"Нажаль, ти обрав варіант ескалації та хочеш побитися із {player['імя']}.Його рівень життя: {player['рівень життя']}, сила: {player['сила']}, розум: {player['розум']}")
+    print(f"Нагадую, що ти обрав персонаж {your_character['імя']}.Його рівень життя: {your_character['рівень життя']}, сила: {your_character['сила']}, розум: {your_character['розум']}")
+    print(f"Бій буде тривати до останньої краплі життя")
 
-# stage_one("Ппп")
+    if your_character['рівень життя'] <= 0:
+        print("Ви не можете розпочати бій, бо ви мертві!")
+        return
+    elif player['рівень життя'] <= 0:
+        print(f"{player['імя']} вже мертвий. Немає сенсу з ним битися!")
+        return
 
-# def stage_two(player, characters):
-#     opponent = random.choice(list(characters.values()))
-#     if opponent["ім'я"] == player["ім'я"]:
-#         stage_two(player, characters)
-#     elif:
-#     print(f"Ви зустрілися з {opponent['імя']}.Його рівень життя: {opponent}")
-#
+    # розпочинаємо бій
+    while your_character['рівень життя'] > 0 and player['рівень життя'] > 0:
+        # гравець атакує опонента
+        print(f"Ви атакуєте {player['імя']} і завдаєте {your_character['сила']} пошкоджень!")
+        player['рівень життя'] -= your_character['сила']
 
-# stage_two(player, characters):
+        # перевірка чи опонент вже помер
+        if player['рівень життя'] <= 0:
+            print(f"Ви перемогли {player['імя']}! Отримуєте {player['досвід']} досвіду!")
+            player['досвід'] += player['досвід']
+            return
+
+        # опонент атакує гравця
+        print(f"{player['імя']} атакує вас і завдає {player['сила']} пошкоджень!")
+        player['рівень життя'] -= player['сила']
+
+        # перевірка чи гравець вже помер
+        if your_character['рівень життя'] <= 0:
+            print(f"{player['імя']} переміг вас! Ви програли!")
+            return
+
+
+lets_fight(your_character, player)
