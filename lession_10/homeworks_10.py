@@ -54,3 +54,136 @@
     3. розв'язка ( відповідно до обраних дій та коефіцієнтів - перемога, поразка чи нічия)
 І треба хоча б 9 тестів на усе це добро.
 """
+
+
+import random
+from olena_logger import logger
+
+heroes = {
+    'Котигорошко': {
+        'назва': 'Котигорошко',
+        'сила': 100,
+        'рівень життя': 100
+    },
+    'Івасик-Телесик': {
+        'назва': 'Івасик-Телесик',
+        'сила': 100,
+        'рівень життя': 100
+    },
+    'Пан Коцький': {
+        'назва': 'Пан Коцький',
+        'сила': 100,
+        'рівень життя': 100
+    }
+}
+def hello():
+    print("Привіт. Це початок гри. Скористайся текстовими інструкціями")
+
+hero = {}
+enemy = {}
+
+
+def choose_hero():
+    """Вибір персонажу"""
+
+    while True:
+       print("**********************")
+       you_hero = input("Виберіть героя зі списку: Котигорошко, Івасик-Телесик, Пан Коцький: ")
+       try: 
+           if you_hero in heroes:
+               print("**********************")
+               hero.update(heroes[you_hero])
+               print (f'Привіт, {hero["назва"]}, твої початкові дані - сила: {hero["сила"]}, рівень життя: {hero["рівень життя"]}')
+               break
+           else:
+               print(f'Героя немає в списку, повторіть спробу')   
+               continue
+       except ValueError as e:
+           logger.error('Precondition is failed')
+           print(e)
+    logger.info(f"Hero choosen, {you_hero}")
+    return hero  
+      
+def choose_enemy():
+    hero = choose_hero()['назва']
+    players = list(heroes)
+    players.remove(str(hero)) 
+    your_enemy = random.choice(players)
+    enemy.update(heroes[your_enemy])
+    print(f"Твій супротивник на цю гру {your_enemy}, його рівень - сила: {enemy['сила']}, рівень життя: {enemy['рівень життя']}")
+    logger.info(f"Enemy choosen, {your_enemy}")
+    return enemy
+
+def choose_game():
+    if hero["сила"] <= 0 or hero["рівень життя"] <=0:
+        print(f'Гру закінчено. Твої показники - сила: {hero["сила"]}, рівень життя: {hero["рівень життя"]}')
+        logger.info(f'Game over')
+    else:       
+        action = input("Що ти обереш?\n1. Пограти в гру.\n2. Розпочати бій.\n3. Вихід з гри.\nВиберіть один із трьох варіантів (1, 2, 3): ")
+        if action == "1":
+            print("Починаємо гру. Гравець має 5 спроб відгадати випадкове число від 1 до 20")
+            guess_number()
+            logger.info('guess_number game choosen')
+        elif action == "2":
+            fight()
+            logger.info('fight game choosen')
+        elif action == "3":
+            print(f'Ти покидаєш гру, до зустрічі. Твої показники - сила: {hero["сила"]}, рівень життя: {hero["рівень життя"]}')
+            logger.info('Game over')
+
+
+def guess_number():
+    print("**********************")
+    secret_number = random.randint(1, 20)
+    guesses = 0
+    max_guesses = 5
+    for x in range(guesses, max_guesses):
+        number =  int(input("Guess the number from 1 to 20 in 5 tries!: "))
+        if number < secret_number:
+            print("Число менше ніж загадане")
+            hero["рівень життя"]-=10
+        elif number > secret_number:
+            print("Число більше ніж загадане")
+            hero["сила"]-=10
+        else:
+            print("ти виграв!")
+            hero["рівень життя"]+=10
+            hero["сила"]+=10
+            break 
+    choose_game()
+
+def fight():
+    print("**********************")
+    while enemy["рівень життя"] > 0:
+        print(f'Твої показники - сила: {hero["сила"]}, рівень життя: {hero["рівень життя"]}')
+        print(f'Показники {enemy["назва"]} - сила: {enemy["сила"]}, рівень життя: {enemy["рівень життя"]}')
+        print("**********************")
+        x = int(input("1. Битися.\n2. Спробувати ухилитись.\n3. Втекти.\nВиберіть один із трьох варіантів (1, 2, 3): "))
+        print("**********************")
+        if x == 1:
+            enemy["рівень життя"] -= random.randint(0,50)
+            print("**********************")
+            print(f"Ти вдарив противника, у нього лишилося життя: {enemy['рівень життя']}")
+            hero["сила"] -= random.randint(0,5)
+            print(f"На це було витрачено сили, залишок сил: {hero['сила']}")
+            if hero['рівень життя'] < 0 or hero["сила"] < 0:
+                print("Ти програв")             
+            elif enemy['рівень життя'] < 0 or enemy["сила"] < 0:
+                print("Ти виграв")
+        elif x == 2:
+            hero["рівень життя"] -= random.randint(0,5)
+            print("**********************")
+            print(f"Противник поцілив у тебе, у тебе лишилося життя: {hero['рівень життя']}") 
+            if hero['рівень життя'] < 0 or hero["сила"] < 0:
+                print("Ти програв")             
+            elif enemy['рівень життя'] < 0 or enemy["сила"] < 0:
+                print("Ти виграв")
+        elif x == 3:
+             print(f'Ти покидаєш гру, до зустрічі. Твої показники - сила: {hero["сила"]}, рівень життя: {hero["рівень життя"]}')
+             logger.info('Game over')
+             break
+
+
+hello()
+choose_enemy()
+choose_game()
