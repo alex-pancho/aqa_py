@@ -76,7 +76,7 @@ json_validator(json_folder)
 
 xml_file = path.parent.parent / 'ideas_for_test' / 'work_with_xml' / 'groups.xml'
 
-# Нижче коментар
+# Дякую за пояснення, одразу ж виправив :)
 
 
 def xml_search_incoming_by_group_number(num):
@@ -95,4 +95,4 @@ def xml_search_incoming_by_group_number(num):
         logger.info(f'{value.text}')
 
 
-xml_search_incoming_by_group_number(1)
+xml_search_incoming_by_group_number(4)
