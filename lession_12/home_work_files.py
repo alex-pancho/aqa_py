@@ -12,8 +12,8 @@ ideas_for_test/work_with_csv
 """
 
 path = Path(__file__)
-
-csv_1 = path.parent.parent / 'ideas_for_test' / 'work_with_csv' / 'r-m-с.csv'
+print(path)
+csv_1 = path.parent.parent / 'ideas_for_test' / 'work_with_csv' / 'r-m-c.csv'
 csv_2 = path.parent.parent / 'ideas_for_test' / 'work_with_csv' / 'rmc.csv'
 
 # У цих файлах дублікати усі рядки окрім одного. Взагалі, я подумав, що тут можно обійтись без модуля csv aлe давайте
@@ -64,7 +64,7 @@ def json_validator(folder):
                 logger.error(f'File {file} is not JSON format')
 
 
-json_validator(json_folder)
+# json_validator(json_folder)
 
 
 # task 3
@@ -95,4 +95,4 @@ def xml_search_incoming_by_group_number(num):
         logger.info(f'{value.text}')
 
 
-xml_search_incoming_by_group_number(4)
+# xml_search_incoming_by_group_number(4)
