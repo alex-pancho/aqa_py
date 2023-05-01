@@ -8,14 +8,17 @@ class InvalidInputException(Exception):
         self.input = input
 
     def __str__(self):
-        return f"Invalid input: {self.input}"
+        return f"Invalid input: '{self.input}' is not int"
 
 def calculate_sum(a, b):
-    if not isinstance(a, int) or not isinstance(b, int):
-        raise InvalidInputException(f"{a} or {b}")
+    if not isinstance(a, int):
+        raise InvalidInputException(a)
+    elif not isinstance(b, int):
+        raise InvalidInputException(b)
+    # ValueError - тут краще
     return a + b
 
-#print(calculate_sum(1, "a"))
+#print(calculate_sum(1, "ccccc"))
 
 def divide(x, y):
     try:
@@ -26,23 +29,27 @@ def divide(x, y):
     else:
         logger.info(f'{x} divided by {y} is {result}')
         return result
+    finally:
+        logger.debug("final countdown")
+#print(divide(5, 0))
+# Створення логеру
+
 
 # Строгі твердження
-filename = Path("file.txt")
+filename = Path("text.txt")
 #assert filename.exists(), f"{filename} not found"
-
-
+print("Hello!!!")
+# Контекстні менеджери
+# f = open(filename, 'r')
+# f.write("ta ta ta")
+# f.close()
+## WRONG WAY!!!
 # f = open(filename, 'w')
 # try:
 #     f.write("ta ta ta")
 # finally:
 #     f.close()
-# # Контекстні менеджери
-# with open(filename, 'w') as f:
-#     f.write("ta ta ta")
-
-
-
-if __name__ == '__main__':
-    divide(10, 5)
-    divide(10, 0)
+## GOOOD WAY::::
+with open(filename, 'w') as f:
+    f.write("ta ta ta")
+print("end record")

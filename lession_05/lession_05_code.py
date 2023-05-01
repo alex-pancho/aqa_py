@@ -41,4 +41,8 @@ for i in my_list:
     print(i)
 # for в один рядок
 sum_el = [i for i in my_list if i%2 == 0]
+<<<<<<< HEAD
 print(sum_el)
+=======
+print(sum_el)
+>>>>>>> 9bcb8e3ca9290127be7d72529ef423c3e866be50

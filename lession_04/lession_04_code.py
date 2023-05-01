@@ -37,9 +37,18 @@ print(7 in a) # False
 ## методи списків
 # додавання у список
 big_list.append(4)
-print(big_list)
-big_list[1] = 338
-print(big_list)
+big_list.extend([5,6,7])
+big_list.insert(1, "223")
+# пошук, перевірка значень
+value = 61
+big_list.index(value)
+big_list.count(value)
+# впорядкування даних
+#big_list.sort()  #['abc', 'ABD', 'aBe']
+big_list.reverse()
+# зміни
+big_list.copy()
+big_list.clear()
 
 big_list.extend([5,6,7])
 print(big_list)
@@ -212,4 +221,8 @@ print(4 in my_tuple)  # False
 
 # Повторення Tuple:
 my_tuple = ("apple", "banana", "cherry")
+<<<<<<< HEAD
 # print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
+=======
+# print(my_tuple * 2)  # ("apple", "banana", "cherry", "apple", ...
+>>>>>>> 9bcb8e3ca9290127be7d72529ef423c3e866be50
