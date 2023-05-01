@@ -1,6 +1,6 @@
 import random
 import time
-from hw_10_Logger import logger
+from hw_10_logger import logger
 
 
 class Hero:
@@ -217,4 +217,4 @@ def game():
 After long treasure search you finally find it. You won the game!!!')
 
 
-#  game()
+game()
