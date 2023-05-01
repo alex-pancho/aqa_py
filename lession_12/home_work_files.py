@@ -90,24 +90,9 @@ def xml_search_incoming_by_group_number(num):
 
     for child in xml_tree:
         value = child.find('timingExbytes/incoming')
+        if value is None:
+            raise ValueError(f"{num} num in timingExbytes/incoming data is empty")
         logger.info(f'{value.text}')
 
 
-xml_search_incoming_by_group_number(2)
-
-# Частина коду з лекціїї (вставлено нижче з прикладами) про xml де іде перевірка if value is None не працює як слід,
-# а саме не викликає помилку. Довго теж сидів над цим, але потім вирішив так як у моїй функції (викликав перевірку
-# перед циклом). Можете спробувати самі (Вже підставив у number неіснуючий параметр)
-
-# my_xml = path.parent / "group.xml"
-# with my_xml.open() as file:
-#     xml_data = file.read()
-# root = ET.fromstring(xml_data)
-# number = 3
-# v = root.findall(f".//group[number='{number}']")
-# values = [ x.text for x in v ]
-# for child in  v:
-#     value = child.find('timingExbytes/micro')
-#     if value is None:
-#         raise ValueError("опис що чи чому значення нема")
-#     print(value.text)
+xml_search_incoming_by_group_number(1)
