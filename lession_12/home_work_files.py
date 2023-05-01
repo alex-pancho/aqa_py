@@ -29,7 +29,7 @@ def csv_duplicates(file_1, file_2):
     """Find duplicates in 2 csv files with different delimiters and write it to result file
     First file delimiter is ",", second file delimiter is ";" """
     try:
-        with open(file_1, newline='\n') as csv_file_1, open(file_2, newline='\n') as csv_file_2:
+        with open(file_1) as csv_file_1, open(file_2) as csv_file_2:
 
             content_csv_1 = [line.strip().split(',') for line in csv_file_1.readlines()]
             content_csv_2 = [line.strip().split(';') for line in csv_file_2.readlines()]
@@ -64,7 +64,7 @@ def json_validator(folder):
                 logger.error(f'File {file} is not JSON format')
 
 
-# json_validator(json_folder)
+json_validator(json_folder)
 
 
 # task 3
@@ -95,4 +95,4 @@ def xml_search_incoming_by_group_number(num):
         logger.info(f'{value.text}')
 
 
-# xml_search_incoming_by_group_number(4)
+xml_search_incoming_by_group_number(4)
