@@ -58,108 +58,120 @@
 import random
 from my_logger import logger
 
-
 herous = {
 'Ursa': {'power': 52, 'health': 600, 'speed': 6, 'money': 50},
-'Warlock': {'power': 34, 'health': 1200, 'speed': 4, 'money': 0},
-'Luna': {'power': 42, 'health': 780, 'speed': 7, 'money': 20}}
-
-monsters = {
-'Rohan': {'name': 'Roshanum', 'health': 1500, 'power': 30, 'speed': 2},
-'Goblin': {'name': 'Goblin', 'health': 300, 'power': 15, 'speed': 5}
+'Warlock': {'power': 14, 'health': 1200, 'speed': 4, 'money': 0},
+'Luna': {'power': 42, 'health': 780, 'speed': 7, 'money': 20}
 }
 
-print("Hello, my dear guest. Let's try to play the game")
+monsters = {
+'Rohan': {'money': 150, 'health': 1500, 'power': 550, 'speed': 2},
+'Goblin': {'money': 20, 'health': 300, 'power': 15, 'speed': 5}
+}
 
-def start_game():
-    while True:
-        key_hero = input("Please make a choice! You have three herous to choose from(Ursa, Warlock and Luna): ").capitalize()
-        try:
-            if key_hero in herous:
-                print(f"You hero is {key_hero}. It's not a bad choice.")
-                print(f'Your skills: \n Health: {herous[key_hero]["health"]}\n Power: {herous[key_hero]["power"]}\n Speed: {herous[key_hero]["speed"]}\n Money: {herous[key_hero]["money"]}')  #Need to add a function with oppotunities of selected hero later
-                logger.info(f'The hero was selected. Your hero is {key_hero}.')
-                return key_hero
-            else:
-                raise ValueError('Something went wrong. Please try again to type a hero')
-        except ValueError as mistake:
-            print(mistake)
-
-
-
-#start_game()
+def hero_skills(key_hero):
+    """This function returns selected hero's skills"""
+    print(f"Your Hero's Skills: \n \
+    Health: {herous[key_hero]['health']}\n \
+    Power: {herous[key_hero]['power']}\n \
+    Speed: {herous[key_hero]['speed']}\n \
+    Money: {herous[key_hero]['money']}")
+    return herous.get(key_hero)
 
 def random_monster():
-    'This function is for selecting a monstar randomly'
+    """This function is for selecting a monster randomly"""
     monster = None
     monster = random.choice(list(monsters))
     return monster
 
 #random_monster()
 
+def monster_skills(monster):
+    """This function returns selected monster's skills"""
+    print(f"Monster's Skills: \n \
+    Health: {monsters[monster]['health']}\n \
+    Power: {monsters[monster]['power']}\n \
+    Speed: {monsters[monster]['speed']}\n \
+    Money: {monsters[monster]['money']}")
 
 def first_stage(monster, hero):
-    print(f"Unfortunately, on the way to your goal you encountered {monster}.\nHis amount of health: {monsters[monster]['health']}, his power: {monsters[monster]['power']}")
-    logger.info(f"Monster will be in the current game : {monster}")
+    """This function is for selection an action by a user"""
     your_action = input("What are you gooing to do? Fight, Run or Compensate?" ).capitalize()
     print('You have chosen :', your_action)
     if your_action == 'Fight':
-        logger.info('The hero decided to choose: fight')
-        return fight_action(monster, hero)
+        logger.info('User chose: Fight')
+        return fight_action(monster, hero, your_action)
     elif your_action == 'Run':
-        logger.info('The hero decided to choose: run')
-        return run_action(monster, hero)
+        logger.info('User chose: Run')
+        return run_action(monster, hero, your_action)
     elif your_action == 'Compensate':
-        logger.info('The hero decided to choose: compensate')
-        return compensate_action(monster, hero)
+        logger.info('User chose: Compensate')
+        return compensate_action(monster, hero, your_action)
     else:
         print("Your selected action looks weird. Please try again")
-        logger.info('The user typed incorrect action')
-        return first_stage(monster, hero)
+        logger.info('User selected non-existent action')
+        return first_stage(monster, hero, your_action)
 
-
-def fight_action(monster, key_hero):
-    'This is fight between you and random monster'
-    if herous[key_hero]["power"] > monsters[monster]["power"]:
-        herous[key_hero]["power"] += monsters[monster]["power"]
-        print(f'Congratulations! You won, the {monster} was killed')
-        logger.info('The hero is stronger than the monster')
-    elif herous[key_hero]["power"] == monsters[monster]["power"]:
-        herous[key_hero]["power"] += monsters[monster]["power"] / 2
-        print(f'The fight was hard, but the draw won. Now you and {monster} are friends')
-        logger.info('The hero was on an equal footing with the monster')
+def fight_action(monster, key_hero, your_action):
+    """This is fight between selected hero and random monster"""
+    if herous[key_hero]["power"] >= monsters[monster]["power"]:
+        print(f'Congratulations! You won, {monster} was killed')
+        logger.info(f'{key_hero} is stronger than {monster}')
+        return key_hero
     else:
-        monsters[monster]["power"] += herous[key_hero]["power"]
-        print('Unfortunately, the monster is stronger than you, but today he is in a good mood and let you go')
-        logger.info('The hero is weaker than the monster')
+        print(f'Unfortunately, {monster} is stronger than {key_hero}, but today {monster} is in a good mood and let you go')
+        logger.info(f'{key_hero} is weaker than {monster}')
+        return monster
 
-def run_action(monster, key_hero):
-    'This is the run of life between monster and hero'
+def run_action(monster, key_hero, your_action):
+    """This is the run of life between random monster and selected hero"""
     if herous[key_hero]["speed"] > monsters[monster]["speed"]:
-        herous[key_hero]["speed"] += monsters[monster]["speed"]
         print(f"Congratulations! The right choice, it's better not to put yourself at risk."
         f" {monster} can't catch up with you anymore")
-        logger.info('The hero was faster than the monster')
-    elif herous[key_hero]["speed"] == monsters[monster]["speed"]:
-        herous[key_hero]["speed"] += monsters[monster]["speed"] / 2
-        print(f"You had a gap at the start, the {monster} can't catch up with you")
-        logger.info('The hero was on an equal footing with the monster')
+        logger.info(f'{key_hero} was faster than {monster}')
+        return key_hero
     else:
-        monsters[monster]["speed"] += herous[key_hero]["speed"]
         print(f"You're caught, but the {monster} doesn't need you")
-        logger.info('The hero was slower than the monster')
+        logger.info(f'{key_hero} was slower than {monster}')
+        return monster
 
-def compensate_action(monster, key_hero):
-    'This is compensate action between monster and hero'
+def compensate_action(monster, key_hero, your_action):
+    """This is compensate action between random monster and selected hero"""
     if herous[key_hero]["money"] > 0:
-        monsters[monster]["money"] += herous[key_hero]["money"]
-        print(f"{monster} didn't touch you, but he took all your money")
-        logger.info('The hero paid off the monster')
+        monsters[monster]['money'] += herous[key_hero]["money"]
+        total_amount = calculate_money(monster_money, hero_money)
+        print(f"{monster} didn't touch you, but {monster} took all your money.")
+        logger.info(f'{key_hero} paid off {monster}')
+        return monsters[monster]['money']
     else:
         print("You can't negotiate because you have no money. Think again about what I say and choose an action")
         logger.info('The hero has no money')
         return first_stage(monster, key_hero)
 
-my_hero = start_game()
-met_monster = random_monster()
-first_stage(met_monster, my_hero)
+def start_game():
+    """This is a simple game.
+    Firstly, a user needs to choose a hero (User, Warlock, Goblin), each hero has some skills (power, health, speed, money).
+    Secondly, the user will meet a monster (Rohan, Goblin) and will need to choose an action (Fight, Run, Compensate).
+    The game can either end in defeat or victory, depending on the chosen hero, action and hero's skills
+    """
+    print("Hello, my dear guest. Let's try to play the game")
+    while True:
+        key_hero = input("Please make a choice! You have three herous to choose from(Ursa, Warlock and Luna): ").capitalize()
+        try:
+            if key_hero in herous:
+                print(f"You hero is {key_hero}. Congratulations! Look at your skills:")
+                hero_skills(key_hero)
+                logger.info(f'The user selected: {key_hero}')
+                break
+            else:
+                raise ValueError('Something went wrong. Please try again to type a hero')
+        except ValueError as mistake:
+            print(mistake)
+    monster = random_monster()
+    print(f"Unfortunately, on the way to your goal you encountered {monster}.\nPay attention to his skills and choose an action. Be carefull!")
+    logger.info(f"User met monster: {monster}")
+    monster_skills(monster)
+    first_stage(monster, key_hero)
+    print("Thank you for your participation")
+
+start_game()
