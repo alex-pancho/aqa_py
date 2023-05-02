@@ -92,6 +92,11 @@ def select_player():
     player = heroes.pop(select)
     return player
 
+def select_actios(actions_tuple):
+    act_a = actions_tuple[0], actions[actions_tuple[0]]
+    act_b = actions_tuple[-1], actions[actions_tuple[-1]]
+    select = input(f"Оберіть дію: {act_a} або {act_b}")
+    return select
 
 def select_locations():
     return choice(locations)
@@ -100,15 +105,15 @@ def select_enemy():
     """Компютер робить вибір з списку залишившихся персонажів"""
     # Завдання - додати можливість  зі списку
     # нейтралів обирати персонаж компютеру
-    enemy_1 = choice(heroes)
-    enemy_2 = choice(darks)
-    #enemy_3 = choice(neutrals)
+    enemy_1 = choice(list(heroes.items()))
+    enemy_2 = choice(list(darks.items()))
+    #enemy_3 = xxx
     number = randint(1, 2)
     if number == 1:
-        enemy = heroes.pop(enemy_1)
+        enemy = heroes.pop(enemy_1[0])
         return enemy
     else:
-        enemy = enemy_2.pop(enemy_2)
+        enemy = darks.pop(enemy_2[0])
         return enemy
 
 def meet_hero_and_enemy(player, enemy):
@@ -122,7 +127,11 @@ def meet_hero_and_enemy(player, enemy):
 
 def game():
     player = select_player()
-    print(player)
+    print("Ваші данні:", player)
+    enemy = select_enemy()
+    print("Ваш суперник:", enemy)
+    actions = meet_hero_and_enemy(player, enemy)
+    s_actions = select_actios(actions)
 
 if __name__ == "__main__":
     game()
