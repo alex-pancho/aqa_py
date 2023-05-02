@@ -92,11 +92,28 @@ def select_player():
     player = heroes.pop(select)
     return player
 
-def select_actios(actions_tuple):
+def select_actions(actions_tuple):
     act_a = actions_tuple[0], actions[actions_tuple[0]]
     act_b = actions_tuple[-1], actions[actions_tuple[-1]]
-    select = input(f"Оберіть дію: {act_a} або {act_b}")
+    select = int(input(f"Оберіть номер дії: {act_a} або {act_b}"))
     return select
+
+def actions_processing(action, player, enemy):
+    if action == 0:
+        print("ви мило розійшлися")
+        return player, enemy
+    elif action == 1:
+        if player["friends"] is None:
+            player["friends"] = enemy
+            print("Ви подружилися")
+        else:
+            print("У вас є друг, ви мило розійшлися")
+    else:
+        player["power"] -= enemy["power"]
+        enemy["power"] -= player["power"]
+        print(f"Стався бій, тепер у вас {player['power']} життя, у ворга життя {enemy['power']}")
+
+    return player, enemy
 
 def select_locations():
     return choice(locations)
@@ -131,7 +148,8 @@ def game():
     enemy = select_enemy()
     print("Ваш суперник:", enemy)
     actions = meet_hero_and_enemy(player, enemy)
-    s_actions = select_actios(actions)
+    s_actions = select_actions(actions)
+    player, enemy = actions_processing(s_actions, player, enemy)
 
 if __name__ == "__main__":
     game()
