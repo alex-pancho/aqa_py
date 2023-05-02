@@ -18,15 +18,23 @@ class TestGame(unittest.TestCase):
                 select_character()
 
     def test_encounter(self):
-        with patch('builtins.input', return_value='1'):
+        with patch('builtins.input', return_value=1):
             action = encounter('Snake')
-            self.assertEqual(action, 1)
+            self.assertEqual(action, Action.DIALOGUE)
+
+        with patch('builtins.input', return_value=2):
+            action = encounter('Snake')
+            self.assertEqual(action, Action.FIGHT)
+
+        with patch('builtins.input', return_value=3):
+            action = encounter('Snake')
+            self.assertEqual(action, Action.ESCAPE)
 
         with patch('builtins.input', return_value='invalid'):
             with self.assertRaises(ValueError):
                 encounter('Snake')
 
-    def test_battle(self):
+    def test_battle_1(self):
         with patch('game.random.randint', side_effect=[5, 10]):
             result = battle('Catigoroshko', 'Snake')
             self.assertEqual(result, 'defeat')
@@ -39,12 +47,11 @@ class TestGame(unittest.TestCase):
             result = battle('Catigoroshko', 'Snake')
             self.assertEqual(result, 'tie')
 
-    def select_character(self):
-        actual_result = select_character(ValueError)
-        expect_result = "Invalid character selection"
-        self.assertEqual(actual_result, expect_result)
+    def test_battle_2(self):
+        def run_battle(player_roll, enemy_roll):
+            with patch('game.random.randint', side_effect=[player_roll, enemy_roll]):
+                return battle('Catigoroshko', 'Snake')
 
-    def encounter(self):
-        actual_result = encounter(1, 2, 3)
-        expect_result = "action"
-        self.assertEqual(actual_result, expect_result)
+        self.assertEqual(run_battle(5, 10), 'defeat')
+        self.assertEqual(run_battle(10, 5), 'victory')
+        self.assertEqual(run_battle(5, 5), 'tie')
