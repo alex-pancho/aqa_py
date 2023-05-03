@@ -31,7 +31,9 @@ class Human:
 
     def eat(self):
         self.energy += 5
-        # return self.energy
+
+    def talk(self):
+        self.energy -=20
 
     def sleep(self):
         self.energy += 10
