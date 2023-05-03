@@ -60,6 +60,7 @@ for file in json_files:
 xml_doc = p.parent.parent / 'ideas_for_test' / 'work_with_xml' / 'groups.xml'
 print(xml_doc)
 def search_by_group_number(number):
+    """This function is for searching by group/number and then timingExbytes/incoming"""
     with xml_doc.open() as file:
         xml_data = file.read()
         first_root = ET.fromstring(xml_data)
