@@ -6,6 +6,7 @@ from homeworks_13 import first_girl
 class HomeworkTest(unittest.TestCase):
 
     def test_first_boy(self):
+        """Test for checking crating first boy"""
         boy = Human('Eugene', 'Poronko', '1993', 'boy')
         self.assertEqual(boy.name, 'Eugene')
         self.assertEqual(boy.surname, 'Poronko')
@@ -13,6 +14,7 @@ class HomeworkTest(unittest.TestCase):
         self.assertEqual(boy.gender, 'boy')
 
     def test_second_boy(self):
+        """Test for checking crating second boy"""
         boy = Human('Edic', 'Koba', '1993', 'boy')
         self.assertEqual(boy.name, 'Edic')
         self.assertEqual(boy.surname, 'Koba')
@@ -20,6 +22,7 @@ class HomeworkTest(unittest.TestCase):
         self.assertEqual(boy.gender, 'boy')
 
     def test_third_boy(self):
+        """Test for checking crating third boy"""
         boy = Human('Vladislav', 'Sidora','1994', 'boy')
         self.assertEqual(boy.name, 'Vladislav')
         self.assertEqual(boy.surname, 'Sidora')
@@ -27,6 +30,7 @@ class HomeworkTest(unittest.TestCase):
         self.assertEqual(boy.gender, 'boy')
 
     def test_first_girl(self):
+        """Test for checking crating first girl"""
         girl = Human('Evgeniya', 'Kupenko', '1998', 'girl')
         self.assertEqual(girl.name, 'Evgeniya')
         self.assertEqual(girl.surname, 'Kupenko')
@@ -34,6 +38,7 @@ class HomeworkTest(unittest.TestCase):
         self.assertEqual(girl.gender, 'girl')
 
     def test_second_girl(self):
+        """Test for checking crating second girl"""
         girl = Human('Vitalina', 'Petrova', '1997', 'girl')
         self.assertEqual(girl.name, 'Vitalina')
         self.assertEqual(girl.surname, 'Petrova')
