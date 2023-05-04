@@ -29,39 +29,44 @@ class Human:
         self.sex = sex
         self.energy = energy
 
-    def eat(self):
+    def eat(self) -> int:
         """Human can eat and restore energy if energy less than 100"""
         if self.energy <= 95:
             self.energy += 5
         elif 100 >= self.energy > 95:
             self.energy = 100
+        return self.energy
 
-    def sleep(self):
+    def sleep(self) -> int:
         """Human can sleep and restore energy if energy less than 100"""
         if self.energy <= 90:
             self.energy += 10
         elif 100 >= self.energy > 90:
             self.energy = 100
+        return self.energy
 
-    def speak(self):
+    def speak(self) -> int | str:
         """Human can speak if he/she have minimum 5 energy"""
         if self.energy >= 5:
             self.energy -= 5
+            return self.energy
         elif 0 <= self.energy < 5:
-            print(f"{self.name} you don't have enough energy to perform this action")
+            return f"{self.name} you don't have enough energy to perform this action"
 
-    def walk(self):
+    def walk(self) -> int | str:
         """Human can speak if he/she have minimum 10 energy"""
         if self.energy >= 10:
             self.energy -= 10
+            return self.energy
         elif 0 <= self.energy < 10:
-            print(f"{self.name} you don't have enough energy to perform this action")
+            return f"{self.name} you don't have enough energy to perform this action"
 
-    def make_home_work(self):
+    def make_home_work(self) -> int | str:
         if self.energy >= 90:
             self.energy -= 90
+            return self.energy
         elif 0 <= self.energy < 90:
-            print(f"{self.name} you don't have enough energy to perform this action")
+            return f"{self.name} you don't have enough energy to perform this action"
 
 
 frodo = Human("Frodo", "Baggins", ("22", "09", "2968"), "male", 100)
