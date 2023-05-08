@@ -4,6 +4,8 @@ print(car == 'bmw')
 print(car == 'audi')
 
 
+False # "", {}, [], (), 0
+
 # оператор if
 age =  44 #int(input("Type your age: "))
 if age < 18:

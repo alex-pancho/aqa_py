@@ -117,10 +117,12 @@ print("2**2:", square(2))
 def describe_pet(animal_type, pet_name):
     """Display information about a pet."""
     return f"My {animal_type}'s name is {pet_name.title()}."
-print(describe_pet("shinshila", "pyizhyk"))
-print(describe_pet("pyizhyk", "shinshila"))
+# print(describe_pet("shinshila", "pyizhyk"))
+# print(describe_pet("pyizhyk", "shinshila"))
 
-#
+# def make_pizza(*toppings):
+
+
 def comma(*args) -> int:
     return ",".join([str(a) for a in args])
 print(comma(1))
@@ -132,6 +134,7 @@ def make_pizza(*toppings):
 
 print(make_pizza("aplle", "banana", "kivi"))
 
+#print(comma(1, 2, 3))
 
 # Опційні задані значення аргументів - Making an Argument Optional
 def spam(a, b=42):
