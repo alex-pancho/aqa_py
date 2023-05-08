@@ -64,39 +64,37 @@ class Human:
         return self.energy
 
 
-# Humans create
+if __name__ == '__main__':
 
+    # Humans create
 
-man1 = Human('man1', '1man', ('2002', '11', '01'), 'm')
-man2 = Human('man2', '2man', ('2003', '12', '02'), 'm')
-man3 = Human('man3', '3man', ('2004', '01', '03'), 'm')
-woman1 = Human('woman1', '1woman', ('2005', '02', '04'), 'w')
-woman2 = Human('woman2', '2woman', ('2006', '03', '05'), 'w')
-test = Human('man1', '1man', ('2002', '11', '01'), 'm')  # data for unittests
+    man1 = Human('man1', '1man', ('2002', '11', '01'), 'm')
+    man2 = Human('man2', '2man', ('2003', '12', '02'), 'm')
+    man3 = Human('man3', '3man', ('2004', '01', '03'), 'm')
+    woman1 = Human('woman1', '1woman', ('2005', '02', '04'), 'w')
+    woman2 = Human('woman2', '2woman', ('2006', '03', '05'), 'w')
+    test = Human('man1', '1man', ('2002', '11', '01'), 'm')  # data for unittests
 
-# Human actions
+    # Human actions
 
+    man1.make_hw()
+    man1.eat()
 
-man1.make_hw()
-man1.eat()
+    man2.talk()
+    man2.sleep()
 
-man2.talk()
-man2.sleep()
+    man3.walk()
+    man3.make_hw()
 
-man3.walk()
-man3.make_hw()
+    woman1.talk()
+    woman1.talk()
+    woman1.walk()
 
-woman1.talk()
-woman1.talk()
-woman1.walk()
+    woman2.sleep()
+    woman2.eat()
 
-woman2.sleep()
-woman2.eat()
+    # Energizer define
 
-
-# Energizer define
-
-
-humans = [man1, man2, man3, woman1, woman2]
-max_human = max(humans, key=lambda human: human.energy)
-print(f"The human with the maximum energy is {max_human.first_name} has {max_human.energy} energy points.")
+    humans = [man1, man2, man3, woman1, woman2]
+    max_human = max(humans, key=lambda human: human.energy)
+    print(f"The human with the maximum energy is {max_human.first_name} has {max_human.energy} energy points.")
