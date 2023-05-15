@@ -92,6 +92,18 @@ def select_player():
     player = heroes.pop(select)
     return player
 
+def select_negative_character():
+    """Вибір зі списку негативних персонажів"""
+    char_negative_list = [n for n in darks]
+    select_darks = input(f"Оберіть злодія: {', '.join([n for n in darks])}: ").capitalize()
+    if select_darks not in char_negative_list:
+        print(f"Злодія {select_darks} немає спробуйте ще раз")
+        return select_negative_character()
+    zlodiy = darks.pop(select_darks)
+    return zlodiy
+
+
+
 def select_actions(actions_tuple):
     act_a = actions_tuple[0], actions[actions_tuple[0]]
     act_b = actions_tuple[-1], actions[actions_tuple[-1]]
