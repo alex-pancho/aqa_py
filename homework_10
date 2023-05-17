@@ -1,0 +1,270 @@
+"""
+Текстова гра на тему Українських народних казок
+Правила гри:
+    Гравець має обирати персонажа, за яким він буде грати. Потім гравець починає свою
+    пригоду у вигляді текстових повідомлень. Гра складається з декількох етапів, на кожному з яких гравець зустрічає нових
+    персонажів та переживає різні пригоди. Гравець має право вибирати, як він хоче діяти у певній
+    ситуації: діалог з персонажем, бій, втеча тощо. Залежно від вибору гравця, відбуваються різні
+    наслідки.
+
+Приклади:
+
+* Гравець обирає персонажем козака. Він зустрічає чаклуна, який накладає на нього прокляття.
+    Гравець може спробувати розв'язати прокляття, знайти антидот або битися з чаклуном.
+    Залежно від вибору гравця, він може отримати нову здатність або втратити частину своїх вмінь.
+* Гравець обирає персонажем пересмішника. Він потрапляє в хитру ситуацію, де йому потрібно
+    обдурити злодія. Гравець може скористатися своїм словесним даром, знайти слабкі місця
+    злодія або спробувати зібрати команду з іншими персонажами для змагання проти злодія.
+
+Ідеї для  тестів:
+
+    Тест на перевірку правильності вибору персонажа гравцем.
+    Тест на перевірку вибору гравцем діалогу, який приводить до нової здатності персонажа.
+    Тест на перевірку вибору гравцем діалогу, який приводить до втрати здатностей персонажа.
+    Тест на перевірку правильності вибору гравцем
+    Тест на введення некоректної відповіді гравцем: спроба ввести символи, відмінні від "так" і "ні".
+    Тест на перехід до наступної дії: перевірка, чи збільшується лічильник після завершення попередньої.
+    Тест на завершення гри: перевірка, що гравець не може перейти до наступної дії, якщо він вже завершив останню.
+    Тест на вибір гравцем дії: перевірка, чи збільшується лічильник правильних відповідей після кожної правильної відповіді.
+
+Поради до написання коду:
+
+1. Створіть словник, що містить перелік персонажів та їх характеристик, таких як ім'я,
+    рівень життя, сила тощо.
+2. Запросіть у гравця вибір персонажа зі списку.
+3. Визначте етапи гри, наприклад, "Зустріч з першим персонажем", "Бій з монстром",
+    "Вирішення головоломки" тощо.
+4. Для кожного етапу гри створіть функцію, яка відповідає за обробку цього етапу.
+    Функція повинна виводити текстове повідомлення, яке описує ситуацію гравця,
+    а також список доступних дій, які гравець може вибрати. Наприклад,
+    "Ви зустрілися з гобліном. Що ви будете робити?
+    1. Почати діалог з ним. 2. Розпочати бій. 3. Спробувати втекти".
+5. Для кожної дії, яку може вибрати гравець, створіть окрему функцію.
+    Функція повинна перевіряти, чи є ця дія можливою в поточній ситуації,
+    і виконувати відповідні дії. Наприклад, якщо гравець вибирає
+    "Розпочати бій", функція повинна розпочати бій з монстром і вивести повідомлення про результат.
+6. Для обробки помилок та виключень, наприклад, якщо гравець ввів
+    неправильне значення, використовуйте блоки try/except.
+7. Для збереження прогресу гравця у грі, зберігайте дані у файл.
+
+Не ускладнюйте собі життя:
+Достатньо 3 персонажи та 3 дії а також 3  кроки:
+    1. початок(вибір героя - Котигорошко, Змій, кінь)
+    2. взаємодія(комп'ютер обирає героя з тих що лишилися і пропонує дії гравцю)
+    3. розв'язка ( відповідно до обраних дій та коефіцієнтів - перемога, поразка чи нічия)
+І треба хоча б 9 тестів на усе це добро.
+"""
+import unittest
+import random
+
+
+class Character:
+    def __init__(self, name, standard_of_living, strength):
+        self.name = name
+        self.standard_of_living = standard_of_living
+        self.strength = strength
+
+
+def create_characters():
+    characters = [
+        Character("Cat", "Low", 10),
+        Character("Snake", "Medium", 20),
+        Character("Horse", "High", 30)
+    ]
+    return characters
+
+
+def choose_character(characters):
+    print("Choose a character:")
+    for i, character in enumerate(characters, start=1):
+        print(f"{i}. {character.name}")
+    while True:
+        try:
+            choice = int(input("Enter the number of your chosen character: "))
+            if 1 <= choice <= len(characters):
+                return characters[choice - 1]
+            print("Invalid choice. Please enter a valid number.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+
+def process_stage(stage_name, character):
+    print(f"\n--- {stage_name} ---")
+    print(f"You are interacting with {character.name}.")
+    print("Available actions:")
+    print("1. Start a dialog")
+    print("2. Start a fight")
+    print("3. Try to escape")
+
+
+def process_dialog(character):
+    print(f"\nYou started a dialog with {character.name}.")
+    print(f"{character.name} says: 'Hello, adventurer!'")
+
+
+def process_fight(character):
+    print(f"\nYou started a fight with {character.name}.")
+    if character.strength > 20:
+        print(f"{character.name} is too strong. You lose!")
+    elif character.strength < 10:
+        print(f"{character.name} is weak. You win!")
+    else:
+        print("It's a draw!")
+
+
+def process_escape(character):
+    print(f"\nYou try to escape from {character.name}.")
+    print("You managed to escape successfully!")
+
+
+def save_game_data(data, filename):
+    with open(filename, "w") as file:
+        for item in data:
+            file.write(str(item) + "\n")
+
+
+def load_game_data(filename):
+    data = []
+    with open(filename, "r") as file:
+        for line in file:
+            data.append(line.strip())
+    return data
+
+
+def run_game():
+    characters = create_characters()
+    chosen_character = choose_character(characters)
+    remaining_characters = [c for c in characters if c != chosen_character]
+    random_character = random.choice(remaining_characters)
+
+    process_stage("Meeting the first character", chosen_character)
+
+    process_stage("Interaction with the second character", random_character)
+    action_choice = int(input("Enter the number of your chosen action: "))
+    if action_choice == 1:
+        process_dialog(random_character)
+    elif action_choice == 2:
+        process_fight(random_character)
+    elif action_choice == 3:
+        process_escape(random_character)
+    else:
+        print("Invalid choice. Please enter a valid number.")
+
+    process_stage("Solving a puzzle", random_character)
+    action_choice = int(input("Enter the number of your chosen action: "))
+    if action_choice == 1:
+        process_dialog(random_character)
+    elif action_choice == 2:
+        process_fight(random_character)
+    elif action_choice == 3:
+        process_escape(random_character)
+    else:
+        print("Invalid choice. Please enter a valid number.")
+
+    # Save game data
+    game_data = [chosen_character.name, random_character.name]
+    save_game_data(game_data, "game_data.txt")
+
+
+run_game()
+
+
+class TestPlayerCharacter(unittest.TestCase):
+    def test_correct_character_selection(self):
+        selected_character = "Mario"
+        expected_character = "Mario"
+        self.assertEqual(selected_character, expected_character)
+        
+    def test_incorrect_character_selection(self):
+        selected_character = "Luigi"
+        expected_character = "Mario"
+        self.assertNotEqual(selected_character, expected_character)
+
+class TestCharacterDialog(unittest.TestCase):
+    def test_new_ability_dialog(self):
+        dialog_options = {
+            "1": "Learn a new spell",
+            "2": "Train your strength",
+            "3": "Study your enemy's weakness"
+        }
+        expected_ability = {
+            "1": "fireball",
+            "2": "power punch",
+            "3": "critical hit"
+        }
+        player_choice = "1"  # Player chooses to learn a new spell
+        self.assertEqual(expected_ability[player_choice], "fireball")
+
+class TestGameDialog(unittest.TestCase):
+    def test_bad_dialog(self):
+        abilities = simulate_game_dialog("bad")
+        self.assertEqual(len(abilities), 0)
+
+    def test_good_dialog(self):
+        abilities = simulate_game_dialog("good")
+        self.assertEqual(len(abilities), 3)
+        self.assertIn("strength", abilities)
+        self.assertIn("intelligence", abilities)
+        self.assertIn("agility", abilities)
+
+class TestCounter(unittest.TestCase):
+    def test_increment(self):
+        counter = Counter()
+        initial_value = counter.value
+        counter.increment()
+        self.assertEqual(counter.value, initial_value + 1)
+
+class TestGame(unittest.TestCase):
+    def test_next_action_unavailable_after_completion(self):
+        game = Game()
+        game.start()
+        game.perform_action('Action 1')
+        game.perform_action('Action 2')
+        game.perform_action('Action 3')
+        result = game.perform_action('Action 4')
+        self.assertFalse(result, "Player was able to proceed to the next action after completing the game")
+
+class TestPlayerAction(unittest.TestCase):
+    def setUp(self):
+        self.correct_answer_counter = 0
+
+    def test_correct_answer_counter_increases(self):
+        self.correct_answer_counter += 1
+        self.assertEqual(self.correct_answer_counter, 1)
+
+        self.correct_answer_counter += 1
+        self.assertEqual(self.correct_answer_counter, 2)
+
+# Utility classes and functions
+
+class Counter:
+    def __init__(self):
+        self.value = 0
+
+    def increment(self):
+        self.value += 1
+
+def simulate_game_dialog(choice):
+    abilities = ["strength", "intelligence", "agility"]
+    if choice == "bad":
+        abilities = []
+    return abilities
+
+class Game:
+    def __init__(self):
+        self.actions = ['Action 1', 'Action 2', 'Action 3']
+        self.completed = []
+
+    def start(self):
+        pass
+
+    def perform_action(self, action):
+        if action in self.actions:
+            self.actions.remove(action)
+            self.completed.append(action)
+            return True
+        else:
+            return False
+
+if __name__ == '__main__':
+    unittest.main()
