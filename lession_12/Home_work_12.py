@@ -5,12 +5,14 @@ from pathlib import Path
 import csv
 import pathlib
 xml_path = "ideas_for_test/work_with_xml/groups.xml"
+# неправильно заданий шлях
 if not pathlib.Path(xml_path).exists():
     print(f"FILE {xml_path} FILE DOES NOT EXIST")
 
 
 p = Path("c:\\")
 folder_path = Path("aqa_py", "lession_12", "ideas_for_test", "work_with_csv")
+# тут уже краще але не зрозуміло чому від диску с
 result_file = f"result_Ihor_M.csv".replace("<", "_").replace(">", "")
 
 file_paths = [f for f in folder_path.glob("*.csv")]
@@ -53,7 +55,7 @@ ideas_for_test/work_with_json
 """
 
 folder_path = Path("ideas_for_test/work_with_json")
-
+# неправильно заданий шлях
 for file_path in folder_path.glob("*.json"):
     with open(file_path) as f:
         try:
@@ -70,7 +72,7 @@ for file_path in folder_path.glob("*.json"):
 """
 
 xml_path = Path("ideas_for_test/work_with_xml/groups.xml")
-
+# неправильно заданий шлях
 
 def find_timingExbytes(xml_path, group_number):
     with open(xml_path) as f:
