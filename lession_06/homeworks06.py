@@ -30,7 +30,8 @@ multiplication_table(4)
 def sum_two_nums(x, y):
     """Calculating the sum of two numbers"""
     summa = x + y
-    return print(f"Сума числа {x} та {y} дорівнює {summa}.")
+    return summa
+#print(f"Сума числа {x} та {y} дорівнює {summa}.")
 #sum_two_nums(3, 7)
 
 # task 3
