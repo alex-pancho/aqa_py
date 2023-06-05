@@ -94,7 +94,7 @@ def test_api_hillel_2():
     #proxy = {"http":"username@password@proxyip:port"}
     proxy = {"http":"192.168.20.130:8080"}
     auth = HTTPProxyAuth("username", "password")
-    r = requests.post(url, json=data, proxies=proxy)
+    r = requests.post(url, json=data, proxies=proxy, auth=auth)
     print(r.url)
     print(r.headers)
     print(r.status_code)
