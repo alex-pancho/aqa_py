@@ -21,10 +21,11 @@ class Pet:
         response = requests.delete(url=Pet.URL + self.id)
         return [response.status_code, response.reason], response.content
 
-    @staticmethod
-    def get_available_pets() -> tuple:
-        response = requests.get(url=Pet.URL + "findByStatus", params={"status": "available"})
+    @classmethod
+    def get_available_pets(cls) -> tuple:
+        response = requests.get(url=cls.URL + "findByStatus", params={"status": "available"})
         return [response.status_code, response.reason], response.content
+
 
 
 dog = Pet({
@@ -46,8 +47,7 @@ dog = Pet({
     "status": "available"
 })
 
-print(dog.get_available_pets())
+print(Pet.get_available_pets())
 print(dog.create_pet())
 print(dog.get_pet())
 print(dog.delete_pet())
-
