@@ -3,7 +3,7 @@ import requests
 
 class Pet:
 
-    BaseUrl = 'https://petstore.swagger.io/v2/pet'
+    base_url = 'https://petstore.swagger.io/v2/pet'
 
     @staticmethod
     def checker(response):
@@ -11,32 +11,30 @@ class Pet:
         try:
             response.raise_for_status()
             try:
-                response.json()
+                return response.json()
             except requests.JSONDecodeError():
                 return 'Response body is not JSON format'
         except requests.HTTPError:
             return response.status_code, response.reason
-        else:
-            return response.json()
 
     def get_available_pets(self):
         """Get list with pets"""
-        response = requests.get('/'.join([Pet.BaseUrl, 'findByStatus']), params={'status': 'available'})
+        response = requests.get('/'.join([self.base_url, 'findByStatus']), params={'status': 'available'})
         return self.checker(response)
 
     def add_pet(self, data):
         """Add new pet"""
-        response = requests.post(Pet.BaseUrl, json=data)
+        response = requests.post(self.base_url, json=data)
         return self.checker(response)
 
     def get_pet(self, value: int | str):
         """Find pet by id"""
-        response = requests.get('/'.join([Pet.BaseUrl, str(value)]))
+        response = requests.get('/'.join([self.base_url, str(value)]))
         return self.checker(response)
 
     def delete_pet(self, value: int | str):
         """Delete pet BibleThump :,( """
-        response = requests.delete('/'.join([Pet.BaseUrl, str(value)]))
+        response = requests.delete('/'.join([self.base_url, str(value)]))
         return self.checker(response)
 
 
