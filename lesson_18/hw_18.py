@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 class Pet:
@@ -9,23 +10,54 @@ class Pet:
         self.body = body
         self.id = str(body["id"])
 
-    def create_pet(self) -> tuple:
+    def create_pet(self):
+        """
+        Creates a new pet then returns response list status code, reason
+        and json response body with pet params
+        """
         response = requests.post(url=Pet.URL, json=self.body)
-        return [response.status_code, response.reason], response.content
+        try:
+            response_body = response.json()
+            return [response.status_code, response.reason], response_body
+        except json.decoder.JSONDecodeError:
+            print("Broken json body received")
 
-    def get_pet(self) -> tuple:
+    def get_pet(self):
+        """
+        Gets the pet by id then returns response list status code, reason
+        and json response body with pet params
+        """
         response = requests.get(url=Pet.URL + self.id)
-        return [response.status_code, response.reason], response.content
+        try:
+            response_body = response.json()
+            return [response.status_code, response.reason], response_body
+        except json.decoder.JSONDecodeError:
+            print("Broken json body received")
 
-    def delete_pet(self) -> tuple:
+    def delete_pet(self):
+        """
+        Deletes the pet by id then returns response list status code, reason
+        and json server response body
+        """
         response = requests.delete(url=Pet.URL + self.id)
-        return [response.status_code, response.reason], response.content
+        try:
+            response_body = response.json()
+            return [response.status_code, response.reason], response_body
+        except json.decoder.JSONDecodeError:
+            print("Broken json body received")
 
     @classmethod
-    def get_available_pets(cls) -> tuple:
+    def get_available_pets(cls):
+        """
+        Gets all pets then returns response list status code, reason
+        and json response body with all pets and their params
+        """
         response = requests.get(url=cls.URL + "findByStatus", params={"status": "available"})
-        return [response.status_code, response.reason], response.content
-
+        try:
+            response_body = response.json()
+            return [response.status_code, response.reason], response_body
+        except json.decoder.JSONDecodeError:
+            print("Broken json body received")
 
 
 dog = Pet({
