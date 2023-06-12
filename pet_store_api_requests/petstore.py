@@ -19,26 +19,20 @@ class Petstore():
         print("--->")
 
 
-    # def check_pet_id_in_endpoints(self, pet_id: str) -> None:
-    #     print(self.base_url + self.pet_findstatus_path_param + self.pet_status_codes[0])
-    #     # endpoints = [
-    #     #     "https://petstore.swagger.io/v2/pet/findByStatus?status=pending",
-    #     #     "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
-    #     #     "https://petstore.swagger.io/v2/pet/findByStatus?status=sold"
-    #     # ]
-    #
+    # def check_pet_id_in_all_statuses(self, pet_id: str) -> None:
+    #     '''DRAFT function: Verify info about pet via cheking all statuses (pending,available,sold)'''
     #     endpoints = [
-    #         self.base_url + self.pet_findstatus_path_param + "?status=" + self.pet_status_codes[0],
-    #         self.base_url + self.pet_findstatus_path_param + "?status=" + self.pet_status_codes[1],
-    #         self.base_url + self.pet_findstatus_path_param + "?status=" + self.pet_status_codes[2]
+    #         self.base_url + "/pet/findByStatus?status=" + self.pet_status_codes[0],
+    #         self.base_url + "/pet/findByStatus?status=" + self.pet_status_codes[1],
+    #         self.base_url + "/pet/findByStatus?status=" + self.pet_status_codes[2]
     #     ]
     #
     #     for endpoint in endpoints:
+    #         print(endpoint)
     #         try:
     #             response = requests.get(endpoint)
-    #             response.raise_for_status()  # Генеруєм виняток, якщо статус відповіді не є 200 (OK)
+    #             response.raise_for_status()
     #             response_json_pets = response.json()
-    #             # print("json respoonse iz pets", response_json_pets)
     #             for pet in response_json_pets:
     #                 if pet["id"] == pet_id:
     #                     print("Pet Found:")
@@ -51,38 +45,10 @@ class Petstore():
     #
     #     print("Pet not found.")
 
-    def check_pet_id_in_endpoints(self, pet_id: str) -> None:
-        endpoints = [
-            self.base_url + "/pet/findByStatus?status=" + self.pet_status_codes[0],
-            self.base_url + "/pet/findByStatus?status=" + self.pet_status_codes[1],
-            self.base_url + "/pet/findByStatus?status=" + self.pet_status_codes[2]
-        ]
-
-        for endpoint in endpoints:
-            try:
-                response = requests.get(endpoint)
-                response.raise_for_status()
-                response_json_pets = response.json()
-                for pet in response_json_pets:
-                    if pet["id"] == pet_id:
-                        print("Pet Found:")
-                        print("ID:", pet["id"])
-                        print("Name:", pet["name"])
-                        print("Status:", pet["status"])
-                        return response_json_pets
-            except requests.exceptions.RequestException as e:
-                print("Error occurred during request:", str(e))
-
-        print("Pet not found.")
-
 
     def get_petstore_status(self):
         '''Get pets status in petstore'''
         pet_findstatus_path_param = "/pet/findByStatus"
-        headers = {
-            'Content-Type': 'application/json',
-            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
-        }
 
         user_prompt = input("To get pets status, print: pending, available, or sold: ")
         try:
@@ -92,7 +58,7 @@ class Petstore():
             params = {"status": user_prompt}
             url = self.base_url + pet_findstatus_path_param
 
-            r = requests.get(url, headers=headers, params=params)
+            r = requests.get(url, headers=self.headers, params=params)
             self.print_server_response(r)
         except ValueError as e:
             print(e)
@@ -105,10 +71,6 @@ class Petstore():
         Обробіть відповідь сервера та виведіть підтвердження про додавання тварини на екран.'''
 
         pet_create_path_param = "/pet"
-        headers = {
-            'Content-Type': 'application/json',
-            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
-        }
         data = {
                 "id": 0,
                 "category": {
@@ -133,14 +95,14 @@ class Petstore():
             if status not in self.pet_status_codes:
                 raise ValueError(f"You send invalid paramet:status<{status}>. Remainder! Valid status list:{self.pet_status_codes}. Try again")
             url = self.base_url + pet_create_path_param
-            r = requests.post(url, headers=headers, json=data)
+            r = requests.post(url, headers=self.headers, json=data)
             self.print_server_response(r)
             json_response = r.json()
             pet_name = json_response["name"]
             pet_status = json_response["status"]
             pet_id = json_response["id"]
             print(f"Response name is <{pet_name}> and status is <{pet_status}>")
-            # print(f"Response id<{pet_id}>")
+
 
         except ValueError as e:
             print(e)
@@ -151,15 +113,10 @@ class Petstore():
         Введіть ідентифікатор тварини, яку потрібно знайти.
         Зробіть запит до /pet/{petId}, де {petId} - ідентифікатор шуканої тварини.
         Обробіть відповідь сервера та виведіть інформацію про знайдену тварину на екран.'''
-        pet_path = "/pet/"
-        headers = {
-            'Content-Type': 'application/json',
-            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
-        }
 
-        user_prompt = input("To get information about PET, input PET_ID: ")
-        url = self.base_url + pet_path + user_prompt
-        r = requests.get(url, headers=headers)
+        # user_prompt = input("To get information about PET, input PET_ID: ")
+        url = self.base_url + self.pet_path + pet_id
+        r = requests.get(url, headers=self.headers)
         self.print_server_response(r)
 
 
@@ -186,21 +143,16 @@ class Petstore():
 
 
 
-
-
-#9223372036854630556
-#9223372036854632710
-#9223372036854632716
-
-#9223372036854633614
-#9223372036854633617
-#9223372036854633618
+#Informationf for testing porposes:
+#9223372036854633614 -> {'code': 1, 'type': 'error', 'message': 'Pet not found'}
+#9223372036854633617 -> {'code': 1, 'type': 'error', 'message': 'Pet not found'}
+#{'id': 9223372036854641291, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
+# {'id': 9223372036854641533, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik-Bolick', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
 
 if __name__ == "__main__":
     petstore = Petstore()
     # petstore.get_petstore_status()
-    # petstore.add_pet_to_store("t", "pending")
-    # petstore.find_pet_by_id("9223372036854632710")
-    # petstore.check_pet_id_in_endpoints("9223372036854632716")
-    petstore.delete_pet_by_id("9223372036854633618")
+    # petstore.add_pet_to_store("Vovik-Bolick", "pending")
+    # petstore.find_pet_by_id("9223372036854641291")
+    # petstore.delete_pet_by_id("9223372036854633618")
 
