@@ -15,7 +15,7 @@ print(nix_time_now)
 
 print(time.localtime())
 
-print("*")
+# print("*")
 
 yant = time.strftime("Now year %Y %m day is %d time is: %H:%M",
                      time.localtime())
