@@ -2,84 +2,120 @@ import requests
 import json
 
 
-class Pet:
+def request(function):
+    """
+    Decorator. Receives request function validate response
+    then returns decoded json response
+    """
+    def wrapper(*args, **kwargs):
+        response = function(*args, **kwargs)
+        if response.status_code == 200:
+            try:
+                return response.json()
+            except json.decoder.JSONDecodeError:
+                print('>>> Broken json body received')
+        else:
+            print(f'>>> Request failed {response.status_code, response.reason} given')
 
-    URL = "https://petstore.swagger.io/v2/pet/"
-
-    def __init__(self, body):
-        self.body = body
-        self.id = str(body["id"])
-
-    def create_pet(self):
-        """
-        Creates a new pet then returns response list status code, reason
-        and json response body with pet params
-        """
-        response = requests.post(url=Pet.URL, json=self.body)
-        try:
-            response_body = response.json()
-            return [response.status_code, response.reason], response_body
-        except json.decoder.JSONDecodeError:
-            print("Broken json body received")
-
-    def get_pet(self):
-        """
-        Gets the pet by id then returns response list status code, reason
-        and json response body with pet params
-        """
-        response = requests.get(url=Pet.URL + self.id)
-        try:
-            response_body = response.json()
-            return [response.status_code, response.reason], response_body
-        except json.decoder.JSONDecodeError:
-            print("Broken json body received")
-
-    def delete_pet(self):
-        """
-        Deletes the pet by id then returns response list status code, reason
-        and json server response body
-        """
-        response = requests.delete(url=Pet.URL + self.id)
-        try:
-            response_body = response.json()
-            return [response.status_code, response.reason], response_body
-        except json.decoder.JSONDecodeError:
-            print("Broken json body received")
-
-    @classmethod
-    def get_available_pets(cls):
-        """
-        Gets all pets then returns response list status code, reason
-        and json response body with all pets and their params
-        """
-        response = requests.get(url=cls.URL + "findByStatus", params={"status": "available"})
-        try:
-            response_body = response.json()
-            return [response.status_code, response.reason], response_body
-        except json.decoder.JSONDecodeError:
-            print("Broken json body received")
+    return wrapper
 
 
-dog = Pet({
-    "id": 1,
-    "category": {
-        "id": 1,
-        "name": "Dog"
-    },
-    "name": "Patron",
-    "photoUrls": [
-        "https://google.com"
-    ],
-    "tags": [
-        {
+URL = "https://petstore.swagger.io/v2/pet/"
+
+
+@request
+def get_all_pets(url=URL):
+    return requests.get(url=url + "findByStatus", params={"status": "available"})
+
+
+@request
+def create_pet(body, url=URL):
+    return requests.post(url=url, json=body)
+
+
+@request
+def get_pet(pet_id, url=URL):
+    return requests.get(url=url + pet_id)
+
+
+@request
+def delete_pet(pet_id, url=URL):
+    return requests.delete(url=url + pet_id)
+
+
+def filter_pets():
+    """
+    Processing response and make list with  pets names
+    """
+    pets = []
+
+    for dicts in get_all_pets():
+        for k, v in dicts.items():
+            if k == "name":
+                pets.append(v)
+    print(pets)
+
+
+def add_pet():
+
+    body = {
             "id": 1,
-            "name": "Angry"
+            "category": {
+                "id": 1,
+                "name": "Dog"
+            },
+            "name": "Patron",
+            "photoUrls": [
+                "https://google.com"
+            ],
+            "tags": [
+                {
+                    "id": 1,
+                    "name": "Angry"
+                }
+            ],
+            "status": "available"
         }
-    ],
-    "status": "available"
-})
 
-print(Pet.get_available_pets())
-print(dog.create_pet())
-print(dog.get_pet())
-print(dog.delete_pet())
+    result = create_pet(body)
+
+    try:
+        if body == result:
+            print(f'>>> {body["category"]["name"]} {body["name"]} successfully created with id: {body["id"]}')
+        else:
+            print(f'>>> Oops, Something went wrong {body["category"]["name"]} {body["name"]} wasn\'t created')
+    except TypeError:
+        print('>>> Empty response given')
+
+
+def search_pet():
+    try:
+        user_search = int(input('>>> Enter pet id: '))
+        id_list = []
+        for dicts in get_all_pets():
+            for k, v in dicts.items():
+                if k == 'id':
+                    id_list.append(v)
+
+        if user_search in id_list:
+            print(f'>>> Pet with id: {user_search} exists')
+        else:
+            print(f'>>> Pet with id: {user_search} wasn\'t found')
+    except ValueError:
+        print('>>> ID must be a number')
+
+
+def delete_pet_by_id():
+    try:
+        user_search = input('>>> Enter pet id: ')
+        response_body = delete_pet(user_search)
+        if response_body["message"] == user_search:
+            print(f'>>> Pet ID {user_search} successfully deleted')
+    except TypeError:
+        print('>>> Pet ID doesn\'t exist')
+
+
+filter_pets()
+add_pet()
+search_pet()
+delete_pet_by_id()
