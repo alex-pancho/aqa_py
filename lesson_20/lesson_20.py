@@ -1,6 +1,5 @@
 import time
 
-
 my_time_01 = time.asctime((1980, 1, 2, 3, 4, 5, 6, 7, 8))
 print(my_time_01)
 my_real_time = time.asctime()
