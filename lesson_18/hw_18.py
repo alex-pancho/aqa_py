@@ -1,69 +1,91 @@
 import requests
 
-
 def get_available_pets():
-    """Отримати список доступних тварин"""
-    url = 'https://petstore.swagger.io/v2/pet/findByStatus'
-    params = {'status': 'available'}
-    r = requests.get(url, params=params)
+    """Get list of available pets"""
+    try:
+        response = requests.get('https://petstore.swagger.io/v2/pet/findByStatus?status=available')
+        response.raise_for_status()
+        pets = response.json()
 
-    if r.status_code == 200:
-        pets = r.json()
+        pet_info = []
         for pet in pets:
-            if 'id' in pet and 'name' in pet and 'status' in pet:
-                print(f"ID: {pet['id']}, Name: {pet['name']}, Status: {pet['status']}")
-            else:
-                print('Неправильний формат даних для тварини')
-    else:
-        print('Не вдалося отримати список тварин')
- 
+            pet_info.append({
+                'id': pet['id'],
+                'name': pet['name'],
+                'status': pet['status']
+            })
 
-def add_new_pet(name, status):
-    """Додаємо нову тваринку"""
-    url = 'https://petstore.swagger.io/v2/pet'
-    headers = {'Content-Type': 'application/json'}
-    data = {
-        'name': name,
-        'status': status
-    }
-    response = requests.post(url, json=data, headers=headers)
+        return pet_info
 
-    if response.status_code == 200:
-        pet = response.json()
-        print(f"Тварину з ID {pet['id']} було успішно додано")
-    else:
-        print('Не вдалося додати нову тварину')
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}"
 
+def add_new_pet(name, status, id):
+    """add new pet with name, status and id"""
+    try:
+        pet_data = {
+            'name': name,
+            'status': status,
+            'id' : id
+        }
+
+        response = requests.post('https://petstore.swagger.io/v2/pet', json=pet_data)
+        response.raise_for_status()
+
+        return "New pet added successfully."
+
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}"
 
 def find_pet_by_id(pet_id):
-    """Пошук тварини по id"""
-    url = f'https://petstore.swagger.io/v2/pet/{pet_id}'
-    response = requests.get(url)
+    """search pets by id"""
+    try:
+        url = f"https://petstore.swagger.io/v2/pet/{pet_id}"
 
-    if response.status_code == 200:
+        response = requests.get(url)
+        response.raise_for_status()
+
         pet = response.json()
-        print(f"ID: {pet['id']}, Name: {pet['name']}, Status: {pet['status']}")
-    else:
-        print('Тварину не знайдено')
+        pet_info = {
+            'id': pet['id'],
+            'name': pet['name'],
+            'status': pet['status']
+        }
 
+        return pet_info
+
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}"
 
 def delete_pet_by_id(pet_id):
-    """Видалення тварини по id"""
-    url = f'https://petstore.swagger.io/v2/pet/{pet_id}'
-    response = requests.delete(url)
+    """delete pet """
+    try:
+        url = f"https://petstore.swagger.io/v2/pet/{pet_id}"
 
-    if response.status_code == 200:
-        print(f"Тварину з ID {pet_id} було успішно видалено")
+        response = requests.delete(url)
+        response.raise_for_status()
+
+        return "Pet deleted successfully."
+
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}"
+
+if __name__ == "__main__":
+    # Приклад використання функцій
+    available_pets = get_available_pets()
+    if isinstance(available_pets, list):
+        for pet in available_pets:
+            print(f"ID: {pet['id']}, Name: {pet['name']}, Status: {pet['status']}")
     else:
-        print('Не вдалося видалити тварину')
+        print(available_pets)
 
+    print(add_new_pet("Fluffy", "available", 876666))
 
-#get_available_pets()  # вивели список тварин
+    pet_id = 876666  # Id тварини для пошуку і видалення, взятий з того що ми створюємо
+    pet_info = find_pet_by_id(pet_id)
+    if isinstance(pet_info, dict):
+        print(f"ID: {pet_info['id']}, Name: {pet_info['name']}, Status: {pet_info['status']}")
+    else:
+        print(pet_info)
 
-#add_new_pet('Dina', 'available')  # додали тварину
-
-#find_pet_by_id() # пошук тварини за id, яку ми створили у функції add_new_pet()
-
-#delete_pet_by_id() # видалення цієї тварини
-
-
+    print(delete_pet_by_id(pet_id))
