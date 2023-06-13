@@ -1,4 +1,6 @@
 import requests
+from requests.exceptions import HTTPError
+
 
 class Petstore():
     base_url = "https://petstore.swagger.io/v2"
@@ -12,12 +14,30 @@ class Petstore():
     }
 
     def print_server_response(self, r):
-        '''Print response information'''
+        '''Print response status and json information'''
         print("<---")
         print("Server status response:", r.status_code)
         print("Server response in json format:", r.json())
         print("--->")
 
+    def print_pets_meta_information(self, r):
+        '''Print metainformation about pet'''
+        response_info_in_json = r.json()
+        pet_name = response_info_in_json["name"]
+        pet_status = response_info_in_json["status"]
+        pet_id = response_info_in_json["id"]
+        pet_category = response_info_in_json['category']
+        pet_photourls = response_info_in_json['photoUrls']
+        pet_tags = response_info_in_json['tags']
+
+        print(f"Your pet has the following main info:\n"
+              f"Pet_ID: {pet_id},\n"
+              f"Status: {pet_status},\n"
+              f"Name: {pet_name},\n"
+              f"Category_ID: {pet_category['id']},\n"
+              f"Category_Name: {pet_category['name']},\n"
+              f"Photo_URLs: {pet_photourls},\n"
+              f"Tags: {pet_tags}")
 
     # def check_pet_id_in_all_statuses(self, pet_id: str) -> None:
     #     '''DRAFT function: Verify info about pet via cheking all statuses (pending,available,sold)'''
@@ -45,35 +65,72 @@ class Petstore():
     #
     #     print("Pet not found.")
 
-    def view_pets_info_via_status(self, status:str):
-        ''' veiw pet's data due to status'''
+    def view_pets_info_via_status(self, status: str):
+        '''View pet's data due to status'''
         pet_findstatus_path_param = "/pet/findByStatus"
 
-        # user_prompt = input("To get pets status, print: pending, available, or sold: ")
         try:
-
-
             if status not in self.pet_status_codes:
-                raise ValueError(f"Your input is:<{status}>, it doesn't match {self.pet_status_codes}. Try again")
+                raise ValueError(f"Your input is: <{status}>, it doesn't match {self.pet_status_codes}. Try again!")
 
             params = {"status": status}
             url = self.base_url + pet_findstatus_path_param
-
             r = requests.get(url, headers=self.headers, params=params)
-            response_info_in_jsonf = r.json()
-            self.print_server_response(r)
-            return response_info_in_jsonf
+            # response_info_in_json = r.json()
+            # self.print_server_response(r)
+            get_pet_names_from_response = self.get_pets_name(r) #Generate the list of pets names from response
+            print(f"According to {params} here is the list of pet's names from response:{get_pet_names_from_response}")
+            return r
 
         except ValueError as e:
             print(e)
 
-if __name__ == "__main__":
-    petstore = Petstore()
-    print(petstore.view_pets_info_via_status(""))
+        except HTTPError as h:
+            print(f"An HTTP error occurred: {h}.Probably due to invalid response status value")
+
+    def get_pets_name(self, r):
+        '''Generate the list of pets names from response commonly function for view_pets_info_via_status()'''
+        try:
+            response_info_in_json = r.json()
+            names = [pet.get("name") for pet in response_info_in_json]
+            return names
+        except AttributeError:
+            print("We are getting 'NoneType' object in response. It has no attribute 'json'")
+
+    def find_pet_by_id(self, pet_id: str):
+        '''Знайти тварину за ідентифікатором (метод GET).
+        Введіть ідентифікатор тварини, яку потрібно знайти.
+        Зробіть запит до /pet/{petId}, де {petId} - ідентифікатор шуканої тварини.
+        Обробіть відповідь сервера та виведіть інформацію про знайдену тварину на екран.'''
+
+        # user_prompt = input("To get information about PET, input PET_ID: ")
+        url = self.base_url + self.pet_path + pet_id
+        r = requests.get(url, headers=self.headers)
+        self.print_server_response(r)
 
 
+    def delete_pet_by_id(self, pet_id: str):
+        '''Видалити тварину за ідентифікатором (метод DELETE).
+        Введіть ідентифікатор тварини, яку потрібно видалити.
+        Зробіть запит до /pet/{petId}, де {petId} - ідентифікатор тварини, яку потрібно видалити.
+        Обробіть відповідь.'''
 
-    def add_pet_to_store(self, name:str, status:str):
+        try:
+            url = self.base_url + self.pet_path + pet_id
+            r = requests.delete(url, headers=self.headers)
+            if r.status_code == 200:
+                print(
+                    f"Congratulations, you have successfully deleted information about pet <{pet_id}> from our system!")
+            elif r.status_code == 400:
+                raise ValueError("Invalid PET_ID. Please try again.")
+            elif r.status_code == 404:
+                raise ValueError("Pet not found. Please try again.")
+            else:
+                raise ValueError("An error occurred while deleting the pet.")
+        except ValueError as e:
+            print(e)
+
+    def add_pet_to_store(self, name: str, status: str):
         '''Додати нову тварину (метод POST).
         Створіть новий об'єкт тварини з необхідною інформацією, наприклад, ім'я та статус.
         Зробіть запит до /pet з об'єктом тварини в тілі запиту, щоб додати нову тварину.
@@ -99,68 +156,39 @@ if __name__ == "__main__":
             "status": status
         }
         try:
-            if len(name) == 0 or len(status) == 0:
-                raise ValueError(
-                    f"Your send empty parametr:name<{name}> or status<{status}>. Empty str name or status are prohibited. Try again!")
+            if len(name) == 0:
+                raise ValueError("Invalid input: Empty name argument. Empty name is not allowed. Try again!")
+            if len(status) == 0:
+                raise ValueError("Invalid input: Empty status argument. Empty status is not allowed. Try again!")
             if status not in self.pet_status_codes:
                 raise ValueError(
-                    f"You send invalid paramet:status<{status}>. Remainder! Valid status list:{self.pet_status_codes}. Try again")
+                    f"Invalid input: Invalid status '{status}'. Valid status list: {self.pet_status_codes}. Try again!")
+
             url = self.base_url + pet_create_path_param
             r = requests.post(url, headers=self.headers, json=data)
+            r.raise_for_status()  # Генерує виняток, якщо статус відповіді не є 200 (OK)
             self.print_server_response(r)
-            json_response = r.json()
-            pet_name = json_response["name"]
-            pet_status = json_response["status"]
-            pet_id = json_response["id"]
-            print(f"Response name is <{pet_name}> and status is <{pet_status}>")
+            self.print_pets_meta_information(r)
+            return r
+
+        except ValueError as ve: # Генеруємо гарний вивід помилки для юзера
+            print(ve)
+
+        except requests.exceptions.RequestException as re:
+            print(f"An error occurred during the request: {re}")
 
 
-        except ValueError as e:
-            print(e)
-
-
-    def find_pet_by_id(self, pet_id:str):
-        '''Знайти тварину за ідентифікатором (метод GET).
-        Введіть ідентифікатор тварини, яку потрібно знайти.
-        Зробіть запит до /pet/{petId}, де {petId} - ідентифікатор шуканої тварини.
-        Обробіть відповідь сервера та виведіть інформацію про знайдену тварину на екран.'''
-
-        # user_prompt = input("To get information about PET, input PET_ID: ")
-        url = self.base_url + self.pet_path + pet_id
-        r = requests.get(url, headers=self.headers)
-        self.print_server_response(r)
-
-    def delete_pet_by_id(self, pet_id: str):
-        '''Видалити тварину за ідентифікатором (метод DELETE).
-        Введіть ідентифікатор тварини, яку потрібно видалити.
-        Зробіть запит до /pet/{petId}, де {petId} - ідентифікатор тварини, яку потрібно видалити.
-        Обробіть відповідь.'''
-
-        try:
-            url = self.base_url + self.pet_path + pet_id
-            r = requests.delete(url, headers=self.headers)
-            if r.status_code == 200:
-                print(
-                    f"Congratulations, you have successfully deleted information about pet <{pet_id}> from our system!")
-            elif r.status_code == 400:
-                raise ValueError("Invalid PET_ID. Please try again.")
-            elif r.status_code == 404:
-                raise ValueError("Pet not found. Please try again.")
-            else:
-                raise ValueError("An error occurred while deleting the pet.")
-        except ValueError as e:
-            print(e)
-
-
-
-#Informationf for testing porposes:
-#9223372036854633614 -> {'code': 1, 'type': 'error', 'message': 'Pet not found'}
-#9223372036854633617 -> {'code': 1, 'type': 'error', 'message': 'Pet not found'}
-#{'id': 9223372036854641291, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
+# Informationf for testing porposes:
+# 9223372036854633614 -> {'code': 1, 'type': 'error', 'message': 'Pet not found'}
+# 9223372036854633617 -> {'code': 1, 'type': 'error', 'message': 'Pet not found'}
+# {'id': 9223372036854641291, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
 # {'id': 9223372036854641533, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik-Bolick', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
 
-
+if __name__ == "__main__":
+    petstore = Petstore()
+    print(petstore.view_pets_info_via_status("sold"))
+    # print(petstore.get_pets_name(petstore.view_pets_info_via_status("available")))
     # petstore.add_pet_to_store("Vovik-Bolick", "pending")
+    # petstore.add_pet_to_store("", "pending")
     # petstore.find_pet_by_id("9223372036854641291")
     # petstore.delete_pet_by_id("9223372036854633618")
-
