@@ -45,23 +45,32 @@ class Petstore():
     #
     #     print("Pet not found.")
 
-
-    def get_petstore_status(self):
-        '''Get pets status in petstore'''
+    def view_pets_info_via_status(self, status:str):
+        ''' veiw pet's data due to status'''
         pet_findstatus_path_param = "/pet/findByStatus"
 
-        user_prompt = input("To get pets status, print: pending, available, or sold: ")
+        # user_prompt = input("To get pets status, print: pending, available, or sold: ")
         try:
-            if user_prompt not in self.pet_status_codes:
-                raise ValueError(f"Your input is:<{user_prompt}>, doesn't match {self.pet_status_codes}. Try again")
 
-            params = {"status": user_prompt}
+
+            if status not in self.pet_status_codes:
+                raise ValueError(f"Your input is:<{status}>, it doesn't match {self.pet_status_codes}. Try again")
+
+            params = {"status": status}
             url = self.base_url + pet_findstatus_path_param
 
             r = requests.get(url, headers=self.headers, params=params)
+            response_info_in_jsonf = r.json()
             self.print_server_response(r)
+            return response_info_in_jsonf
+
         except ValueError as e:
             print(e)
+
+if __name__ == "__main__":
+    petstore = Petstore()
+    print(petstore.view_pets_info_via_status(""))
+
 
 
     def add_pet_to_store(self, name:str, status:str):
@@ -72,28 +81,30 @@ class Petstore():
 
         pet_create_path_param = "/pet"
         data = {
+            "id": 0,
+            "category": {
                 "id": 0,
-                "category": {
+                "name": "string"
+            },
+            "name": name,
+            "photoUrls": [
+                "string"
+            ],
+            "tags": [
+                {
                     "id": 0,
                     "name": "string"
-                },
-                "name": name,
-                "photoUrls": [
-                    "string"
-                ],
-                "tags": [
-                    {
-                        "id": 0,
-                        "name": "string"
-                    }
-                ],
-                "status": status
+                }
+            ],
+            "status": status
         }
         try:
-            if len(name)== 0 or len(status)== 0:
-                raise ValueError(f"Your send empty parametr:name<{name}> or status<{status}>. Empty str name or status are prohibited. Try again!")
+            if len(name) == 0 or len(status) == 0:
+                raise ValueError(
+                    f"Your send empty parametr:name<{name}> or status<{status}>. Empty str name or status are prohibited. Try again!")
             if status not in self.pet_status_codes:
-                raise ValueError(f"You send invalid paramet:status<{status}>. Remainder! Valid status list:{self.pet_status_codes}. Try again")
+                raise ValueError(
+                    f"You send invalid paramet:status<{status}>. Remainder! Valid status list:{self.pet_status_codes}. Try again")
             url = self.base_url + pet_create_path_param
             r = requests.post(url, headers=self.headers, json=data)
             self.print_server_response(r)
@@ -118,7 +129,6 @@ class Petstore():
         url = self.base_url + self.pet_path + pet_id
         r = requests.get(url, headers=self.headers)
         self.print_server_response(r)
-
 
     def delete_pet_by_id(self, pet_id: str):
         '''Видалити тварину за ідентифікатором (метод DELETE).
@@ -149,9 +159,7 @@ class Petstore():
 #{'id': 9223372036854641291, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
 # {'id': 9223372036854641533, 'category': {'id': 0, 'name': 'string'}, 'name': 'Vovik-Bolick', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'pending'}
 
-if __name__ == "__main__":
-    petstore = Petstore()
-    # petstore.get_petstore_status()
+
     # petstore.add_pet_to_store("Vovik-Bolick", "pending")
     # petstore.find_pet_by_id("9223372036854641291")
     # petstore.delete_pet_by_id("9223372036854633618")
