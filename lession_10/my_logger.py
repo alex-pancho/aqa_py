@@ -9,7 +9,7 @@ logger.setLevel(logging.DEBUG)
 # logging.ERROR
 
 # Створюємо обробник для запису в файл
-file_handler = logging.FileHandler('log_file.log')
+file_handler = logging.FileHandler('hb.log')
 file_handler.setLevel(logging.INFO)
 
 # Створюємо обробник для виводу в консоль
