@@ -1,5 +1,6 @@
 import requests
 import json
+from lession_10 import hw_10_logger as l
 
 
 def request(function):
@@ -13,7 +14,7 @@ def request(function):
             try:
                 return response.json()
             except json.decoder.JSONDecodeError:
-                print('>>> Broken json body received')
+                l.logger.error('Broken json body received')
         else:
             print(f'>>> Request failed {response.status_code, response.reason} given')
 
@@ -85,7 +86,7 @@ def add_pet():
         else:
             print(f'>>> Oops, Something went wrong {body["category"]["name"]} {body["name"]} wasn\'t created')
     except TypeError:
-        print('>>> Empty response given')
+        l.logger.error('Empty response given')
 
 
 def search_pet():
@@ -102,7 +103,7 @@ def search_pet():
         else:
             print(f'>>> Pet with id: {user_search} wasn\'t found')
     except ValueError:
-        print('>>> ID must be a number')
+        l.logger.error('Incorrect ID value entered')
 
 
 def delete_pet_by_id():
@@ -112,7 +113,7 @@ def delete_pet_by_id():
         if response_body["message"] == user_search:
             print(f'>>> Pet ID {user_search} successfully deleted')
     except TypeError:
-        print('>>> Pet ID doesn\'t exist')
+        l.logger.error('ID value doesn\'t exist')
 
 
 filter_pets()
