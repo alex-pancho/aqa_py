@@ -115,3 +115,7 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
+
+#logs for data hw
+ideas_for_test/heartbeat/hb.log
+ideas_for_test/heartbeat/hblog
