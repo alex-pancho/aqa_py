@@ -78,6 +78,5 @@ def extract_timestamp(line):
 #     # Запис в журнал (error)
 #     print(f"Error: Key '{key}', Timestamp {timestamp}, Difference: {time_difference} seconds")
 
-
 if __name__ == '__main__':
     print(analyze_hblog_data())
