@@ -21,18 +21,29 @@ with open(filename, mode="r") as f:
 
     content = [x.strip()[x.find('Timestamp'):x.find('|')].split() for x in f.readlines() if '0003' in x][::-1]
 
-    # Після того як ми прочитали потрібні нам дані і зберегли їх - порахуємо різницю наступного і початкового рядку
-    # (виключаючи останній рядок, щоб не вийти за межі списку, адже його різниця з минулим і так порахується)
-    # і те чи виходять вони за певні межі часу і в залежності від цього будем логувати варнінг чи ерор.
+# Після того як ми прочитали потрібні нам дані і зберегли їх - порахуємо різницю наступного і початкового рядку
+# (виключаючи останній рядок, щоб не вийти за межі списку, адже його різниця з минулим і так порахується)
+# і те чи виходять вони за певні межі часу і в залежності від цього будем логувати варнінг чи ерор.
 
-    for i in range(len(content[:-1])):
-        start = datetime.datetime.strptime(content[i][1], '%H:%M:%S')
-        end = datetime.datetime.strptime(content[i + 1][1], '%H:%M:%S')
-        if datetime.timedelta(seconds=30) < end - start < datetime.timedelta(seconds=32):
-            my_logger.logger.warning(f'Warning! Heartbeat difference is {end - start}')
-            warning_count += 1
-        if datetime.timedelta(seconds=32) <= end - start:
-            my_logger.logger.error(f'Crtitcal! Heartbeat difference is {end - start}')
-            critical_count += 1
+content_dicts = []
+
+for i in range(len(content)):
+    for j in range(len(content[i])):
+        if j == 0:
+            content_dicts.append({content[i][j]: content[i][j + 1]})
+        if j % 2 == 0:
+            content_dicts[i].setdefault(content[i][j], content[i][j + 1])
+
+today = datetime.datetime.strftime(datetime.datetime.today(), '%Y-%m-%d')
+
+for i in range(len(content_dicts[:-1])):
+    start = datetime.datetime.strptime(today + ' ' + content_dicts[i]['Timestamp'], '%Y-%m-%d %H:%M:%S')
+    end = datetime.datetime.strptime(today + ' ' + content_dicts[i + 1]['Timestamp'], '%Y-%m-%d %H:%M:%S')
+    if datetime.timedelta(seconds=30) < end - start < datetime.timedelta(seconds=32):
+        my_logger.logger.warning(f'Warning! Heartbeat difference is {end - start}. Time of incident {end}')
+        warning_count += 1
+    if datetime.timedelta(seconds=32) <= end - start:
+        my_logger.logger.error(f'Critical! Heartbeat difference is {end - start}. Time of incident {end}')
+        critical_count += 1
 
 print(f'Усього варнінгів: {warning_count}', f'Усього критичних помилок: {critical_count}')
