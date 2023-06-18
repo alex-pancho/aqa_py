@@ -7,7 +7,7 @@ import pathlib
 
 xml_path = "ideas_for_test/work_with_xml/groups.xml"
 if not pathlib.Path(xml_path).exists():
-    print(f"FILE {xml_path} FILE DOES NOT EXIST")
+    print(f"FILE {xml_path} FILE DOES NOT EXT")
 
 
 p = Path("c:\\")
