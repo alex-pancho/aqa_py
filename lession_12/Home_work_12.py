@@ -3,15 +3,14 @@ import logging
 import json
 from pathlib import Path
 import csv
-import pathlib
 
-xml_path = "ideas_for_test/work_with_xml/groups.xml"
-if not pathlib.Path(xml_path).exists():
-    print(f"FILE {xml_path} FILE DOES NOT EXT")
+xml_path = Path(Path(__file__).parent, "ideas_for_test", "work_with_xml", "groups.xml")
+
+if not xml_path.exists():
+    print(f"FILE {xml_path} DOES NOT EXIST")
 
 
-p = Path("c:\\")
-folder_path = Path("aqa_py", "lession_12", "ideas_for_test", "work_with_csv")
+folder_path = Path(Path(__file__).parent, "ideas_for_test", "work_with_csv")
 result_file = f"result_Ihor_M.csv".replace("<", "_").replace(">", "")
 
 file_paths = [f for f in folder_path.glob("*.csv")]
