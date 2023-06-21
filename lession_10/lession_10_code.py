@@ -31,7 +31,7 @@ def divide(x, y):
         return result
     finally:
         logger.debug("final countdown")
-#print(divide(5, 0))
+print(divide(5, 2))
 # Створення логеру
 
 
