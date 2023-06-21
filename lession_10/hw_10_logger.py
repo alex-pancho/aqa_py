@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-file_handler = logging.FileHandler('error_log.log')
+file_handler = logging.FileHandler('hb.log')
 file_handler.setLevel(logging.INFO)
 
 console_handler = logging.StreamHandler()
