@@ -14,11 +14,11 @@ class TestTesting(unittest.TestCase):
 
 
     def test_task01(self):
-        """Sum of two nums""
+        """Sum of two nums"""
         actual_result = sum_two_nums(2, 6)
         expected_result = 8
         self.assertEqual(actual_result, expected_result, f"Sum of 2 and 6 is {sum_two_nums(2, 6)}")
 
 
 if __name__ == "__main__":
-    unittest.main(verbosity=1)
+    unittest.main(verbosity=2)
