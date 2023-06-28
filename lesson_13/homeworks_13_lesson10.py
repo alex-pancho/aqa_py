@@ -78,47 +78,7 @@ if __name__ == "__main__":
     print(f"{max_energy_human.name} {max_energy_human.surname}, energy: {max_energy_human.energy}")
 
 
-#Tests:
-# import unittest
-#
-# class TestHuman(unittest.TestCase):
-#     def test_create_human(self):
-#         human = Human("Stan", "Smith", 1980/04/13, "male")
-#         self.assertEqual(human.name, "Stan")
-#         self.assertEqual(human.surname, "Smith")
-#         self.assertEqual(human.birthdate, 1980/04/13)
-#         self.assertEqual(human.gender, "male")
-#         self.assertEqual(human.energy, 100)
-#
-#     def test_eat(self):
-#         human = Human("John", "Doe", 1990/1/1, "male")
-#         human.eat()
-#         self.assertEqual(human.energy, 105)
-#
-#     def test_sleep(self):
-#         human = Human("John", "Doe", 1990/1/1, "male")
-#         human.sleep()
-#         self.assertEqual(human.energy, 110)
-#
-#     def test_talk(self):
-#         human = Human("John", "Doe", 1990/1/1, "male")
-#         human.talk()
-#         self.assertEqual(human.energy, 95)
-#
-#     def test_walk(self):
-#         human = Human("John", "Doe", 1990/1/1, "male")
-#         human.walk()
-#         self.assertEqual(human.energy, 90)
-#
-#     def test_do_homework(self):
-#         human = Human("John", "Doe", 1990/1/1, "male")
-#         human.do_homework()
-#         self.assertEqual(human.energy, 10)
-#
-# if __name__ == '__main__':
-#     unittest.main()
-
-
+#Tests
 import unittest
 
 class TestHuman(unittest.TestCase):
