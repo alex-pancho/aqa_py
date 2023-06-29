@@ -10,8 +10,8 @@ usr_id = None  # За це пояснюю нижче
 
 
 @pytest.mark.parametrize("name, last_name, email, password, repeat_password", [
-    ("Giga", "Chad", "gachiboy732@gmail.com", "WE7865kulv67", "WE7865kulv67"),
-    ("Johan", "Dvir", "dontmisswithjohannqk@gmail.com", "777heRo777", "777heRo777")])
+    ("Giga", "Chad", "gachiboy715@gmail.com", "WE7865kulv67", "WE7865kulv67"),
+    ("Johan", "Dvir", "dontmisswithjohannqv@gmail.com", "777heRo777", "777heRo777")])
 def test_signup_positive(name, last_name, email, password, repeat_password, read_users_from_database_function, clean_database):
     global usr_id
     command = """
@@ -132,7 +132,7 @@ def test_signup_negative(name, last_name, email, password, repeat_password, read
     assert len(usrs) == 0, "Table is not empty!"
 
 
-@pytest.mark.parametrize("email, password, remember", [("qam2608@2022test.com", "Qam2608venv", False),
+@pytest.mark.parametrize("email, password, remember", [("dontmisswithjohannqc@gmail.com", "777heRo777", False),
                                                        ("gachiboy750@gmail.com", "WE7865kulv67", True)])
 def test_sigin_positive(email, password, remember):
 
