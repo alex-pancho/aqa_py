@@ -44,9 +44,9 @@ class users():
         endpoint = "/users/settings"
         return s.put(base_api_url+endpoint, json=request_body)
     
-    def resetpassword(s:requests.session, user_id:int, token:str):
+    def resetpassword(s:requests.session, **kwargs):
         #TODO: make this part better
-        endpoint = f"/users/resetpassword/{user_id}/{token}"
+        endpoint = f"/users/resetpassword/{kwargs['userId']}/{kwargs['token']}"
         return s.get(base_api_url+endpoint)
     
     def email(s:requests.session, request_body:dict):
@@ -149,9 +149,9 @@ class instructions():
         endpoint = f"/instructions/{id_}"
         return s.get(base_api_url+endpoint)
 
-
-def after_processsing(r):
-    try:
-        return r.json()
-    except Exception as e:
-        return {}
+# Це нам не потрібно в нашій реалізації, закоментуємо
+# def after_processsing(r):
+#     try:
+#         return r.json()
+#     except Exception as e:
+#         return {}
