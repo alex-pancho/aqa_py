@@ -70,13 +70,13 @@ webpage = fetch_webpage('https://google.com')
 print(webpage)
 
 
-# def decor(func):
-#     return func("Mary")
+def decor(func):
+    return func("Mary")
 
 
-# @decor
-# def print_hello(name):
-#     print(f"Hello, {name}")
+@decor
+def print_hello(name):
+    print(f"Hello, {name}")
 
 
-# print_hello
+print_hello
