@@ -38,10 +38,10 @@ def test_error():
 def get_error():
     raise AttributeError("character name empty")
 
+
 def test_error_message():
     with pytest.raises(
             AttributeError,
             match="character name empty"
             ):
         get_error()
-

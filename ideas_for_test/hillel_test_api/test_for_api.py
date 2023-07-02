@@ -221,10 +221,3 @@ def test_delete_user(new_user):
 
     assert r.status_code == 200
     assert r_json["status"] == "ok"
-
-
-
-
-
-
-
