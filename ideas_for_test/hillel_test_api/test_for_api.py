@@ -198,7 +198,7 @@ def test_profile_put(new_user):
 
 
 def test_settings_get(new_user):
-    "Get user settings"
+    """Get user settings"""
 
     r = users.settings_get(s)
     r_json = after_processsing(r)
