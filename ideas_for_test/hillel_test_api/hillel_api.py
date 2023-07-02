@@ -24,11 +24,11 @@ class auth():
 
 class users():
 
-    def current(s:requests.session, request_body:dict={}):
+    def current(s:requests.session):
         endpoint = "/users/current"
         return s.get(base_api_url+endpoint)
     
-    def profile_get(s:requests.session, request_body:dict={}):
+    def profile_get(s:requests.session):
         endpoint = "/users/profile"
         return s.get(base_api_url+endpoint)
     
@@ -36,7 +36,7 @@ class users():
         endpoint = "/users/profile"
         return s.put(base_api_url+endpoint, json=request_body)
     
-    def settings_get(s:requests.session, request_body:dict={}):
+    def settings_get(s:requests.session):
         endpoint = "/users/settings"
         return s.get(base_api_url+endpoint)
     
@@ -44,10 +44,10 @@ class users():
         endpoint = "/users/settings"
         return s.put(base_api_url+endpoint, json=request_body)
     
-    def resetpassword(s:requests.session, user_id:int, token:str):
+    def resetpassword(s:requests.session, request_body:dict):
         #TODO: make this part better
-        endpoint = f"/users/resetpassword/{user_id}/{token}"
-        return s.get(base_api_url+endpoint)
+        endpoint = "/users/password/"
+        return s.put(base_api_url+endpoint, json=request_body)
     
     def email(s:requests.session, request_body:dict):
         endpoint = "/users/email"
@@ -57,7 +57,7 @@ class users():
         endpoint = "/users/password"
         return s.put(base_api_url+endpoint, json=request_body)
     
-    def users(s:requests.session, request_body:dict={}):
+    def users(s:requests.session):
         endpoint = "/users"
         return s.delete(base_api_url+endpoint)
 
