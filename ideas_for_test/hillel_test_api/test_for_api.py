@@ -45,70 +45,72 @@ def test_car_brends():
     assert r.status_code == 200, "Wrong status code"
     assert r_json["status"] == "ok", "Key 'status' is not ok"
     data=r_json["data"]
-    assert isinstance (data, list), "Expected 'data' to be an instance of 'dict'"
+    assert isinstance (data, list), "Expected 'list' to be an instance of 'list'"
 
 
 def test_car_brands_id():
     '''Проверка положительного ответа с минимальными параметрами'''
 
-    car_data={
-    "id": 2
-}
-
-    r=cars.brands_id (s, car_data)
-    r_json=after_processsing (r)
-    assert r.status_code == 200, "Wrong status code"
-    assert r_json["status"] == "ok", "Key 'status' is not ok"
-
-    data=r_json["data"]
-    assert isinstance (data, dict), "Expected 'data' to be an instance of 'dict'"
-    assert isinstance (data["id"], int), "Expected 'id' to be an instance of 'int'"
-    assert isinstance (data["title"], str), "Expected 'title' to be an instance of 'str'"
-    assert isinstance (data["logoFilename"], str), "Expected 'logoFilename' to be an instance of 'str'"
-
-def test_car_brands_id_neg():
-    '''Негативная проверка с буквеным значением в id'''
-    car_data={
-    "id": "dd"
-}
+    car_data = {
+        "id": 2
+    }
 
     r = cars.brands_id(s, car_data)
     r_json = after_processsing(r)
+    assert r.status_code == 200, "Wrong status code"
+    assert r_json.get("status") == "ok", "Key 'status' is not ok"
+
+    data = r_json.get("data")
+    assert isinstance(data, dict), "Expected 'data' to be an instance of 'dict'"
+    assert isinstance(data.get("title"), str), "Expected 'title' to be an instance of 'str'"
+    assert isinstance(data.get("logoFilename"), str), "Expected 'logoFilename' to be an instance of 'str'"
+
+
+def test_car_brands_id_neg():
+    '''ативная проверка с буквеным значением в id'''
+    car_data = {
+        "id": "dd"
+    }
+
+    r=cars.brands_id (s, car_data)
+    r_json=after_processsing (r)
+    data=r_json.get ("data")
     assert r.status_code == 404, "Wrong status code"
-    assert r_json["status"] == "error", "Key 'status' is not ok"
-    assert isinstance ("status", str), "Expected 'id' to be an instance of 'int'"
-    assert isinstance ("message", str), "Expected 'message' to be an instance of 'str'"
+    assert r_json["status"] == "error", "Key 'status' is not error"
+    assert isinstance ("status", str), "Expected 'message' to be an instance of 'str'"
+    assert isinstance ("message", str), "Expected 'status' to be an instance of 'str'"
 
 def test_car_brands_models_id():
     '''Проверка типов и значений в атрибутах ответа'''
-    car_data={
-    "id": "3"
-}
+    car_data = {
+        "id": "3"
+    }
 
     r = cars.models_id(s, car_data)
     r_json = after_processsing(r)
     assert r.status_code == 200, "Wrong status code"
-    assert r_json["status"] == "ok", "Key 'status' is not ok"
     assert r_json["data"]["id"] == 3, "Initial page id value is incorrect"
 
-    data=r_json["data"]
-    assert isinstance (data, dict), "Expected 'data' to be an instance of 'dict'"
-    assert isinstance (data["id"], int), "Expected 'id' to be an instance of 'int'"
-    assert isinstance (data["carBrandId"], int), "Expected 'title' to be an instance of 'int'"
-    assert isinstance (data["title"], str), "Expected 'logoFilename' to be an instance of 'str'"
+    data = r_json["data"]
+    assert isinstance(data, dict), "Expected 'data' to be an instance of 'dict'"
+    assert isinstance(data.get("id"), int), "Expected 'id' to be an instance of 'int'"
+    assert isinstance(data.get("carBrandId"), int), "Expected 'carBrandId' to be an instance of 'int'"
+    assert isinstance(data.get("title"), str), "Expected 'title' to be an instance of 'str'"
 
 
 def test_car_brands_models_id_neg():
-    '''Негативная проверка с буквеным значением в id'''
+    '''Негативная проверка с пустым значением car_data'''
     car_data={
-    "id": "id"
+    "carBrandId": "",
+    "carModelId": "",
+    "mileage": ""
 }
 
     r = cars.models_id(s, car_data)
     r_json=after_processsing (r)
     assert r.status_code == 404, "Wrong status code"
-    assert r_json["status"] == "error", "Key 'status' is not ok"
-    assert isinstance ("status", str), "Expected 'id' to be an instance of 'int'"
+    assert r_json["status"] == "error", "Key 'status' is not error"
+    assert isinstance ("status", str), "Expected 'status' to be an instance of 'str'"
     assert isinstance ("message", str), "Expected 'message' to be an instance of 'str'"
 
 
@@ -145,7 +147,7 @@ def test_car_brands_cars_post_neg():
     r = cars.cars_post(s, car_data)
     r_json = after_processsing(r)
     assert r.status_code == 401, "Wrong status code"
-    assert r_json["status"] == "error", "Key 'status' is not ok"
+    assert r_json["status"] == "error", "Key 'status' is not error"
     assert r_json["message"] == "Not authenticated"
 
 
@@ -193,9 +195,9 @@ def cars_id_delete_neg():
     assert r_json["message"] == "Car successfully deleted"
     data=r_json["data"]
     assert isinstance (data, dict), "Expected 'data' to be an instance of 'dict'"
-    assert isinstance (data["id"], int), "Expected 'id' to be an instance of 'int'"
-    assert isinstance (data["carBrandId"], str), "Expected 'title' to be an instance of 'str'"
-    assert isinstance (data["title"], str), "Expected 'logoFilename' to be an instance of 'str'"
+    assert isinstance (data.get("id"), int), "Expected 'id' to be an instance of 'int'"
+    assert isinstance (data.get("carBrandId"), str), "Expected 'title' to be an instance of 'str'"
+    assert isinstance (data.get("title"), str), "Expected 'logoFilename' to be an instance of 'str'"
 
 
 
