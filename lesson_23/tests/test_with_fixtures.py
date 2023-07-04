@@ -1,10 +1,14 @@
 import pytest
 import requests
 import datetime
+import random
+import string
+
 
 base_api_url = "https://qauto.forstudy.space/api"
 status_codes = {
     "success": 200,
+    "created": 201,
     "bad_request": 400,
     "User not logged in": 401
 }
@@ -15,7 +19,8 @@ status_msg = [
     "Successfully received the data",
     "User is not logged in",
     "error",
-    "Incorrect data was recieved"
+    "Incorrect data was recieved",
+    "Creates user, user profile and user settings, and authenticates created user."
 
 ]
 
@@ -65,10 +70,75 @@ def signin():
     yield s, response_json  # ретьорнимо об'єкт сесії з кукі і обєкт респонс в json-i
 
 
+def pytest_generate_tests(metafunc):
+    '''Generate user-data'''
+    if 'user_data' in metafunc.fixturenames:
+        attr2 = ''.join(random.choices(string.ascii_letters, k=2)) #generate 2 ascii characters
+        attr20 = ''.join(random.choices(string.ascii_letters, k=20)) #generate 20 ascii characters
+        attr15 = ''.join(random.choices(string.ascii_letters, k=15)) #generate 15 ascii characters
+
+        metafunc.parametrize('user_data', [
+            {
+                "name": f"{attr2}", #test minLength: 2
+                "lastName": f"{attr2}",#test minLength: 2
+                "email": f"{attr2}25kosko@kotest.com",
+                "password": "Qwerty12311",
+                "repeatPassword": "Qwerty12311"
+            },
+            {
+                "name": f"{attr20}", #test maxLength: 20
+                "lastName": f"{attr20}", #test maxLength: 20
+                "email": f"{attr2}26_kosko@kotest.com",
+                "password": "Qwwety12349",
+                "repeatPassword": "Qwwety12349"
+            },
+            {
+                "name": f"{attr2}",  # test minLength: 2
+                "lastName": f"{attr2}",  # test minLength: 2
+                "email": f"{attr2}@k.com",# test minLength: 8
+                "password": "Qwerty12311",
+                "repeatPassword": "Qwerty12311"
+            },
+            {
+                "name": f"{attr20}",  # test maxLength: 20
+                "lastName": f"{attr20}",  # test maxLength: 20
+                "email": f"{attr15}@k.om",
+                "password": "Qwwety12349",
+                "repeatPassword": "Qwwety12349"
+            }
+        ])
+
+
+@pytest.fixture(scope='session')
+def signup():
+    '''signup new user'''
+    s = requests.session()
+
+    def _signup(user_data):
+        endpoint = "/auth/signup"
+        try:
+            response = s.post(base_api_url + endpoint, json=user_data)
+            response.raise_for_status()  # Перевірка на наявність помилки у відповіді
+
+        except (ConnectionError, requests.exceptions.HTTPError) as k:
+            print("No connection or error in response:", str(k))
+        return response
+
+    return _signup
+    # TODO: "розробити видалення створеного користувача після завершення тестів"через s.delete(base_api_url + f"/users")
+
+
+
+def test_signup(signup, user_data):
+    '''verification positive tc for signup'''
+    response = signup(user_data)
+    assert response.status_code == status_codes[
+        "created"], f"Incorrect status code. Got {response.status_code} but expected {status_codes['created']}"
+
+
 @pytest.fixture()
 def after_processsing():
     '''Get response in json format'''
-
     def process_response(response):
         try:
             return response.json()
@@ -126,6 +196,7 @@ def test_get_error_current_endpoint_without_coocies(after_processsing, validate_
     assert response.status_code == status_codes[
         "User not logged in"], f"Incorrect status code. Got <{response.status_code}> but expected <{status_codes['User not logged in']}>"
     validate_response_headers(response, endpoint, 'GET')
+
 
 def test_get_user_profile_data(signin, after_processsing, validate_response_headers):
     s_cookies = signin[0]

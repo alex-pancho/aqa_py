@@ -1,5 +1,7 @@
-from hillel_api import *
+# from hillel_test_api import *
 import pytest
+
+from ideas_for_test.hillel_test_api.hillel_api import after_processsing, s, auth
 
 
 def test_sigin_positive():
