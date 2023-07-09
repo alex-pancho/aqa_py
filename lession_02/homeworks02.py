@@ -1,9 +1,14 @@
 # task 01 == Розділіть змінну так, щоб вона займала декілька фізичних лінії
+alice_in_wonderland = '''Would you tell me, please, which way I ought to go from here?"
+"That depends a good deal on where you want to get to," said the Cat.
+"I don't much care where ——" said Alice.
+"Then it doesn't matter which way you go," said the Cat.
+"—— so long as I get somewhere," Alice added as an explanation.
+"Oh, you're sure to do that," said the Cat, "if you only walk long enough.'''
 # task 02 == Знайдіть та екрануйте всі символи одинарної дужки у тексті
-alice_in_wonderland = '"Would you tell me, please, which way I ought to go from here?"\n"That depends a good deal on where you want to get to," said the Cat.\n"I don't much care where ——" said Alice.\n"Then it doesn't matter which way you go," said the Cat.\n"—— so long as I get somewhere," Alice added as an explanation.\n"Oh, you're sure to do that," said the Cat, "if you only walk long enough."'
-
+# у тексті вище відсутні символи одинарної дужки
 # task 03 == Виведіть змінну alice_in_wonderland на друк
-
+print(alice_in_wonderland)
 
 """
     # Задачі 04 -10:
@@ -17,6 +22,9 @@ alice_in_wonderland = '"Would you tell me, please, which way I ought to go from 
 моря становить 37 800 км2. Яку площу займають Чорне та Азов-
 ське моря разом?
 """
+black_sea_area = 436_402
+azov_sea_area = 37_800
+print(f'both sea area is {black_sea_area + azov_sea_area}')
 
 
 # task 05
@@ -26,6 +34,11 @@ alice_in_wonderland = '"Would you tell me, please, which way I ought to go from 
 250 449 товарів. На другому та третьому – 222 950 товарів.
 Знайдіть кількість товарів, що розміщені на кожному складі.
 """
+a_b_c = 375_291
+a_b = 250_449
+b_c = 222_950 
+a = a_b_c-b_c
+print(f"на першому складі {a} товарів, на другому складі {a_b-a} товарів,на третьому {a_b_c-a_b}")
 
 
 # task 06
@@ -35,6 +48,9 @@ alice_in_wonderland = '"Would you tell me, please, which way I ought to go from 
 вати необхідно буде півтора року по 1179 грн/місяць. Обчисліть
 вартість комп’ютера.
 """
+time = 18
+pay_every_month = 1179
+print(f"The computer costs {time*pay_every_month}")
 
 
 # task 07
@@ -44,6 +60,35 @@ a) 8019 : 8     d) 7248 : 6
 b) 9907 : 9     e) 7128 : 5
 c) 2789 : 5     f) 19224 : 9
 """
+a = 8019
+b = 8
+print(f"остача від ділення {a%b}")
+# остача від ділення 3
+
+a = 9907
+b = 9
+print(f"остача від ділення {a%b}")
+# остача від ділення 7
+
+a = 2789
+b = 5
+print(f"остача від ділення {a%b}")
+# остача від ділення 4
+
+a = 7248
+b = 6
+print(f"остача від ділення {a%b}")
+# остача від ділення 0
+
+a = 7128
+b = 5
+print(f"остача від ділення {a%b}")
+# остача від ділення 3
+
+a = 19224
+b = 9
+print(f"остача від ділення {a%b}")
+# остача від ділення 0
 
 
 # task 08
@@ -58,7 +103,12 @@ c) 2789 : 5     f) 19224 : 9
 Торт            1           350 грн
 Вода            3           21 грн
 """
-
+big_pizza = 274
+middle_pizza = 218
+juice = 35
+pie = 350
+water = 21
+print(f"Загальна вартість продуктів складає {(big_pizza*4)+(middle_pizza*2)+(juice*4)+pie+(water*3)}")
 
 # task 09
 """
@@ -67,7 +117,12 @@ c) 2789 : 5     f) 19224 : 9
 розміщено щонайбільше 8 фото. Скільки сторінок знадобиться
 Ігорю, щоб вклеїти всі фото?
 """
+number_of_fotos = 232
+fotos_on_page = 8 
+print(f"Ігорю знадобиться {number_of_fotos/fotos_on_page} сторінок")
 
+# якби результат ділення не було ціле число, то я б зробив 
+# print(f"Ігорю знадобиться {number_of_fotos//fotos_on_page+1} сторінок")
 
 # task 10
 """
@@ -80,3 +135,7 @@ c) 2789 : 5     f) 19224 : 9
 равку під час цієї подорожі, кожного разу заправляючи пов-
 ний бак?
 """
+distance = 1600
+benz = distance/100*9
+zapravka = benz/48
+print(f"на подорож потрібно {benz} літри бензину, нам потрібно заправитись {zapravka} рази")
