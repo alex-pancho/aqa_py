@@ -1,13 +1,14 @@
 from hillel_api import *
 import pytest
 
+
 @pytest.fixture
 def sign_up_positive():
     """sign up with valid data"""
     data = {
         "name": "Leonel",
         "lastName": "Messi",
-        "email": "messibarcelona5@test.com",
+        "email": "messibarcelona6@test.com",
         "password": "Qwerty12345",
         "repeatPassword": "Qwerty12345"
     }
@@ -25,7 +26,7 @@ def test_sign_up_positive(sign_up_positive):
 def sign_in_positive():
     """sign in with valid data"""
     data = {
-        "email": "messibarcelona5@test.com",
+        "email": "messibarcelona6@test.com",
         "password": "Qwerty12345",
         "remember": False
     }
