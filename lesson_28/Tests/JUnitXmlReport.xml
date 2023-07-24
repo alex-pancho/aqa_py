@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="3.176" timestamp="2023-07-24T19:01:03.453307" hostname="DESKTOP-G6T8G42"><testcase classname="" name="test_space_page" time="0.000"><error message="collection failure">test_space_page.py:10: in &lt;module&gt;
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\chrome.py:39: in install
+    driver_path = self._get_driver_path(self.driver)
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\core\manager.py:30: in _get_driver_path
+    file = self._download_manager.download_file(driver.get_driver_download_url())
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\drivers\chrome.py:40: in get_driver_download_url
+    driver_version_to_download = self.get_driver_version_to_download()
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\core\driver.py:51: in get_driver_version_to_download
+    self._driver_to_download_version = self._version if self._version not in (None, "latest") else self.get_latest_release_version()
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\drivers\chrome.py:62: in get_latest_release_version
+    resp = self._http_client.get(url=latest_release_url)
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\core\http.py:37: in get
+    self.validate_response(resp)
+..\..\..\..\my_venvs\venv_py3_8\lib\site-packages\webdriver_manager\core\http.py:16: in validate_response
+    raise ValueError(f"There is no such driver by url {resp.url}")
+E   ValueError: There is no such driver by url https://chromedriver.storage.googleapis.com/LATEST_RELEASE_115.0.5790</error></testcase></testsuite></testsuites>
