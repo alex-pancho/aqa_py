@@ -4,6 +4,7 @@
 # from elements import WebPage
 
 # from selenium.webdriver.common.by import WebElement
+from selenium.common import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -210,7 +211,7 @@ class WebPage(object):
     def current_url(self):
         return self._web_driver.current_url
 #######################################
-
+'''TO DO - implement locators in separate class'''
 # class MainPageLocator():
 #     class MainPageLocator():
 #         menu_home = WebElement(By.XPATH, '//a[text()="Home"]')
@@ -220,19 +221,23 @@ class WebPage(object):
 
 class HomePage(WebPage):
     # Локатори елементів сторінки
-    menu_home = (By.XPATH,          '//a[text()="Home"]')
-    about_btn_locator = (By.XPATH,  '//button[text()="About"]')
-    contacts_head = (By.XPATH,      '//h2')
+    menu_home =                         (By.XPATH,'//a[text()="Home"]')
+    about_btn_locator =                 (By.XPATH,'//button[text()="About"]')
+    contacts_head =                     (By.XPATH,'//h2')
     '''Login modal window locators'''
-    sign_in_button = (By.XPATH,     '//button[text()="Sign In"]')
-    sign_up_button = (By.XPATH,     '//button[text()="Sign Up"]')
-    modal_title_login = (By.XPATH,  '//h4[text()="Log in"]')
-    email_input = (By.ID,        '//input[@id="signinEmail"]')
-    pswd_input = (By.ID,         '//input[@id="signinPassword"]')
-    remember_me_chekbx = (By.ID, '//input[@id="remember"]')
-    forgot_pass_btn = (By.XPATH,    '//button[text()="Forgot password"]')
-    registration_btn = (By.XPATH,   '//button[text()="Registration"]')
-    login_btn = (By.XPATH,          '//button[text()="Login"]')
+    sign_in_button =                    (By.XPATH,'//button[text()="Sign In"]')
+    sign_up_button =                    (By.XPATH,'//button[text()="Sign Up"]')
+    modal_title_login =                 (By.XPATH,'//h4[text()="Log in"]')
+    email_input =                       (By.NAME,"email")
+    pswd_input =                        (By.ID,"signinPassword")
+    remember_me_chekbx =                (By.ID,"remember")
+    forgot_pass_btn =                   (By.XPATH,'//button[text()="Forgot password"]')
+    registration_btn =                  (By.XPATH,'//button[text()="Registration"]')
+    login_btn =                         (By.XPATH,'//button[text()="Login"]')
+    wrong_log_pass_allect_loctr =       (By.XPATH, '//p[text()="Wrong email or password"]')
+    '''After signin locators'''
+    garage_text_loctr =                 (By.XPATH,'// h1[text() = "Garage"]')
+
 
     def __init__(self, web_driver, url=''):
         super().__init__(web_driver, url)
@@ -249,8 +254,27 @@ class HomePage(WebPage):
         self.find_element(self.sign_in_button).click()
 
     def wait_for_modal_login_to_appear(self):
-        wait = WebDriverWait(self._web_driver, 10)
+        wait = WebDriverWait(self._web_driver, 30)
         wait.until(EC.presence_of_element_located(self.modal_title_login))
 
     def click_sign_up_button(self):
         self.find_element(self.sign_up_button).click()
+
+    def enter_email(self, email):
+        email_input = self.find_element(self.email_input)
+        email_input.send_keys(email)
+
+    def enter_password(self, password):
+        password_input = self.find_element(self.pswd_input)
+        password_input.send_keys(password)
+
+    def click_login_button(self):
+        login_btn = self.find_element(self.login_btn)
+        login_btn.click()
+
+    def is_element_present(self, locator):
+        try:
+            self.find_element(locator)
+            return True
+        except NoSuchElementException:
+            return False
