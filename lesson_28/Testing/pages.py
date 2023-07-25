@@ -8,6 +8,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 
 # class WebPage(object):
@@ -224,6 +225,7 @@ class HomePage(WebPage):
     menu_home =                         (By.XPATH,'//a[text()="Home"]')
     about_btn_locator =                 (By.XPATH,'//button[text()="About"]')
     contacts_head =                     (By.XPATH,'//h2')
+    guest_login_btn =                   (By.XPATH, '//button[text()="Guest log in"]')
     '''Login modal window locators'''
     sign_in_button =                    (By.XPATH,'//button[text()="Sign In"]')
     sign_up_button =                    (By.XPATH,'//button[text()="Sign Up"]')
@@ -237,6 +239,18 @@ class HomePage(WebPage):
     wrong_log_pass_allect_loctr =       (By.XPATH, '//p[text()="Wrong email or password"]')
     '''After signin locators'''
     garage_text_loctr =                 (By.XPATH,'// h1[text() = "Garage"]')
+    my_profile_btn =                    (By.ID, "userNavDropdown")
+    logout_btn =                        (By.XPATH, '//button[text()="Logout"]')
+
+    '''Garage locators'''
+    add_car_btn =                       (By.XPATH, '//button[text()="Add car"]')
+    brand_select =                      (By.XPATH, '//select[@id="addCarBrand"]') #default Audi
+    model_select =                      (By.XPATH, '//select[@id="addCarModel"]') #default TT
+    add_car_modal_btn =                 (By.XPATH, "(//button[@class='btn btn-primary'])[2]") #double quotes
+    cancell_car_modal_btn =             (By.XPATH, '//button[@class="btn btn-secondary"]')
+    mileage_input =                     (By.ID, "addCarMileage")
+    default_car_name =                  (By.XPATH, '//p[@class="car_name h2" and text()="Audi TT"]')
+    date_locator =                      (By.XPATH, '//p[contains(@class, "car_update-mileage")]')
 
 
     def __init__(self, web_driver, url=''):
@@ -278,3 +292,7 @@ class HomePage(WebPage):
             return True
         except NoSuchElementException:
             return False
+
+    def click_add_car_button(self):
+        add_car_button = self.find_element(self.add_car_btn)
+        add_car_button.click()

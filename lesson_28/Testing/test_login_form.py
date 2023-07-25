@@ -1,13 +1,14 @@
 from time import sleep
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
 from lesson_28.Testing.pages import HomePage
+from lesson_28.Testing.elements import WebElement
 from lesson_28.Testing.project_utils import do_auth_to_forstudy
+from selenium.webdriver.support.ui import Select
 
 
 @pytest.fixture
@@ -53,7 +54,7 @@ def test_open_login_page(driver):
     assert modal_appeared, "Modal form doesn't exists"
 
 
-def test_valid_login_and_pass(driver):
+def test_valid_login_and_passw(driver):
     '''Do signin via login form'''
     url = 'https://qauto.forstudy.space/'
     home_page = HomePage(driver, url=url)
@@ -77,7 +78,6 @@ def test_valid_login_and_pass(driver):
     # password_input.send_keys(password)
     # login_btn = driver.find_element(*home_page.login_btn)
     # login_btn.click()
-
     garage_text_is_present = wait.until(EC.presence_of_element_located(home_page.garage_text_loctr))
     assert garage_text_is_present, "User isn't logged in"
 
@@ -92,21 +92,18 @@ def test_valid_login_via_actionchains(driver):
     password = "Qwerty12345"
 
     home_page.click_sign_in_button()
-    sleep(3)
+    # sleep(3)
     wait = WebDriverWait(driver, 10)
     modal_appeared = wait.until(EC.presence_of_element_located(home_page.modal_title_login))
-    sleep(3)
+    # sleep(3)
     assert modal_appeared, "Modal form doesn't exists"
     email_input = driver.find_element(*home_page.email_input)
     password_input = driver.find_element(*home_page.pswd_input)
     login_btn = driver.find_element(*home_page.login_btn)
     actions.pause(2)
-    actions.click(email_input)
-    actions.send_keys(email)
-    actions.click(password_input)
-    actions.send_keys(password)
-    actions.click(login_btn)
-    actions.perform()
+    actions.click(email_input).send_keys(email)
+    actions.click(password_input).send_keys(password)
+    actions.click(login_btn).perform()
     garage_text_is_present = wait.until(EC.presence_of_element_located(home_page.garage_text_loctr))
     assert garage_text_is_present, "User isn't logged in"
 
@@ -128,10 +125,8 @@ def test_invalid_login_via_actionchains(driver):
     password_input = driver.find_element(*home_page.pswd_input)
     login_btn = driver.find_element(*home_page.login_btn)
     actions.pause(2)
-    actions.click(email_input)
-    actions.send_keys(email)
-    actions.click(password_input)
-    actions.send_keys(password)
+    actions.click(email_input).send_keys(email)
+    actions.click(password_input).send_keys(password)
     actions.click(login_btn)
     actions.perform()
     wrong_em_login_allert_is_present = wait.until(EC.presence_of_element_located(home_page.wrong_log_pass_allect_loctr))
@@ -157,4 +152,51 @@ def test_remember_me_checkbox(driver):
 
     checkbox = wait.until(EC.presence_of_element_located(home_page.remember_me_chekbx))
     assert checkbox, "Checkbox isn't available"
+
+#TO DO - Find correct "my_profile_btn" locator
+def test_log_out(driver):
+    '''Do logout via my profile drop-down meni and using actionchains'''
+    url = 'https://qauto.forstudy.space/'
+    home_page = HomePage(driver, url=url)
+    actions = ActionChains(driver)
+    # Вхідні дані для тесту
+    email = "qam2608@2022test.com"
+    password = "Qwerty12345"
+
+    home_page.click_sign_in_button()
+    wait = WebDriverWait(driver, 10)
+    modal_appeared = wait.until(EC.presence_of_element_located(home_page.modal_title_login))
+    assert modal_appeared, "Modal form doesn't exists"
+
+    email_input = driver.find_element(*home_page.email_input)
+    password_input = driver.find_element(*home_page.pswd_input)
+    login_btn = driver.find_element(*home_page.login_btn)
+    my_profil_btn = driver.find_element(*home_page.my_profile_btn)
+    # my_profile_btn = driver.find_element(By.XPATH, '//button[text()=" My profile "]')
+    # my_profile_btn = driver.find_element(By.CLASS_NAME, "icon-btn")
+    # my_profile_btn = driver.find_element(By.CLASS_NAME, "icon-btn")
+
+    # my_profile_btn = driver.find_element(*home_page.my_profile_btn)
+
+    # print("My Profile Button:", my_profile_btn)
+
+    actions.click(email_input).send_keys(email)
+    actions.click(password_input).send_keys(password)
+    actions.click(login_btn)
+
+    actions.pause(4)
+    actions.perform()
+    # actions.click(my_profile_btn).perform()
+    actions.pause(4)
+
+    # Знайти елемент Logout у спадному меню та натисніть на нього
+    # logout_btn = wait.until(EC.presence_of_element_located(home_page.logout_btn))
+    # Скролл елемент у видиму область
+    # driver.execute_script("arguments[0].scrollIntoView();", logout_btn)
+    # print("Logout button found?", logout_btn)
+    #
+    # actions.click(logout_btn).perform()
+    # Впевнитися що у елемент для гостьового входу з'явився після виходу
+    # guest_login_btn = wait.until(EC.presence_of_element_located(home_page.guest_login_btn))
+    # assert guest_login_btn, "User is not logged out. Guest login button is not available"
 
