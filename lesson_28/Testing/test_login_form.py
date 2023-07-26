@@ -70,7 +70,7 @@ def test_valid_login_and_passw(driver):
     home_page.enter_email(email)
     home_page.enter_password(password)
     home_page.click_login_button()
-    """Alternative syntax. Just for information"""
+    """Alternative syntax. Just for information and future usage"""
     # email_input =  driver.find_element(*home_page.email_input)
     # password_input = driver.find_element(*home_page.pswd_input)
     # print("password_input>>>>>>>>>>", password_input)
@@ -88,14 +88,12 @@ def test_valid_login_via_actionchains(driver):
     home_page = HomePage(driver, url=url)
     actions = ActionChains(driver)
     # Вхідні дані для тесту
-    email = "qam2608@2022test.com"
+    email = "qam2608@2022test.com" #TODO: add creds to separate class and make all of them private
     password = "Qwerty12345"
 
     home_page.click_sign_in_button()
-    # sleep(3)
     wait = WebDriverWait(driver, 10)
     modal_appeared = wait.until(EC.presence_of_element_located(home_page.modal_title_login))
-    # sleep(3)
     assert modal_appeared, "Modal form doesn't exists"
     email_input = driver.find_element(*home_page.email_input)
     password_input = driver.find_element(*home_page.pswd_input)
@@ -114,7 +112,7 @@ def test_invalid_login_via_actionchains(driver):
     home_page = HomePage(driver, url=url)
     actions = ActionChains(driver)
     # Вхідні дані для тесту
-    email = "q8@test.com"
+    email = "q8@test.com" #TODO: add creds to separate class and make all of them private
     password = "Q"
 
     home_page.click_sign_in_button()
@@ -139,28 +137,26 @@ def test_remember_me_checkbox(driver):
     home_page = HomePage(driver, url=url)
     actions = ActionChains(driver)
     # Вхідні дані для тесту
-    email = None
+    email = None  #TODO: add creds to separate class and make all of them private
     password = None
-
     home_page.click_sign_in_button()
     wait = WebDriverWait(driver, 10)
     modal_appeared = wait.until(EC.presence_of_element_located(home_page.modal_title_login))
     assert modal_appeared, "Modal form doesn't exists"
-
     # remember_checkbox = driver.find_element(*home_page.remember_me_chekbx)
     actions.pause(2)
-
     checkbox = wait.until(EC.presence_of_element_located(home_page.remember_me_chekbx))
     assert checkbox, "Checkbox isn't available"
 
-#TO DO - Find correct "my_profile_btn" locator
+@pytest.mark.skip
+#TODO: - Find correct "my_profile_btn" locator
 def test_log_out(driver):
     '''Do logout via my profile drop-down meni and using actionchains'''
     url = 'https://qauto.forstudy.space/'
     home_page = HomePage(driver, url=url)
     actions = ActionChains(driver)
     # Вхідні дані для тесту
-    email = "qam2608@2022test.com"
+    email = "qam2608@2022test.com"  #TODO: add creds to separate class and make all of them private
     password = "Qwerty12345"
 
     home_page.click_sign_in_button()

@@ -212,20 +212,22 @@ class WebPage(object):
     def current_url(self):
         return self._web_driver.current_url
 #######################################
-'''TO DO - implement locators in separate class'''
-# class MainPageLocator():
-#     class MainPageLocator():
-#         menu_home = WebElement(By.XPATH, '//a[text()="Home"]')
-#         contacts_head = WebElement(By.XPATH, '//h2')
-#         sign_in_button = WebElement(By.XPATH, '//button[text()="Sign In"]')
-#         sign_up_button = WebElement(By.XPATH, '//button[text()="Sign Up"]')
 
 class HomePage(WebPage):
-    # Локатори елементів сторінки
+    '''Main locators''' #TODO: Add locators below to separate class or .py file
     menu_home =                         (By.XPATH,'//a[text()="Home"]')
     about_btn_locator =                 (By.XPATH,'//button[text()="About"]')
     contacts_head =                     (By.XPATH,'//h2')
     guest_login_btn =                   (By.XPATH, '//button[text()="Guest log in"]')
+
+    '''Contacts locators under footer'''
+    contacts =                          (By.XPATH, '//h2[text()="Contacts"]')
+    fb =                                (By.XPATH, "//a[@href='https://www.facebook.com/Hillel.IT.School']")
+    tg =                                (By.XPATH, "//a[@href='https://t.me/ithillel_kyiv']")
+    youtube =                           (By.XPATH, "//a[@href='https://www.youtube.com/user/HillelITSchool?sub_confirmation=1']")
+    insta =                             (By.XPATH, "//a[@href='https://www.instagram.com/hillel_itschool/']")
+    linkdn =                            (By.XPATH, "//a[@href='https://www.linkedin.com/school/ithillel/']")
+
     '''Login modal window locators'''
     sign_in_button =                    (By.XPATH,'//button[text()="Sign In"]')
     sign_up_button =                    (By.XPATH,'//button[text()="Sign Up"]')
@@ -237,6 +239,7 @@ class HomePage(WebPage):
     registration_btn =                  (By.XPATH,'//button[text()="Registration"]')
     login_btn =                         (By.XPATH,'//button[text()="Login"]')
     wrong_log_pass_allect_loctr =       (By.XPATH, '//p[text()="Wrong email or password"]')
+
     '''After signin locators'''
     garage_text_loctr =                 (By.XPATH,'// h1[text() = "Garage"]')
     my_profile_btn =                    (By.ID, "userNavDropdown")
@@ -249,6 +252,7 @@ class HomePage(WebPage):
     add_car_modal_btn =                 (By.XPATH, "(//button[@class='btn btn-primary'])[2]") #double quotes
     cancell_car_modal_btn =             (By.XPATH, '//button[@class="btn btn-secondary"]')
     mileage_input =                     (By.ID, "addCarMileage")
+    mileage_show =                      (By.NAME, "miles")
     default_car_name =                  (By.XPATH, '//p[@class="car_name h2" and text()="Audi TT"]')
     date_locator =                      (By.XPATH, '//p[contains(@class, "car_update-mileage")]')
 

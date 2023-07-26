@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 from selenium import webdriver
 from selenium.common import NoSuchElementException
@@ -9,7 +7,7 @@ from lesson_28.Testing.elements import WebElement
 from lesson_28.Testing.pages import HomePage
 from lesson_28.Testing.project_utils import do_auth_to_forstudy
 
-
+#TODO: add fixture to separate .py file
 @pytest.fixture
 def driver():
     options = webdriver.ChromeOptions()
@@ -67,5 +65,15 @@ def test_text_contact(driver):
     expected_res = 'Contacts'
     assert expected_res == actual_res, f"Actual text <{actual_res}> doesn't match to expected text <{expected_res}>"
     assert contacts_head_element.is_displayed(), "Element isn't displayed"
+
+def test_contacts_under_footer_section(driver):
+    '''Vefiry contacts is available on the page'''
+    home_page = HomePage(driver, url='https://qauto.forstudy.space')
+    assert driver.find_element(*home_page.contacts).is_displayed(), "Contacts header is not displayed!"
+    assert driver.find_element(*home_page.fb).is_displayed(), "Facebook link is not displayed!"
+    assert driver.find_element(*home_page.tg).is_displayed(), "Telegram link is not displayed!"
+    assert driver.find_element(*home_page.youtube).is_displayed(), "YouTube link is not displayed!"
+    assert driver.find_element(*home_page.insta).is_displayed(), "Instagram link is not displayed!"
+    assert driver.find_element(*home_page.linkdn).is_displayed(), "LinkedIn link is not displayed!"
 
 #команда для запуску в терміналі формування xml репортінгу:pytest -rA --junit-xml="JUnitXmlReport.xml"
