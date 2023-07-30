@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="23.522" timestamp="2023-07-20T20:04:26.040829" hostname="PF2XYE5C"><testcase classname="lesson_25.test_less_25" name="test_search" time="12.744"><failure message="AssertionError: assert 'No results found' not in 'No results found.'&#10;  'No results found' is contained here:&#10;    No results found.">def test_search():
+        window = get_python()
+        elem2 = search_field(window)
+        input_to(elem2, "python")
+        time.sleep(1)
+        element = found_results(window)
+&gt;       assert "No results found" not in element.text
+E       AssertionError: assert 'No results found' not in 'No results found.'
+E         'No results found' is contained here:
+E           No results found.
+
+lesson_25\test_less_25.py:12: AssertionError</failure></testcase><testcase classname="lesson_25.test_less_25" name="test_hillel" time="10.282" /></testsuite></testsuites>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="0.090" timestamp="2023-07-20T20:04:02.425881" hostname="PF2XYE5C"><testcase classname="test_lesson_23" name="test_connect" time="0.002"><error message="failed on setup with &quot;assert You connect to Pentagon DB 1 == 0&quot;">@pytest.fixture()  # autouse=True   # scope="module"
+    def connect_to_database():
+        connection = DBConnection()
+&gt;       assert connection == 0
+E       assert You connect to Pentagon DB 1 == 0
+
+lesson_23\test_lesson_23.py:22: AssertionError</error></testcase><testcase classname="test_lesson_23" name="test_connect_2" time="0.002"><error message="failed on setup with &quot;assert You connect to Pentagon DB 2 == 0&quot;">@pytest.fixture()  # autouse=True   # scope="module"
+    def connect_to_database():
+        connection = DBConnection()
+&gt;       assert connection == 0
+E       assert You connect to Pentagon DB 2 == 0
+
+lesson_23\test_lesson_23.py:22: AssertionError</error></testcase></testsuite></testsuites>

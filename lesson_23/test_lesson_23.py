@@ -19,11 +19,12 @@ class DBConnection():
 @pytest.fixture()  # autouse=True   # scope="module"
 def connect_to_database():
     connection = DBConnection()
+    # assert connection == 0  ## ERROR
     return connection
 
 
 def test_connect(connect_to_database):
-    assert isinstance(connect_to_database, DBConnection), connect_to_database
+    assert isinstance(connect_to_database, DBConnection), connect_to_database  ## FAILS
     log.info(connect_to_database)
     assert connect_to_database.connection == "You connect to Pentagon DB", connect_to_database.connection
 
