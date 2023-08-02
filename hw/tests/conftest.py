@@ -15,7 +15,7 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
     if browser_name == "chrome":
-        options = Options()
+        options = Options().add_argument('--headless')
         browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
         browser = webdriver.Firefox()

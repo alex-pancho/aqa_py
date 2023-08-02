@@ -1,7 +1,7 @@
-from hw.schema.main_page import MainPage
-from hw.schema.login_page import LoginPage
-from hw.schema.main_page_auth import MainPageAuth
-from hw.schema.add_car_page import AddCarPage
+from main_page import MainPage
+from login_page import LoginPage
+from main_page_auth import MainPageAuth
+from add_car_page import AddCarPage
 from selenium.webdriver.common.by import By
 
 LINK = 'https://qauto.forstudy.space/'
