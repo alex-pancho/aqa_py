@@ -1,3 +1,5 @@
+import time
+
 from main_page import MainPage
 from login_page import LoginPage
 from main_page_auth import MainPageAuth
@@ -85,7 +87,8 @@ def test_logout(browser):
     signin_page.login()
     auth_page = MainPageAuth(browser, browser.current_url)
     auth_page.logout()
-    assert browser.current_url == LINK
+    time.sleep(2)
+    assert browser.current_url == 'https://guest:welcome2qauto@qauto.forstudy.space/'
 
 
 def test_guest_login(browser):

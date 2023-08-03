@@ -1,3 +1,5 @@
+import time
+
 from base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -40,4 +42,5 @@ class MainPageAuth(BasePage):
         self.get_element(By.XPATH, '//button [text()="Add car"]').click()
 
     def logout(self):
-        self.get_element(By.XPATH, '//a [text()=" Log out "]').click()
+        self.get_element(By.CSS_SELECTOR, '.dropdown-toggle').click()
+        self.get_element(By.CSS_SELECTOR, 'button.dropdown-item').click()
