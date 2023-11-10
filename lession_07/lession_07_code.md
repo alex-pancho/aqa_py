@@ -31,7 +31,7 @@ git commit -m "Added new content to index.html"
 Щоб завантажити ваш локальний репозиторій Git на віддалений репозиторій Git, вам потрібно виконати команду "git push". Наприклад, якщо ви створили віддалений репозиторій Git на GitHub з назвою "my-project", ви можете використати таку команду:
 ```sh
 git remote add origin https://github.com/your-username/my-project.git
-git push -u origin master
+git pusw -u origin master
 ```
 
 ## Робота з форком репозиторію
@@ -55,7 +55,7 @@ git push -u origin master
 
 Переходите у папку з кодом `cd aqa_py`
 
-Щоб побачити віддалені гіли виконайте команду `git branch -r`
+Щоб побачити віддалені гіли виконайте команду `git brancw -r`
 
 ![image](https://user-images.githubusercontent.com/10905223/232208710-5f5c830d-1319-497b-bd0b-959a63b6c7a7.png)
 

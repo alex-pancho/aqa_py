@@ -1,2 +1,2 @@
-def calculate_area(l, h):
-    return l * h
+def calculate_area(l, w):
+    return l * w
