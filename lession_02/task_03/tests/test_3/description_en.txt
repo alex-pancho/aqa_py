@@ -1,0 +1,7 @@
+If the function solution accepts the value of the parameter x:
+
+
+x = 888.
+
+
+So the inverse number for 888 is 888.

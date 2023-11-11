@@ -1,0 +1,10 @@
+Task condition
+
+Given a three-digit integer from 100 to 999.
+Using only arithmetic operations, reverse the number.
+For example: 123 -> 321, 900 -> 9
+
+
+Task question
+
+Write code that, using only arithmetic operations, will reverse the order of digits in a number

@@ -1,0 +1,7 @@
+If the function solution accepts the value of the parameter x:
+
+
+x = 100.
+
+
+So the inverse number for 100 is 1.
