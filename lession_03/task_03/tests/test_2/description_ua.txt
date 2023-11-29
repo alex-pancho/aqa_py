@@ -1,0 +1,3 @@
+Заміна одного з параметрів
+Дано: paralel_processes = 10
+Очікується: paralel_processes = 3
