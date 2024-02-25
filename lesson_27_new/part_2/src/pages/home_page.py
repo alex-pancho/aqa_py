@@ -1,11 +1,14 @@
-from elements import WebElement
+import sys
+import pathlib
+root = str(pathlib.Path(__file__).parents[2])
+sys.path.insert(0, root)
+from src.pages.elements import WebElement
 from src.pages.base_page import BasePage
-from selenium.webdriver.common.by import By
+
 
 
 class HomePage(BasePage):
 
-    _search = (By.NAME, "search")
     _menu_home = '//a[text()="Home"]'
     _sign_in_button = '//button[.="Sign In"]'
     _contacts_head = '//h2'
@@ -14,8 +17,8 @@ class HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def search(self):
-        return WebElement(_search=self._search)
+    def menu_home(self):
+        return WebElement(driver=self.driver, xpath=self._menu_home)
 
     def sign_in_button(self):
-        return WebElement(_sign_in_button=(By.XPATH, self._sign_in_button))
+        return WebElement(driver=self.driver, xpath=self._sign_in_button)

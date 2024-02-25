@@ -7,9 +7,9 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
-
-class WebElement(object):
+class WebElement():
 
     _locator = ('', '')
     _web_driver = None
@@ -21,8 +21,11 @@ class WebElement(object):
         self._timeout = timeout
         self._wait_after_click = wait_after_click
 
-        for attr in kwargs:
-            self._locator = (str(attr).replace('_', ''), str(kwargs.get(attr)))
+        for by, locate in kwargs.items():
+            if by == 'driver':
+                self._web_driver = locate
+            elif by == 'xpath':
+                self._locator = (By.XPATH, locate)
 
     def find(self, timeout=10):
         """ Find element on the page. """
@@ -294,3 +297,23 @@ class ManyWebElements(WebElement):
 
         # Make screen-shot of the page:
         self._web_driver.save_screenshot(file_name)
+
+
+if __name__ == "__main__":
+    import sys
+    import pathlib
+    import time
+    root = str(pathlib.Path(__file__).parents[4])
+    print(root)
+    sys.path.insert(0, root)
+    from lesson_27_new.part_2.get_browser import firefox
+    driver = firefox(True)
+    url = "https://guest:welcome2qauto@qauto.forstudy.space/"
+    driver.get(url)
+    _menu_home = '//a[text()="Home"]'
+    elment = WebElement(xpath=_menu_home, driver=driver)
+    print(elment.is_clickable())
+    # time.sleep(1)
+    print(elment.is_presented())
+    print(elment.is_visible())
+    driver.close()
