@@ -8,7 +8,7 @@ from pages.base_page import BasePage
 
 
 class HomePage(BasePage):
-    
+
     locators= dict(
         menu_home = '//a[text()="Home"]',
         sign_in_button = '//button[.="Sign In"]',
