@@ -303,7 +303,7 @@ if __name__ == "__main__":
     import sys
     import pathlib
     import time
-    root = str(pathlib.Path(__file__).parents[4])
+    root = str(pathlib.Path(__file__).parents[3])
     print(root)
     sys.path.insert(0, root)
     from lesson_27_new.part_2.get_browser import firefox

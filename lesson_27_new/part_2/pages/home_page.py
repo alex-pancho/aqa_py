@@ -2,8 +2,8 @@ import sys
 import pathlib
 root = str(pathlib.Path(__file__).parents[2])
 sys.path.insert(0, root)
-from src.pages.elements import WebElement
-from src.pages.base_page import BasePage
+from pages.elements import WebElement
+from pages.base_page import BasePage
 
 
 
